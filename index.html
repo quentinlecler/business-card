@@ -1,67 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quentin Lecler</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  <title>Quentin Lecler - Full-Stack Developer</title>
+  <meta name="description" content="Full-Stack Developer specializing in Banking & Healthcare solutions. Laravel, .NET, React, Vue.js. Based in Liège, Belgium.">
+  <meta name="author" content="Quentin Lecler">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Quentin Lecler - Full-Stack Developer">
+  <meta property="og:description" content="Full-Stack Developer specializing in Banking & Healthcare solutions.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lecler.dev">
+  <meta property="og:image" content="https://lecler.dev/og.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quentin Lecler - Full-Stack Developer">
+  <meta name="twitter:description" content="Full-Stack Developer specializing in Banking & Healthcare solutions.">
+  <meta name="twitter:image" content="https://lecler.dev/og.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>Q</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
-    html, body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
       height: 100%;
-      width: 100%;
-      background-color: #ffffff;
+      background: #fafafa;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1a1a1a;
+    }
+
+    body {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Playfair Display', serif;
-      color: #111;
+      padding: 2rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .card {
-      padding: 3rem 4rem;
       text-align: center;
-      border: 1px solid #e5e5e5;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
-      max-width: 420px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 440px;
+      animation: fadeIn 0.5s ease-out;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    .name {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.4rem;
     }
 
-    h1 {
-      margin: 0 0 1rem 0;
-      font-size: 2.2rem;
-      font-weight: 400;
-      letter-spacing: 1px;
+    .role {
+      font-size: 1.1rem;
+      color: #444;
+      margin-bottom: 0.5rem;
     }
 
-    p {
-      margin: 0.5rem 0;
-      font-weight: 400;
-      font-size: 1rem;
-      letter-spacing: 0.5px;
+    .sectors {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 0.3rem;
     }
 
-    a {
-      color: #111;
-      text-decoration: none;
+    .location {
+      font-size: 0.85rem;
+      color: #999;
+      margin-bottom: 1.5rem;
+    }
+
+    .current {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1.8rem;
+    }
+
+    .current a {
+      color: #1a1a1a;
       font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid #ccc;
+      transition: border-color 0.2s;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .current a:hover {
+      border-color: #1a1a1a;
+    }
+
+    .stack {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .stack span {
+      font-size: 0.75rem;
+      color: #666;
+      background: #eee;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      cursor: default;
+    }
+
+    .stack span:hover {
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .links a.primary {
+      background: #1a1a1a;
+      color: #fff;
+      border: 1px solid #1a1a1a;
+    }
+
+    .links a.primary:hover {
+      background: #333;
+    }
+
+    .links a.secondary {
+      color: #1a1a1a;
+      border: 1px solid #ddd;
+    }
+
+    .links a.secondary:hover {
+      background: #1a1a1a;
+      color: #fff;
+      border-color: #1a1a1a;
+    }
+
+    @media (max-width: 480px) {
+      .name { font-size: 1.6rem; }
+      .role { font-size: 1rem; }
+      .links { flex-direction: column; gap: 0.6rem; }
+      .links a { width: 100%; text-align: center; }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Quentin Lecler</h1>
-    <p>Software Engineer</p>
-    <p><a href="mailto:contact@lecler.dev">contact@lecler.dev</a></p>
-  </div>
+  <main class="card">
+    <h1 class="name">Quentin Lecler</h1>
+    <p class="role">Full-Stack Developer</p>
+    <p class="sectors">Banking & Healthcare Solutions</p>
+    <p class="location">Liège, Belgium</p>
+
+    <p class="current">Currently building <a href="https://doctipro.lu" target="_blank" rel="noopener">Doctipro</a></p>
+
+    <div class="stack">
+      <span>Laravel</span>
+      <span>.NET</span>
+      <span>React</span>
+      <span>Vue.js</span>
+      <span>TypeScript</span>
+    </div>
+
+    <nav class="links">
+      <a href="mailto:hello@lecler.dev" class="primary">Email</a>
+      <a href="https://github.com/quentinlecler" target="_blank" rel="noopener" class="secondary">GitHub</a>
+      <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" class="secondary">LinkedIn</a>
+    </nav>
+  </main>
 </body>
 </html>
