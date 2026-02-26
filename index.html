@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quentin Lecler - Full-Stack Developer</title>
-  <meta name="description" content="Full-Stack Developer specializing in Banking & Healthcare solutions. Laravel, .NET, React, Vue.js. Based in Liège, Belgium.">
+  <title>Quentin Lecler — Senior Full-Stack Developer | Healthcare & Financial SaaS</title>
+  <meta name="description" content="Senior Full-Stack Developer specializing in Healthcare SaaS & Financial SaaS. Laravel, Vue.js, React, TypeScript, .NET. Available remote Luxembourg & Switzerland.">
   <meta name="author" content="Quentin Lecler">
+  <meta name="keywords" content="Full-Stack Developer, Healthcare SaaS, Financial SaaS, Laravel, Vue.js, React, TypeScript, Luxembourg, remote, PHP, Node.js">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Quentin Lecler - Full-Stack Developer | Banking & Healthcare">
-  <meta property="og:description" content="Full-Stack Developer based in Liège, Belgium. Building robust applications for banking and healthcare sectors with Laravel, .NET, React, and Vue.js.">
+  <meta property="og:title" content="Quentin Lecler — Senior Full-Stack Developer | Healthcare & Financial SaaS">
+  <meta property="og:description" content="Senior Full-Stack Developer specializing in Healthcare & Financial SaaS. Laravel, Vue.js, React, TypeScript. Available remote Luxembourg & Switzerland.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lecler.dev">
   <meta property="og:image" content="https://lecler.dev/og.png">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Quentin Lecler - Full-Stack Developer | Banking & Healthcare">
-  <meta name="twitter:description" content="Full-Stack Developer based in Liège, Belgium. Building robust applications for banking and healthcare sectors with Laravel, .NET, React, and Vue.js.">
+  <meta name="twitter:title" content="Quentin Lecler — Senior Full-Stack Developer | Healthcare & Financial SaaS">
+  <meta name="twitter:description" content="Senior Full-Stack Developer specializing in Healthcare & Financial SaaS. Laravel, Vue.js, React, TypeScript. Available remote Luxembourg & Switzerland.">
   <meta name="twitter:image" content="https://lecler.dev/og.png">
 
   <!-- Favicon -->
@@ -25,174 +26,1000 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    * {
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
-      background: #fafafa;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #1a1a1a;
+    :root {
+      --bg: #09090b;
+      --bg-card: #131316;
+      --accent-1: #818cf8;
+      --accent-2: #a78bfa;
+      --text: #ededef;
+      --text-secondary: #a0a0ab;
+      --text-muted: #5a5a6e;
+      --border: #1e1e24;
+      --green: #34d399;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Gradient accent bar top */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-1));
+      z-index: 1001;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ── Nav ── */
+    .nav {
+      position: fixed;
+      top: 2px;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(9, 9, 11, 0.8);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+    .nav.scrolled {
+      border-bottom-color: var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 2rem;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card {
       text-align: center;
-      max-width: 440px;
-      animation: fadeIn 0.5s ease-out;
+      padding: 6rem 2rem 4rem;
+      overflow: hidden;
     }
 
-    .name {
+    /* Dot grid pattern */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, var(--text-muted) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.15;
+      mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    /* Glow radial */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(129, 140, 248, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--accent-1);
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-label::before {
+      content: '// ';
+      color: var(--text-muted);
+    }
+
+    .hero-name {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--text) 0%, var(--accent-1) 50%, var(--accent-2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .status-dot::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: var(--green);
+      opacity: 0.4;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.8); opacity: 0; }
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-muted);
+      color: var(--text);
+    }
+
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+
+    .scroll-mouse {
+      width: 22px;
+      height: 34px;
+      border: 2px solid var(--text-muted);
+      border-radius: 11px;
+      position: relative;
+    }
+
+    .scroll-mouse::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 6px;
+      background: var(--text-muted);
+      border-radius: 2px;
+      animation: scrollWheel 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    @keyframes scrollWheel {
+      0%, 100% { opacity: 1; top: 6px; }
+      50% { opacity: 0.3; top: 14px; }
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 6rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .section-label::before {
+      content: '// ';
+    }
+
+    .section-title {
       font-size: 2rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: -0.5px;
-      margin-bottom: 0.4rem;
+      margin-bottom: 3rem;
     }
 
-    .role {
-      font-size: 1.1rem;
-      color: #444;
+    /* ── Stack ── */
+    .stack-category {
+      margin-bottom: 2.5rem;
+    }
+
+    .stack-category:last-child {
+      margin-bottom: 0;
+    }
+
+    .stack-category-title {
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .stack-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.65rem 0.9rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .stack-item:hover {
+      border-color: var(--accent-1);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .stack-item svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* ── Experience ── */
+    .exp-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      border-left: 3px solid var(--accent-1);
+      transition: all 0.3s ease;
+    }
+
+    .exp-card:hover {
+      border-left-color: var(--accent-2);
+      box-shadow: -4px 0 20px rgba(129, 140, 248, 0.06);
+    }
+
+    .exp-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
       margin-bottom: 0.5rem;
     }
 
-    .sectors {
+    .exp-company {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .exp-date {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .exp-type {
       font-size: 0.9rem;
-      color: #888;
-      margin-bottom: 0.3rem;
+      color: var(--accent-1);
+      margin-bottom: 1rem;
     }
 
-    .location {
-      font-size: 0.85rem;
-      color: #999;
-      margin-bottom: 1.5rem;
+    .exp-list {
+      list-style: none;
+      margin-bottom: 1.25rem;
     }
 
-    .current {
+    .exp-list li {
+      position: relative;
+      padding-left: 1.25rem;
       font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 1.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.4rem;
+      line-height: 1.5;
     }
 
-    .current a {
-      color: #1a1a1a;
-      font-weight: 500;
-      text-decoration: none;
-      border-bottom: 1px solid #ccc;
-      transition: border-color 0.2s;
+    .exp-list li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent-1);
+      font-weight: 600;
     }
 
-    .current a:hover {
-      border-color: #1a1a1a;
-    }
-
-    .stack {
+    .exp-tags {
       display: flex;
-      justify-content: center;
-      gap: 0.5rem;
       flex-wrap: wrap;
-      margin-bottom: 2rem;
+      gap: 0.4rem;
     }
 
-    .stack span {
-      font-size: 0.75rem;
-      color: #666;
-      background: #eee;
-      padding: 0.3rem 0.6rem;
+    .exp-tag {
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      background: rgba(129, 140, 248, 0.08);
+      padding: 0.2rem 0.6rem;
       border-radius: 4px;
-      transition: all 0.2s ease;
-      cursor: default;
     }
 
-    .stack span:hover {
-      background: #1a1a1a;
-      color: #fff;
+    /* ── Education ── */
+    .edu-grid {
+      display: grid;
+      gap: 1.25rem;
     }
 
-    .links {
+    .edu-card {
       display: flex;
-      justify-content: center;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .edu-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(129, 140, 248, 0.1);
+      display: flex;
       align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .edu-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--accent-1);
+    }
+
+    .edu-info h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-info p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .edu-info .edu-date {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ── Contact ── */
+    .contact {
+      text-align: center;
+    }
+
+    .contact-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+    }
+
+    .contact-text {
+      color: var(--text-secondary);
+      max-width: 440px;
+      margin: 0 auto 2rem;
+      font-size: 1rem;
+    }
+
+    .contact-cta {
+      display: flex;
       gap: 1rem;
+      justify-content: center;
       flex-wrap: wrap;
     }
 
-    .links a {
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
-      transition: all 0.2s ease;
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
     }
 
-    .links a.primary {
-      background: #1a1a1a;
-      color: #fff;
-      border: 1px solid #1a1a1a;
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
     }
 
-    .links a.primary:hover {
-      background: #333;
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: color 0.2s;
     }
 
-    .links a.secondary {
-      color: #1a1a1a;
-      border: 1px solid #ddd;
+    .footer-links a:hover {
+      color: var(--text);
     }
 
-    .links a.secondary:hover {
-      background: #1a1a1a;
-      color: #fff;
-      border-color: #1a1a1a;
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-muted);
     }
 
-    @media (max-width: 480px) {
-      .name { font-size: 1.6rem; }
-      .role { font-size: 1rem; }
-      .links { flex-direction: column; gap: 0.6rem; }
-      .links a { width: 100%; text-align: center; }
+    /* ── Animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-content > * {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+    .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+    .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
+    .hero-content > *:nth-child(4) { animation-delay: 0.4s; }
+    .hero-content > *:nth-child(5) { animation-delay: 0.5s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .nav {
+        padding: 0.75rem 1.25rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+      }
+
+      section {
+        padding: 4rem 1.25rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .stack-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .exp-card {
+        padding: 1.25rem;
+      }
+
+      .exp-header {
+        flex-direction: column;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-cta .btn {
+        width: 100%;
+        max-width: 260px;
+        justify-content: center;
+      }
+
+      .contact-cta {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-cta .btn {
+        width: 100%;
+        max-width: 260px;
+        justify-content: center;
+      }
+
+      .edu-card {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1 class="name">Quentin Lecler</h1>
-    <p class="role">Full-Stack Developer</p>
-    <p class="sectors">Banking & Healthcare Solutions</p>
-    <p class="location">Liège, Belgium</p>
 
-    <p class="current">Currently building <a href="https://doctipro.lu" target="_blank" rel="noopener">Doctipro</a></p>
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">QL.</a>
+    <ul class="nav-links">
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#parcours">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-    <div class="stack">
-      <span>Laravel</span>
-      <span>.NET</span>
-      <span>React</span>
-      <span>Vue.js</span>
-      <span>TypeScript</span>
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-content">
+      <p class="hero-label">Senior Full-Stack Developer</p>
+      <h1 class="hero-name">Quentin Lecler</h1>
+      <p class="hero-tagline">I build SaaS applications for the Healthcare & Financial sectors in Luxembourg.</p>
+      <div class="hero-status">
+        <span class="status-dot"></span>
+        Currently at Doctipro
+      </div>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Contact me</a>
+        <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn</a>
+      </div>
     </div>
+    <div class="scroll-hint">
+      <div class="scroll-mouse"></div>
+    </div>
+  </header>
 
-    <nav class="links">
-      <a href="mailto:hello@lecler.dev" class="primary">Email</a>
-      <a href="https://github.com/quentinlecler" target="_blank" rel="noopener" class="secondary">GitHub</a>
-      <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" class="secondary">LinkedIn</a>
-    </nav>
+  <main>
+
+    <!-- Stack Technique -->
+    <section id="stack">
+      <p class="section-label reveal">tech stack</p>
+      <h2 class="section-title reveal">Technologies</h2>
+
+      <div class="stack-category reveal">
+        <h3 class="stack-category-title">Backend</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 18.08c-6.63 0-12-2.72-12-6.08s5.37-6.08 12-6.08S24 8.64 24 12s-5.37 6.08-12 6.08zm-1.35-7.2c-.06.63.4 1.08 1.35 1.08 1.27 0 2.13-.72 2.2-1.68.06-.63-.4-1.08-1.33-1.08-1.28 0-2.15.72-2.22 1.68z" fill="#777BB4"/><path d="M5.52 8.64h2.33c1.58 0 2.2.78 2.13 1.83-.1 1.45-1.14 2.25-2.6 2.25h-.98l-.38 1.92H4.62l.9-6zm1.38 3.08h.56c.68 0 1.1-.36 1.14-.9.04-.48-.28-.78-.88-.78h-.48l-.34 1.68zM10.8 14.64l.9-6h1.4l-.16.84c.54-.63 1.14-.96 1.87-.96.12 0 .22.01.32.03l-.32 1.44a1.6 1.6 0 00-.36-.04c-.9 0-1.54.72-1.74 1.68l-.5 3.01h-1.41zM15.07 8.64h2.33c1.58 0 2.2.78 2.13 1.83-.1 1.45-1.14 2.25-2.6 2.25h-.98l-.38 1.92h-1.4l.9-6zm1.38 3.08h.56c.68 0 1.1-.36 1.14-.9.04-.48-.28-.78-.88-.78h-.48l-.34 1.68z" fill="#fff"/></svg>
+            <span>PHP</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M23.642 5.43a.364.364 0 01.014.1v5.149c0 .135-.073.26-.192.327l-4.323 2.49v4.934c0 .135-.074.26-.192.327l-9.04 5.21a.35.35 0 01-.13.048l-.032.006a.332.332 0 01-.165-.008l-.025-.008a.286.286 0 01-.072-.034L.456 18.697a.376.376 0 01-.192-.327V3.209c0-.034.005-.068.014-.1l.008-.026a.32.32 0 01.028-.066l.016-.024c.012-.016.026-.03.04-.044l.022-.019a.354.354 0 01.057-.038L4.907.401a.375.375 0 01.384 0L9.749 2.89l.022.02.04.043.016.024a.32.32 0 01.028.066l.008.026c.009.032.014.066.014.1v9.652l3.76-2.164V5.505c0-.034.005-.068.014-.1l.008-.026a.355.355 0 01.028-.066l.016-.024a.356.356 0 01.04-.044l.022-.019a.32.32 0 01.057-.038l4.458-2.49a.374.374 0 01.384 0l4.458 2.49a.361.361 0 01.057.038l.022.02c.014.013.028.027.04.043l.016.024c.012.02.02.043.028.066zm-.742 5.032V6.002l-1.58.91-2.178 1.254v4.46zm-4.458 7.667v-4.464l-2.142 1.222-6.494 3.706v4.512zM1.006 3.68v14.818l8.296 4.784v-4.506L5.01 16.49l-.022-.013-.02-.014a.33.33 0 01-.038-.032l-.015-.02-.015-.024-.012-.028-.01-.026-.006-.033-.005-.026V6.468L3.1 5.26l-2.094-1.58zM5.1 1.155L1.342 3.208 5.1 5.26 8.856 3.21 5.099 1.155zM6.968 15.58l2.994-1.725V3.68l-1.58.91L6.204 5.84v10.182l.764.44v-.882zm7.49-11.936l-3.757 2.054 3.758 2.053 3.757-2.053-3.758-2.053zm-.376 5.358L12.3 7.748l-1.581-.91v4.461l2.178 1.254 1.58.91V8.999zm8.296.428l-3.758 2.054v4.106l2.178-1.242 1.58-.905V9.43z" fill="#FF2D20"/></svg>
+            <span>Laravel</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M11.998 0C5.366 0 0 5.367 0 12a11.992 11.992 0 008.013 11.319c.585.108.798-.254.798-.565 0-.28-.01-1.022-.015-2.005-3.259.708-3.947-1.57-3.947-1.57-.533-1.354-1.3-1.714-1.3-1.714-1.063-.727.08-.712.08-.712 1.175.083 1.793 1.207 1.793 1.207 1.045 1.79 2.74 1.273 3.41.973.105-.757.408-1.273.743-1.566-2.602-.296-5.337-1.301-5.337-5.792 0-1.28.457-2.326 1.207-3.146-.121-.297-.523-1.489.115-3.104 0 0 .984-.315 3.225 1.202a11.237 11.237 0 012.94-.396 11.27 11.27 0 012.94.396c2.24-1.517 3.224-1.202 3.224-1.202.639 1.615.237 2.807.116 3.104.752.82 1.206 1.866 1.206 3.146 0 4.502-2.74 5.493-5.348 5.783.42.362.795 1.077.795 2.17 0 1.566-.015 2.83-.015 3.214 0 .313.21.678.803.563A11.994 11.994 0 0024 12c0-6.633-5.367-12-12.002-12z" fill="#8CC84B"/></svg>
+            <span>Node.js</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0zm-.047 3.132h.094c2.6.07 4.357 1.17 5.285 2.478.48.68.806 1.42.996 2.143l-2.736.826c-.15-.48-.395-1.005-.768-1.456-.758-.917-1.755-1.32-2.86-1.298-1.244.052-2.233.604-2.8 1.508-.61.972-.715 2.25-.326 3.527.39 1.28 1.13 2.29 2.07 2.82.83.47 1.92.56 2.87.233.612-.21 1.12-.62 1.43-1.1.18-.28.3-.58.37-.9H13.05v-2.3h5.64c.07.31.1.71.1 1.14 0 1.04-.23 2.12-.82 3.04-.76 1.19-2.05 2.07-3.97 2.17-1.47.08-2.9-.42-4.04-1.32-1.14-.91-1.97-2.27-2.39-3.96-.41-1.63-.3-3.32.4-4.79.69-1.47 1.93-2.65 3.72-3.23a6.16 6.16 0 01.27-.08z" fill="#68217A"/></svg>
+            <span>C# / .NET</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l2.828-2.828A7.952 7.952 0 014 12c0-4.418 3.582-8 8-8s8 3.582 8 8a7.952 7.952 0 01-2.343 5.657l2.828 2.828A11.952 11.952 0 0024 12c0-6.627-5.373-12-12-12z" fill="#003545"/><path d="M16.78 17.394l-2.83-2.83a4 4 0 10-3.9 0l-2.83 2.83a8 8 0 009.56 0z" fill="#003545"/></svg>
+            <span>MariaDB</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M17.128 0a10.134 10.134 0 00-2.755.403l-.063.02C12.382.65 11.87 1.136 10.5 1.56c-1.334.414-2.98.477-4.083 1.14-.558.334-1.005.81-1.253 1.522-.067.193-.117.393-.15.601l-.002.015a5.58 5.58 0 00-.05.543c-.013.259-.009.52.009.78.023.345.066.688.135 1.024l.012.06c.048.227.112.449.191.665.066.18.141.356.226.526 0 0 .01.02.015.032C4.618 10.387 3.3 12.882 2.545 15.863c-.078.31-.137.625-.177.942a8.032 8.032 0 00-.064.932c-.004.218.003.437.02.655.013.171.032.342.057.513l.003.024c.088.587.232 1.156.411 1.707a10.1 10.1 0 001.25 2.52c.62.858 1.42 1.551 2.42 1.857.496.152 1.027.194 1.558.158.47-.031.94-.121 1.395-.256a13.068 13.068 0 001.3-.478l.02-.008c.322-.133.64-.276.952-.428.168-.082.334-.168.498-.258.2-.109.396-.224.588-.345l.022-.014c.4-.253.783-.53 1.147-.827a10.072 10.072 0 003.142 1.326c.564.134 1.148.199 1.728.177a5.405 5.405 0 001.715-.345l.023-.01c.326-.133.636-.307.92-.519.318-.237.6-.52.832-.842l.02-.028c.189-.262.344-.548.459-.852.09-.236.154-.482.19-.733.021-.148.032-.298.034-.448a2.899 2.899 0 00-.06-.622 3.642 3.642 0 00-.213-.674 5.063 5.063 0 00-.372-.695c-.35-.538-.813-.995-1.34-1.35a4.856 4.856 0 00-.644-.365 4.18 4.18 0 00-.74-.28l-.09-.024a4.478 4.478 0 00-.735-.113l-.053-.004h-.021l.043-.287a11.346 11.346 0 00.1-2.354 8.478 8.478 0 00-.146-1.233 5.345 5.345 0 00-.161-.614 3.657 3.657 0 00-.115-.33l-.013-.03A3.543 3.543 0 0020.17 9.8c-.293-.384-.657-.698-1.073-.924a3.837 3.837 0 00-.839-.352l-.06-.017a4.463 4.463 0 00-.858-.136c-.264-.017-.53-.005-.793.023a6.084 6.084 0 00-1.045.207l-.095.03-.017-.116a5.528 5.528 0 00-.374-1.3 4.091 4.091 0 00-.333-.616 3.212 3.212 0 00-.393-.485l-.038-.038a3.196 3.196 0 00-.993-.677 3.476 3.476 0 00-.633-.216l-.047-.011a3.9 3.9 0 00-.712-.088c-.205-.007-.41.002-.614.028a5.186 5.186 0 00-.954.202l-.016.005a7.093 7.093 0 00-1.25.534l-.045.025c-.348.2-.68.425-.995.671l-.045.036c-.17.135-.336.276-.496.423l-.031.028c-.038.036-.076.072-.113.109l-.012.012z" fill="#336791"/></svg>
+            <span>PostgreSQL</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12.001 0C5.326 0 .001 5.326.001 12c0 6.675 5.325 12 11.999 12C18.676 24 24 18.675 24 12c0-6.674-5.324-12-11.999-12zm-.003 2.14c5.446 0 9.86 4.414 9.86 9.86 0 5.447-4.414 9.862-9.86 9.862-5.447 0-9.86-4.415-9.86-9.862 0-5.446 4.413-9.86 9.86-9.86z" fill="#00758F"/><path d="M12 5.5c-2.8 0-4.7.7-4.7.7v12.6s1.8-.8 4.5-.8c2.9 0 4.9.8 4.9.8V6.2S14.8 5.5 12 5.5z" fill="#00758F" opacity=".4"/></svg>
+            <span>MySQL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack-category reveal">
+        <h3 class="stack-category-title">Frontend</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 12.765l-5.478 3.285L12 19.335l5.478-3.285L12 12.765z" fill="#35495E"/><path d="M18.884 2.295L12 12.765l-6.884-10.47H0L12 22.935 24 2.295h-5.116z" fill="#41B883"/><path d="M12 12.765L5.116 2.295h4.332L12 6.825l2.552-4.53h4.332L12 12.765z" fill="#35495E"/></svg>
+            <span>Vue.js</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.139" fill="#61DAFB"/><path d="M12 9.861C16.524 9.861 20.25 6.96 20.25 5.5c0-.745-1.058-1.395-2.88-1.834C15.903 3.248 14.026 3 12 3c-2.026 0-3.903.248-5.37.666C4.808 4.105 3.75 4.755 3.75 5.5c0 1.46 3.726 4.361 8.25 4.361z" stroke="#61DAFB" stroke-width="1" fill="none"/><path d="M9.861 12c-2.324 4.024-2.84 7.878-1.861 8.5.5.318 1.465-.052 2.61-1.002.944-.783 1.922-1.917 2.816-3.275.894-1.358 1.606-2.766 2.094-4.032.592-1.536.78-2.83.48-3.691-.155-.445-.458-.72-.861-.78-.978-.145-2.63 1.326-4.278 4.28z" stroke="#61DAFB" stroke-width="1" fill="none"/><path d="M9.861 12c2.324 4.024 5.016 6.654 6.278 5.5.645-.59.567-1.945-.168-3.691-.488-1.266-1.2-2.674-2.094-4.032-.894-1.358-1.872-2.492-2.816-3.275C9.916 5.552 8.951 5.182 8.001 5.5c-.978.327-1.14 2.476.86 6.5z" stroke="#61DAFB" stroke-width="1" fill="none"/></svg>
+            <span>React</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M0 12v12h24V0H0v12zm19.341-.956c.61.152 1.074.423 1.501.865.221.236.549.666.575.77.008.03-1.036.73-1.668 1.123-.023.015-.115-.084-.217-.236-.31-.45-.633-.644-1.128-.678-.728-.05-1.2.332-1.192.967a.88.88 0 00.102.45c.16.331.462.53 1.39.933 1.712.74 2.444 1.226 2.834 1.882.434.729.535 1.916.254 2.752-.308.91-1.07 1.528-2.147 1.746-.332.066-1.12.08-1.49.025-.81-.12-1.578-.544-2.087-1.152a4.26 4.26 0 01-.518-.798l.546-.325c.388-.222.558-.31.578-.283.015.02.143.218.283.44.406.636.81.914 1.44.99.893.109 1.725-.27 1.838-.84.05-.254.013-.39-.165-.633-.227-.31-.65-.54-1.72-1.004-1.225-.53-1.752-.856-2.198-1.372a3.16 3.16 0 01-.56-1.218c-.073-.362-.092-1.27-.032-1.632.2-1.2 1.07-2.034 2.394-2.294.353-.066 1.18-.042 1.537.045zM14.255 12.2l.01 1.18H10.54v8.59H8.564v-8.59H4.839V12.22c0-.652.01-1.2.022-1.21.01-.015 2.115-.023 4.68-.018l4.656.015.058 1.194z" fill="#3178C6"/></svg>
+            <span>TypeScript</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 0L1.608 6v12L12 24l10.392-6V6L12 0zm-1.09 17.496l-4.392-2.1a.6.6 0 01-.342-.543V9.147a.6.6 0 01.342-.543l4.392-2.1a.6.6 0 01.516 0l4.392 2.1a.6.6 0 01.342.543v5.706a.6.6 0 01-.342.543l-4.392 2.1a.6.6 0 01-.516 0z" fill="#CF649A"/></svg>
+            <span>Sass</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack-category reveal">
+        <h3 class="stack-category-title">Infrastructure</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-1.933a.186.186 0 01-.185-.185V6.749a.186.186 0 01.185-.186h1.933a.186.186 0 00.186-.185V4.49a.186.186 0 00-.186-.186h-2.119a2.067 2.067 0 00-2.068 2.068v2.639a2.067 2.067 0 002.068 2.067zm-6.054 0h2.12a.186.186 0 00.185-.185V4.49a.186.186 0 00-.186-.186H7.93a2.067 2.067 0 00-2.068 2.068v2.64a2.067 2.067 0 002.068 2.066zm10.894-5.223a.186.186 0 01.186.186v1.887a.186.186 0 01-.186.186h-1.933a.186.186 0 00-.186.185v1.887a.186.186 0 00.186.185h2.12a2.067 2.067 0 002.066-2.067V6.371a2.067 2.067 0 00-2.067-2.068h-2.12a.186.186 0 00-.185.186v1.887a.186.186 0 00.186.186h1.933zM4.252 12.922H2.186A2.067 2.067 0 00.119 14.99v2.639a2.067 2.067 0 002.067 2.068h2.12a.186.186 0 00.185-.186v-1.887a.186.186 0 00-.185-.186H2.373a.186.186 0 01-.186-.185v-1.887a.186.186 0 01.186-.186h1.879a.186.186 0 00.186-.185v-1.887a.186.186 0 00-.186-.186zm17.482 0h-2.119a2.067 2.067 0 00-2.068 2.068v2.639a2.067 2.067 0 002.068 2.068h2.119a.186.186 0 00.186-.186V17.624a.186.186 0 00-.186-.186h-1.933a.186.186 0 01-.185-.185V15.366a.186.186 0 01.185-.186h1.933a.186.186 0 00.186-.185v-1.887a.186.186 0 00-.186-.186z" fill="#2496ED"/><path d="M12.85 12.922H10.73a2.067 2.067 0 00-2.068 2.068v2.639a2.067 2.067 0 002.068 2.068h2.12a.186.186 0 00.185-.186v-6.403a.186.186 0 00-.186-.186zm-1.934 5.213a.186.186 0 01-.185-.186v-1.887a.186.186 0 01.185-.185h1.748v2.258h-1.748zm-2.946-5.213H5.85a.186.186 0 00-.186.186v1.887a.186.186 0 00.186.186H7.784a.186.186 0 01.186.185v1.887a.186.186 0 01-.186.186H5.85a.186.186 0 00-.186.185v1.887a.186.186 0 00.186.186H7.97a2.067 2.067 0 002.068-2.068V14.99a2.067 2.067 0 00-2.068-2.068z" fill="#2496ED"/></svg>
+            <span>Docker</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5.5 3.21V20.8c0 .45.34.79.79.79h2.21V3.21H5.5z" fill="#6C757D"/><rect x="9.5" y="6" width="9" height="4" rx=".5" fill="#6C757D"/><rect x="9.5" y="12" width="7" height="4" rx=".5" fill="#6C757D"/></svg>
+            <span>REST APIs</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18L19 6.3v4.7c0 4.83-3.13 9.37-7 10.82V3.18z" fill="#6C757D"/></svg>
+            <span>OAuth2</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 15l-4-4 1.41-1.41L11 13.17l6.59-6.59L19 8l-8 8z" fill="#6C757D"/></svg>
+            <span>OpenID Connect</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM12 3v10l3-3h6V3h-9z" fill="#6C757D"/></svg>
+            <span>WebSocket</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack-category reveal">
+        <h3 class="stack-category-title">Networking & Security</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="#049FD9"/></svg>
+            <span>CCNA</span>
+          </div>
+          <div class="stack-item">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" fill="#049FD9"/></svg>
+            <span>CyberOps</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parcours -->
+    <section id="parcours">
+      <p class="section-label reveal">professional experience</p>
+      <h2 class="section-title reveal">Experience</h2>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <h3 class="exp-company">Doctipro</h3>
+          <span class="exp-date">July 2025 — Present</span>
+        </div>
+        <p class="exp-type">Healthcare SaaS — Luxembourg</p>
+        <ul class="exp-list">
+          <li>Real-time virtual waiting room via WebSocket</li>
+          <li>Integrated ophthalmic devices RT5100 Nidek, Tonoref 2 via Node.js</li>
+          <li>Full EMR module — medical exams, patient photos, history, intra-hospital sharing</li>
+          <li>Unified prescription management glasses and lenses</li>
+          <li>Direct payment processing CNS PID V2</li>
+          <li>Third-party laboratory OAuth2 integration (Bionext)</li>
+          <li>Database migration MyISAM &rarr; InnoDB — performance and integrity</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">PHP</span>
+          <span class="exp-tag">Laravel</span>
+          <span class="exp-tag">MariaDB</span>
+          <span class="exp-tag">Node.js</span>
+          <span class="exp-tag">WebSocket</span>
+          <span class="exp-tag">REST APIs</span>
+          <span class="exp-tag">OAuth2</span>
+          <span class="exp-tag">Sass</span>
+          <span class="exp-tag">Vite</span>
+          <span class="exp-tag">CNS PID V2</span>
+        </div>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <h3 class="exp-company">R&eacute;f&eacute;renceur</h3>
+          <span class="exp-date">January 2024 — July 2025</span>
+        </div>
+        <p class="exp-type">Financial SaaS — Luxembourg</p>
+        <ul class="exp-list">
+          <li>No-code landing page configurator — layout, simulator, form, colors, fonts, domain &rarr; publish instantly</li>
+          <li>Custom loan simulator and lead generation forms</li>
+          <li>Custom domain and email management per broker</li>
+          <li>Complete loan request workflow</li>
+          <li>Role-based access control granular permissions</li>
+          <li>Billing automation via Zoho API</li>
+          <li>CLIP payment gateway integration</li>
+          <li>Anysoft broker platform API integration</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">PHP</span>
+          <span class="exp-tag">Laravel</span>
+          <span class="exp-tag">PostgreSQL</span>
+          <span class="exp-tag">React</span>
+          <span class="exp-tag">Vue.js</span>
+          <span class="exp-tag">TypeScript</span>
+          <span class="exp-tag">Sass</span>
+          <span class="exp-tag">REST APIs</span>
+          <span class="exp-tag">Adobe XD</span>
+          <span class="exp-tag">Zoho API</span>
+        </div>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <h3 class="exp-company">Anysoft</h3>
+          <span class="exp-date">April 2019 — January 2024</span>
+        </div>
+        <p class="exp-type">Financial SaaS — Belgium</p>
+        <ul class="exp-list">
+          <li>Full migration Windows/desktop &rarr; web SaaS — sole developer</li>
+          <li>Complete mortgage and consumer credit management SaaS in React</li>
+          <li>Integrated Belfius, Cofidis, BNP Paribas Fortis, Elantis</li>
+          <li>C# API gateways for loan submission to banking partners</li>
+          <li>Identity verification with card reader</li>
+          <li>SMS/email communication system</li>
+          <li>Hundreds of brokers across Benelux</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">React</span>
+          <span class="exp-tag">TypeScript</span>
+          <span class="exp-tag">Node.js</span>
+          <span class="exp-tag">.NET Core</span>
+          <span class="exp-tag">C#</span>
+          <span class="exp-tag">Sybase</span>
+          <span class="exp-tag">REST APIs</span>
+        </div>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <h3 class="exp-company">ESI Informatique</h3>
+          <span class="exp-date">June 2017 — April 2019</span>
+        </div>
+        <p class="exp-type">Agri-food & Quality Control — Belgium</p>
+        <ul class="exp-list">
+          <li>Quality Control SaaS for Vin&ccedil;otte inspectors at Belgium's largest Carrefour distribution center</li>
+          <li>Companion mobile app iOS & Android for warehouse inspections</li>
+          <li>Brunswick Marine client integration</li>
+          <li>Full ownership frontend, backend, database and mobile</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">PHP</span>
+          <span class="exp-tag">Zend Framework</span>
+          <span class="exp-tag">PostgreSQL</span>
+          <span class="exp-tag">Angular.js</span>
+          <span class="exp-tag">React</span>
+          <span class="exp-tag">Ionic</span>
+          <span class="exp-tag">Cordova</span>
+          <span class="exp-tag">Mobile iOS & Android</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formation -->
+    <section id="formation">
+      <p class="section-label reveal">education & certifications</p>
+      <h2 class="section-title reveal">Education</h2>
+
+      <div class="edu-grid">
+        <div class="edu-card reveal">
+          <div class="edu-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
+          </div>
+          <div class="edu-info">
+            <h3>Bachelor's in Computer Science</h3>
+            <p>IPEPS Verviers</p>
+            <p class="edu-date">2016 — 2018</p>
+          </div>
+        </div>
+
+        <div class="edu-card reveal">
+          <div class="edu-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="edu-info">
+            <h3>CCNA — Cisco Certified Network Associate</h3>
+            <p>Cisco Networking Academy</p>
+          </div>
+        </div>
+
+        <div class="edu-card reveal">
+          <div class="edu-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="edu-info">
+            <h3>CyberOps Associate</h3>
+            <p>Cisco Networking Academy</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <p class="section-label reveal">contact</p>
+      <h2 class="contact-title reveal">Get in touch</h2>
+      <div class="contact-cta reveal">
+        <a href="mailto:quentin@lecler.dev" class="btn btn-primary">quentin@lecler.dev</a>
+        <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn</a>
+      </div>
+    </section>
+
   </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="mailto:quentin@lecler.dev">Email</a>
+      <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/quentinlecler" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="footer-copy">&copy; 2025 Quentin Lecler</p>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // Scroll reveal with IntersectionObserver
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Stagger siblings
+          const siblings = entry.target.parentElement.querySelectorAll('.reveal');
+          let delay = 0;
+          siblings.forEach((sib) => {
+            if (sib === entry.target) {
+              entry.target.style.transitionDelay = delay + 'ms';
+            }
+            delay += 80;
+          });
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
