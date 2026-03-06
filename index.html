@@ -123,6 +123,38 @@
       color: var(--text);
     }
 
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 1002;
+    }
+
+    .nav-burger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-burger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-burger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-burger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
     /* ── Hero ── */
     .hero {
       position: relative;
@@ -319,7 +351,7 @@
 
     /* ── Sections ── */
     section {
-      padding: 6rem 2rem;
+      padding: 4rem 2rem;
       max-width: 900px;
       margin: 0 auto;
     }
@@ -340,7 +372,7 @@
       font-size: 2rem;
       font-weight: 700;
       letter-spacing: -0.5px;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
 
     /* ── Stack ── */
@@ -408,7 +440,10 @@
 
     .exp-card:hover {
       border-left-color: var(--accent-2);
-      box-shadow: -4px 0 20px rgba(129, 140, 248, 0.06);
+      border-color: rgba(129, 140, 248, 0.15);
+      border-left-color: var(--accent-2);
+      box-shadow: 0 4px 24px rgba(129, 140, 248, 0.12);
+      transform: translateY(-2px);
     }
 
     .exp-card:last-child {
@@ -622,16 +657,39 @@
         padding: 0.75rem 1.25rem;
       }
 
+      .nav-burger {
+        display: flex;
+      }
+
       .nav-links {
-        gap: 1rem;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 100dvh;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(9, 9, 11, 0.95);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-left: 1px solid var(--border);
+        padding: 5rem 2rem 2rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .nav-links.open {
+        transform: translateX(0);
       }
 
       .nav-links a {
-        font-size: 0.8rem;
+        font-size: 1rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--border);
       }
 
       section {
-        padding: 4rem 1.25rem;
+        padding: 3rem 1.25rem;
       }
 
       .section-title {
@@ -685,7 +743,12 @@
   <!-- Nav -->
   <nav class="nav" id="nav">
     <a href="#" class="nav-logo">QL.</a>
-    <ul class="nav-links">
+    <button class="nav-burger" id="navBurger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#stack">Stack</a></li>
       <li><a href="#parcours">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -946,7 +1009,7 @@
 
         <div class="edu-card reveal">
           <div class="edu-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <div class="edu-info">
             <h3>CCNA — Cisco Certified Network Associate</h3>
@@ -957,7 +1020,7 @@
 
         <div class="edu-card reveal">
           <div class="edu-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
           </div>
           <div class="edu-info">
             <h3>CyberOps Associate</h3>
@@ -972,6 +1035,7 @@
     <section id="contact" class="contact">
       <p class="section-label reveal">contact</p>
       <h2 class="contact-title reveal">Get in touch</h2>
+      <p class="contact-text reveal">Feel free to reach out — I'm always open to connecting.</p>
       <div class="contact-cta reveal">
         <a href="mailto:quentin@lecler.dev" class="btn btn-primary">quentin@lecler.dev</a>
         <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn</a>
@@ -996,6 +1060,20 @@
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 50);
     }, { passive: true });
+
+    // Mobile burger menu
+    const burger = document.getElementById('navBurger');
+    const navLinks = document.getElementById('navLinks');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
 
     // Scroll reveal with IntersectionObserver
     const reveals = document.querySelectorAll('.reveal');
