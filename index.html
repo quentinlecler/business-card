@@ -124,6 +124,10 @@
       color: var(--text);
     }
 
+    .nav-links a.active {
+      color: var(--accent-1);
+    }
+
     .nav-burger {
       display: none;
       flex-direction: column;
@@ -300,19 +304,21 @@
     }
 
     .btn-primary:hover {
-      opacity: 0.9;
+      opacity: 0.92;
       transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(129, 140, 248, 0.35);
     }
 
     .btn-secondary {
       background: transparent;
       color: var(--text-secondary);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .btn-secondary:hover {
-      border-color: var(--text-muted);
+      border-color: rgba(255, 255, 255, 0.25);
       color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
     }
 
     /* Scroll hint */
@@ -425,7 +431,7 @@
       max-width: 680px;
       margin-top: 0.5rem;
       padding-left: 1rem;
-      border-left: 2px solid var(--accent);
+      border-left: 2px solid var(--accent-1);
     }
 
     #formation {
@@ -523,8 +529,7 @@
     }
 
     .exp-card:hover {
-      border-left-color: var(--accent-2);
-      border-color: rgba(129, 140, 248, 0.15);
+      border-color: rgba(129, 140, 248, 0.2);
       border-left-color: var(--accent-2);
       box-shadow: 0 4px 24px rgba(129, 140, 248, 0.12);
       transform: translateY(-2px);
@@ -590,10 +595,11 @@
     }
 
     .exp-tag {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-family: var(--font-mono);
-      color: var(--text-muted);
-      background: rgba(129, 140, 248, 0.08);
+      color: var(--text-secondary);
+      background: rgba(129, 140, 248, 0.1);
+      border: 1px solid rgba(129, 140, 248, 0.12);
       padding: 0.2rem 0.6rem;
       border-radius: 4px;
     }
@@ -612,6 +618,13 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .edu-card:hover {
+      border-color: rgba(129, 140, 248, 0.2);
+      box-shadow: 0 4px 20px rgba(129, 140, 248, 0.08);
+      transform: translateY(-1px);
     }
 
     .edu-icon {
@@ -726,6 +739,13 @@
       color: var(--text-muted);
     }
 
+    /* ── Focus visible ── */
+    :focus-visible {
+      outline: 2px solid var(--accent-1);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
     /* ── Animations ── */
     .reveal {
       opacity: 0;
@@ -757,6 +777,24 @@
       }
     }
 
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+      .hero-content > * {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+
     /* ── Responsive ── */
     @media (max-width: 640px) {
       .nav {
@@ -784,6 +822,7 @@
         text-align: center;
         transform: translateX(100%);
         transition: transform 0.3s ease;
+        z-index: 1001;
       }
 
       .nav-links.open {
@@ -1200,6 +1239,32 @@
     });
     overlay.addEventListener('click', closeMenu);
     navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+    // Scroll-spy: highlight active nav link
+    const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+    const sections = [...navAnchors].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function updateActiveSpy() {
+      const mid = window.innerHeight * 0.4;
+      let closest = null;
+      let closestDist = Infinity;
+      sections.forEach(s => {
+        const top = s.getBoundingClientRect().top;
+        const dist = Math.abs(top - mid);
+        if (top <= mid + 10 && dist < closestDist) {
+          closestDist = dist;
+          closest = s;
+        }
+      });
+      navAnchors.forEach(a => a.classList.remove('active'));
+      if (closest) {
+        const active = [...navAnchors].find(a => a.getAttribute('href') === '#' + closest.id);
+        if (active) active.classList.add('active');
+      }
+    }
+
+    window.addEventListener('scroll', updateActiveSpy, { passive: true });
+    updateActiveSpy();
 
     // Scroll reveal with IntersectionObserver
     const reveals = document.querySelectorAll('.reveal');

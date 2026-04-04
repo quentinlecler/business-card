@@ -38,3 +38,13 @@ Then open `http://localhost:8080`.
 ## Deployment
 
 Push to `main` → GitHub Pages auto-deploys. No CI pipeline.
+
+## Browser Automation
+
+Use the `/playwright-cli` skill for browser testing and automation. The Playwright MCP server is disabled — do not use it.
+
+**Always open the browser in headed (visible) mode:**
+```bash
+playwright-cli open --browser=chrome --headed http://localhost:8080
+```
+Never omit `--headed` — without it, playwright-cli defaults to headless.
