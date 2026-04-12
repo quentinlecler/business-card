@@ -937,14 +937,9 @@
         display: none;
       }
 
-      .stack-grid > .stack-item:last-child:nth-child(odd),
-      .stack-grid > .stack-item:last-child:nth-child(4n) {
+      .stack-grid > .stack-item:last-child:nth-child(odd) {
         grid-column: span 2;
       }
-    }
-
-    .stack-grid > .stack-item:last-child:nth-child(odd) {
-      grid-column: span 2;
     }
   </style>
 </head>
@@ -1108,9 +1103,9 @@
             <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#2ECC40"/></svg>
             <span>Playwright E2E</span>
           </div>
-          <div class="stack-item">
+          <div class="stack-item" title="TDD · 80%+ coverage">
             <svg viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="#2ECC40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="#6C757D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>TDD · 80%+ coverage</span>
+            <span>TDD · 80%+ cov&#8230;</span>
           </div>
         </div>
       </div>
