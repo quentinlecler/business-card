@@ -937,9 +937,14 @@
         display: none;
       }
 
-      .stack-grid > .stack-item:last-child:nth-child(odd) {
+      .stack-grid > .stack-item:last-child:nth-child(odd),
+      .stack-grid > .stack-item:last-child:nth-child(4n) {
         grid-column: span 2;
       }
+    }
+
+    .stack-grid > .stack-item:last-child:nth-child(odd) {
+      grid-column: span 2;
     }
   </style>
 </head>
@@ -990,7 +995,7 @@
     <!-- About -->
     <section id="about">
       <p class="section-label reveal">about</p>
-      <p class="about-text reveal">Senior Full-Stack Developer specializing in healthcare and finance SaaS in Luxembourg. 8+ years building mission-critical platforms as sole developer — from architecture to deployment, with a TDD approach and 80%+ test coverage.</p>
+      <p class="about-text reveal">Senior Full-Stack Developer specializing in healthcare and finance SaaS in Luxembourg. 8+ years building mission-critical platforms as sole developer — from architecture to deployment.</p>
     </section>
 
     <!-- Stack Technique -->
