@@ -1,1397 +1,954 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quentin Lecler — Senior Full-Stack Developer</title>
-  <meta name="description" content="Senior Full-Stack Developer specializing in Healthcare SaaS & Financial SaaS. Laravel, Vue.js, React, TypeScript.">
-  <meta name="author" content="Quentin Lecler">
-  <meta name="keywords" content="Full-Stack Developer, Healthcare SaaS, Financial SaaS, Laravel, Vue.js, React, TypeScript, Luxembourg, PHP, Node.js">
-  <meta name="google-site-verification" content="zPN4wNuD0ncm_xalb3_HQyCagDVP8bQyQfuKwrRHrAQ" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Quentin Lecler — Senior Full-Stack Developer">
-  <meta property="og:description" content="8+ years building mission-critical SaaS for healthcare and finance in Luxembourg. Laravel, Vue.js, React, TypeScript, Node.js.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://lecler.dev">
-  <meta property="og:image" content="https://lecler.dev/og.png">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Quentin Lecler — Senior Full-Stack Developer">
-  <meta name="twitter:description" content="8+ years building mission-critical SaaS for healthcare and finance in Luxembourg. Laravel, Vue.js, React, TypeScript, Node.js.">
-  <meta name="twitter:image" content="https://lecler.dev/og.png">
-
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>Q</text></svg>">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg: #09090b;
-      --bg-card: #131316;
-      --accent-1: #818cf8;
-      --accent-2: #a78bfa;
-      --text: #ededef;
-      --text-secondary: #a0a0ab;
-      --text-muted: #5a5a6e;
-      --border: #1e1e24;
-      --green: #34d399;
-      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* Gradient accent bar top */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-1));
-      z-index: 1001;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* ── Nav ── */
-    .nav {
-      position: fixed;
-      top: 2px;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: rgba(9, 9, 11, 0.8);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
-    }
-
-    .nav.scrolled {
-      border-bottom-color: var(--border);
-    }
-
-    .nav-logo {
-      font-family: var(--font-mono);
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-links a.active {
-      color: var(--accent-1);
-    }
-
-    .nav-burger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-      z-index: 1002;
-    }
-
-    .nav-burger span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
-    .nav-burger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .nav-burger.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .nav-burger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    .nav-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-    .nav-overlay.open {
-      display: block;
-    }
-
-    /* ── Hero ── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
-      overflow: hidden;
-    }
-
-    /* Noise grain overlay */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-      background-size: 180px 180px;
-      opacity: 0.04;
-      pointer-events: none;
-    }
-
-    /* Aurora glow blobs */
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 55% 45% at 20% 60%, rgba(129, 140, 248, 0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 45% 55% at 80% 30%, rgba(167, 139, 250, 0.1) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 50% 85%, rgba(99, 102, 241, 0.07) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    /* Horizontal scan line */
-    .hero-scanline {
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 3px,
-        rgba(255, 255, 255, 0.012) 3px,
-        rgba(255, 255, 255, 0.012) 4px
-      );
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-label {
-      font-family: var(--font-mono);
-      font-size: 0.875rem;
-      color: var(--accent-1);
-      margin-bottom: 1.25rem;
-      letter-spacing: 0.05em;
-    }
-
-    .hero-label::before {
-      content: '// ';
-      color: var(--text-muted);
-    }
-
-    .hero-name {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 700;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--text) 0%, var(--accent-1) 50%, var(--accent-2) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-tagline {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      color: var(--text-secondary);
-      max-width: 520px;
-      margin: 0 auto 1.5rem;
-    }
-
-    .hero-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      margin-bottom: 2.5rem;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      position: relative;
-    }
-
-    .status-dot::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      background: var(--green);
-      opacity: 0.4;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.4; }
-      50% { transform: scale(1.8); opacity: 0; }
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.75rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      opacity: 0.92;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 20px rgba(129, 140, 248, 0.35);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--text-secondary);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .btn-secondary:hover {
-      border-color: rgba(255, 255, 255, 0.25);
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    /* Scroll hint */
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      opacity: 0.3;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      animation: scrollBounce 2s ease-in-out infinite;
-    }
-
-    .scroll-mouse {
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--text-muted);
-      border-radius: 11px;
-      position: relative;
-    }
-
-    .scroll-mouse::after {
-      content: '';
-      position: absolute;
-      top: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 3px;
-      height: 6px;
-      background: var(--text-muted);
-      border-radius: 2px;
-      animation: scrollWheel 2s ease-in-out infinite;
-    }
-
-    @keyframes scrollBounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(6px); }
-    }
-
-    @keyframes scrollWheel {
-      0%, 100% { opacity: 1; top: 6px; }
-      50% { opacity: 0.3; top: 14px; }
-    }
-
-    .hero-freelance {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.25rem;
-      margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: rgba(129, 140, 248, 0.04);
-      transition: all 0.3s ease;
-    }
-
-    a:has(.hero-freelance):hover .hero-freelance {
-      border-color: rgba(129, 140, 248, 0.15);
-      box-shadow: 0 4px 24px rgba(129, 140, 248, 0.12);
-      transform: translateY(-2px);
-    }
-
-    .freelance-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      margin-bottom: 0.1rem;
-    }
-
-    .freelance-text {
-      font-size: 0.8rem;
-      color: var(--accent-1);
-      font-family: var(--font-mono);
-    }
-
-    .freelance-stack {
-      font-size: 0.72rem;
-      font-family: var(--font-mono);
-      color: var(--text-secondary);
-    }
-
-    .freelance-sectors {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-
-    /* ── Sections ── */
-    section {
-      padding: 4rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    /* ── About ── */
-    #about {
-      padding-bottom: 0;
-    }
-
-    .about-text {
-      font-size: 1.15rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 680px;
-      margin-top: 0.5rem;
-      padding-left: 1rem;
-      border-left: 2px solid var(--accent-1);
-    }
-
-    #formation {
-      padding-bottom: 2rem;
-    }
-
-    #contact {
-      padding-top: 2rem;
-    }
-
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.05em;
-    }
-
-    .section-label::before {
-      content: '// ';
-    }
-
-    .section-title {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 2rem;
-    }
-
-    /* ── Stack ── */
-    .stack-category {
-      margin-bottom: 2.5rem;
-    }
-
-    .stack-category:last-child {
-      margin-bottom: 0;
-    }
-
-    .stack-category-title {
-      font-size: 0.8rem;
-      font-family: var(--font-mono);
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .stack-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 0.75rem;
-    }
-
-    .stack-item {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.65rem 0.9rem;
-      height: 2.75rem;
-      box-sizing: border-box;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      white-space: nowrap;
-      overflow: hidden;
-      transition: all 0.2s ease;
-    }
-
-    .stack-item:hover {
-      border-color: var(--accent-1);
-      color: var(--text);
-      transform: translateY(-1px);
-    }
-
-    .stack-item svg {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-    }
-
-    /* ── Experience ── */
-    .exp-card {
-      position: relative;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      border-left: 3px solid var(--accent-1);
-      transition: all 0.3s ease;
-    }
-
-    .exp-card:hover {
-      border-color: rgba(129, 140, 248, 0.2);
-      border-left-color: var(--accent-2);
-      box-shadow: 0 4px 24px rgba(129, 140, 248, 0.12);
-      transform: translateY(-2px);
-    }
-
-    .exp-card:last-child {
-      margin-bottom: 0;
-    }
-
-    .exp-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .exp-company {
-      font-size: 1.25rem;
-      font-weight: 600;
-    }
-
-    .exp-date {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    .exp-type {
-      font-size: 0.9rem;
-      color: var(--accent-1);
-      margin-bottom: 1rem;
-    }
-
-    .exp-list {
-      list-style: none;
-      margin-bottom: 1.25rem;
-    }
-
-    .exp-list li {
-      position: relative;
-      padding-left: 1.25rem;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.4rem;
-      line-height: 1.5;
-    }
-
-    .exp-list li::before {
-      content: '›';
-      position: absolute;
-      left: 0;
-      color: var(--accent-1);
-      font-weight: 600;
-    }
-
-    .exp-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .exp-tag {
-      font-size: 0.72rem;
-      font-family: var(--font-mono);
-      color: var(--text-secondary);
-      background: rgba(129, 140, 248, 0.1);
-      border: 1px solid rgba(129, 140, 248, 0.12);
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-    }
-
-    /* ── Education ── */
-    .edu-grid {
-      display: grid;
-      gap: 0.65rem;
-    }
-
-    .edu-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.9rem;
-      padding: 0.9rem 1.1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      transition: all 0.2s ease;
-    }
-
-    .edu-card:hover {
-      border-color: rgba(129, 140, 248, 0.2);
-      box-shadow: 0 4px 20px rgba(129, 140, 248, 0.08);
-      transform: translateY(-1px);
-    }
-
-    .edu-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      background: rgba(129, 140, 248, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .edu-icon svg {
-      width: 17px;
-      height: 17px;
-      color: var(--accent-1);
-    }
-
-    .edu-info h3 {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 0.15rem;
-    }
-
-    .edu-info p {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .edu-info .edu-date {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 0.25rem;
-    }
-
-    /* ── Contact ── */
-    .contact {
-      text-align: center;
-      position: relative;
-    }
-
-    .contact-inner {
-      position: relative;
-      padding: 3.5rem 2.5rem;
-      border-radius: 20px;
-      border: 1px solid rgba(129, 140, 248, 0.15);
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(129, 140, 248, 0.08) 0%, transparent 70%),
-        linear-gradient(135deg, rgba(129, 140, 248, 0.04) 0%, rgba(167, 139, 250, 0.04) 100%),
-        var(--bg-card);
-      overflow: hidden;
-    }
-
-    .contact-inner::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 50% 80% at 50% 110%, rgba(129, 140, 248, 0.14) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .contact-inner::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 10%;
-      right: 10%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(129, 140, 248, 0.4), transparent);
-    }
-
-    .contact-title {
-      font-size: clamp(1.75rem, 4vw, 2.75rem);
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--text) 0%, var(--accent-1) 60%, var(--accent-2) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .contact-text {
-      color: var(--text-secondary);
-      max-width: 400px;
-      margin: 0 auto 2.5rem;
-      font-size: 1rem;
-      line-height: 1.65;
-    }
-
-    .contact-cta {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      position: relative;
-    }
-
-    .contact-malt {
-      margin-top: 1.5rem;
-      font-size: 0.8rem;
-      font-family: var(--font-mono);
-      position: relative;
-    }
-
-    .contact-malt a {
-      color: var(--text-muted);
-      transition: color 0.2s;
-    }
-
-    .contact-malt a:hover {
-      color: var(--accent-1);
-    }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .footer-links a {
-      display: inline-flex;
-      align-items: center;
-      opacity: 0.6;
-      transition: opacity 0.2s;
-    }
-
-    .footer-links a:hover {
-      opacity: 1;
-    }
-
-    .footer-links img {
-      width: 22px;
-      height: 22px;
-      filter: invert(1);
-    }
-
-    .footer-copy {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    /* ── Focus visible ── */
-    :focus-visible {
-      outline: 2px solid var(--accent-1);
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    /* ── Animations ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .hero-content > * {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.6s ease forwards;
-    }
-
-    .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
-    .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
-    .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
-    .hero-content > *:nth-child(4) { animation-delay: 0.4s; }
-    .hero-content > *:nth-child(5) { animation-delay: 0.5s; }
-
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ── Reduced motion ── */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      .reveal {
-        opacity: 1;
-        transform: none;
-      }
-      .hero-content > * {
-        opacity: 1;
-        transform: none;
-        animation: none;
-      }
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 640px) {
-      .nav {
-        padding: 0.75rem 1.25rem;
-      }
-
-      .nav-burger {
-        display: flex;
-      }
-
-      .nav-links {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100dvh;
-        flex-direction: column;
-        gap: 0;
-        background: #09090b;
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        padding: 2rem;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        z-index: 1001;
-      }
-
-      .nav-links.open {
-        transform: translateX(0);
-      }
-
-      .nav-links a {
-        font-size: 1rem;
-        padding: 0.75rem 0;
-        border-bottom: 1px solid var(--border);
-      }
-
-      section {
-        padding: 3rem 1.25rem;
-      }
-
-      .section-title {
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
-      }
-
-      .stack-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .exp-card {
-        padding: 1.25rem;
-      }
-
-      .exp-header {
-        flex-direction: column;
-      }
-
-      .hero-cta {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .hero-cta .btn {
-        width: 100%;
-        max-width: 260px;
-        justify-content: center;
-      }
-
-      .contact-cta {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .contact-cta .btn {
-        width: 100%;
-        max-width: 260px;
-        justify-content: center;
-      }
-
-      .edu-card {
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-
-      .scroll-hint {
-        display: none;
-      }
-
-      .stack-grid > .stack-item:last-child:nth-child(odd) {
-        grid-column: span 2;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quentin Lecler — Laravel & PHP Specialist</title>
+<meta name="description" content="Laravel & PHP Specialist — 8+ years building mission-critical SaaS for healthcare and finance in Luxembourg.">
+<meta property="og:title" content="Quentin Lecler — Laravel & PHP Specialist">
+<meta property="og:description" content="8+ years building mission-critical SaaS for healthcare and finance in Luxembourg. Laravel expert from v5 to v12.">
+<meta property="og:image" content="https://lecler.dev/og.jpg">
+<meta property="og:url" content="https://lecler.dev">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lecler.dev">
+<style>
+.skip-link{position:absolute;top:-120px;left:16px;background:var(--accent-solid,#6366F1);color:#fff;padding:8px 16px;border-radius:6px;font-family:monospace;font-size:12px;text-decoration:none;z-index:9999;transition:top 0.2s}
+.skip-link:focus{top:8px}
+</style>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧑‍💻</text></svg>">
+<meta name="theme-color" content="#08080F" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAFBFF" media="(prefers-color-scheme: light)">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet"></noscript>
+<style>
+/* ── Reset ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 58px; }
+body {
+  background: #08080F; color: #F0F6FF;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 15px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ── CSS Vars ──────────────────────────────── */
+:root {
+  --bg: #07070E; --bg-surface: #0C0D1A; --bg-card: #0A0B18;
+  --border: #191B32; --border-hover: #2E3060;
+  --fg-1: #EEF0FF; --fg-2: #8890C4; --fg-3: #3E4272;
+  --accent: #A5B4FC; --accent-solid: #6366F1;
+  --grad: linear-gradient(135deg, #EEF0FF 0%, #A5B4FC 100%);
+  --mono: 'JetBrains Mono', monospace;
+  --display: 'Space Grotesk', system-ui, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Light theme ────────────────────────────── */
+body.light {
+  background: #FAFBFF; color: #0D0F1A;
+  --bg: #FAFBFF; --bg-surface: #FFFFFF; --bg-card: #F4F5FD;
+  --border: #DDE0F0; --border-hover: #B8BCDC;
+  --fg-1: #0D0F1A; --fg-2: #3D4270; --fg-3: #8A8FB8;
+  --accent: #4F46E5; --accent-solid: #4F46E5;
+}
+body.light nav { background: rgba(250,251,255,0.92); border-bottom-color: #DDE0F0; }
+body.light .hero-glow { background: radial-gradient(ellipse at 50% 35%, rgba(79,70,229,0.13) 0%, rgba(99,102,241,0.05) 45%, transparent 68%); display: block; }
+body.light .hero-name { background: none; -webkit-text-fill-color: #0D0F1A; color: #0D0F1A; }
+body.light .contact-lead { background: none; -webkit-text-fill-color: #0D0F1A; color: #0D0F1A; }
+body.light .hero-badge { color: #4F46E5; background: rgba(79,70,229,0.07); border-color: rgba(79,70,229,0.2); }
+body.light .hero-badge::before { background: #4F46E5; }
+body.light .section-label { color: #4F46E5; }
+body.light .edu-type { color: #4F46E5; }
+body.light .exp-tag { background: rgba(79,70,229,0.06); border-color: rgba(79,70,229,0.18); color: #4F46E5; }
+body.light .tech-badge { color: var(--fg-2); border-color: #DDE0F0; }
+body.light .tech-badge:hover { border-color: #4F46E5; color: #1E1B4B; }
+body.light .exp-card, body.light .edu-card, body.light .contact-link { box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+body.light .theme-btn { background: #ECEEF8; border-color: #DDE0F0; }
+
+/* ── Nav ────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 58px;
+  background: rgba(7,7,14,0.88); backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s, border-color 0.3s;
+}
+.nav-logo {
+  font-family: var(--mono); font-size: 13px; font-weight: 500;
+  letter-spacing: 0.02em; color: var(--fg-2); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-logo:hover { color: var(--fg-1); }
+.nav-logo strong { color: var(--fg-1); }
+.nav-right { display: flex; align-items: center; gap: 28px; }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+  color: var(--fg-3); text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 1px; background: var(--accent);
+  transform: scaleX(0); transition: transform 0.2s var(--ease);
+}
+.nav-links a:hover { color: var(--fg-2); }
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--accent); }
+.nav-cta {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.06em; color: #fff;
+  background: var(--accent-solid); border: none; border-radius: 6px;
+  padding: 8px 16px; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.nav-cta:hover { background: #4F46E5; transform: translateY(-1px); }
+.theme-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  background: rgba(129,140,248,0.08); border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  font-size: 15px; flex-shrink: 0;
+}
+.theme-btn:hover { background: rgba(129,140,248,0.15); border-color: var(--border-hover); transform: rotate(12deg); }
+
+/* ── Layout ─────────────────────────────────── */
+.container { max-width: 840px; margin: 0 auto; padding: 0 32px; }
+section { padding: 96px 0; }
+section + section { border-top: 1px solid var(--border); }
+
+/* ── Hero ───────────────────────────────────── */
+#hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding-top: 56px; position: relative; border-top: none; overflow: hidden;
+}
+.hero-glow {
+  position: absolute; top: -15%; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 650px; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, rgba(99,102,241,0.18) 0%, rgba(165,180,252,0.07) 45%, transparent 68%);
+  transition: background 0.4s ease;
+}
+.hero-inner { position: relative; z-index: 1; padding: 60px 0 80px; }
+
+/* Hero entrance animations */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-inner > * {
+  opacity: 0;
+  animation: heroFadeUp 0.65s var(--ease) forwards;
+}
+.hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+.hero-inner > *:nth-child(2) { animation-delay: 0.18s; }
+.hero-inner > *:nth-child(3) { animation-delay: 0.30s; }
+.hero-inner > *:nth-child(4) { animation-delay: 0.40s; }
+.hero-inner > *:nth-child(5) { animation-delay: 0.50s; }
+.hero-inner > *:nth-child(6) { animation-delay: 0.60s; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent); background: rgba(165,180,252,0.07);
+  border: 1px solid rgba(165,180,252,0.2); border-radius: 999px;
+  padding: 6px 14px; margin-bottom: 28px; white-space: nowrap;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+}
+.hero-badge:hover {
+  background: rgba(165,180,252,0.13); border-color: rgba(165,180,252,0.4);
+  color: var(--fg-1); transform: translateY(-1px);
+}
+.hero-badge::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0;
+  animation: blink 2.4s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+.hero-name {
+  font-family: var(--display); font-size: clamp(48px, 7vw, 88px);
+  font-weight: 700; letter-spacing: -0.04em; line-height: 0.95;
+  background: var(--grad);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin-bottom: 18px;
+}
+.hero-role {
+  font-family: var(--mono); font-size: 14px; font-weight: 400;
+  color: var(--fg-2); letter-spacing: 0.02em; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 2px;
+}
+.hero-role .cursor {
+  display: inline-block; width: 2px; height: 1em;
+  background: var(--accent); margin-left: 1px; vertical-align: middle;
+  animation: cursorBlink 1.1s step-end infinite;
+}
+@keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+.hero-desc {
+  font-size: 14px; color: var(--fg-2); line-height: 1.7;
+  max-width: 440px; margin-bottom: 10px;
+}
+.hero-stack {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em;
+  color: var(--fg-3); margin-bottom: 36px; line-height: 2;
+}
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ── Buttons ─────────────────────────────────── */
+.btn-filled {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: #fff; background: var(--accent-solid);
+  border: none; border-radius: 6px; padding: 11px 22px;
+  cursor: pointer; text-decoration: none;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.btn-filled:hover { background: #4F46E5; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(99,102,241,0.3); }
+.btn-filled:active { transform: scale(0.97); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--fg-2); background: transparent;
+  border: 1px solid var(--border-hover); border-radius: 6px;
+  padding: 11px 22px; cursor: pointer; text-decoration: none;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.15s;
+}
+.btn-outline:hover { color: var(--fg-1); border-color: var(--accent); background: rgba(165,180,252,0.05); transform: translateY(-2px); }
+.btn-malt {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: #FC5656; background: transparent;
+  border: 1px solid rgba(252,86,86,0.35); border-radius: 6px;
+  padding: 11px 22px; cursor: pointer; text-decoration: none;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.btn-malt:hover { color: #fff; background: #FC5656; border-color: #FC5656; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(252,86,86,0.25); }
+.btn-malt:active { transform: scale(0.97); }
+
+/* ── Sections ────────────────────────────────── */
+.section-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--display); font-size: 28px; font-weight: 700;
+  letter-spacing: -0.03em; color: var(--fg-1); margin-bottom: 36px;
+}
+
+/* ── Scroll reveal ───────────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── Stats bar ──────────────────────────────── */
+.hero-stats {
+  display: flex; gap: 0; flex-wrap: wrap;
+  margin-top: 40px; border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+}
+.stat {
+  flex: 1; min-width: 120px; padding: 16px 20px;
+  border-right: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.stat:last-child { border-right: none; }
+.stat:hover { background: rgba(165,180,252,0.04); }
+.stat-num {
+  font-family: var(--display); font-size: 26px; font-weight: 700;
+  letter-spacing: -0.03em; color: var(--fg-1); line-height: 1;
+  background: var(--grad); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--fg-3);
+}
+body.light .stat-num { background: none; -webkit-text-fill-color: var(--accent-solid); color: var(--accent-solid); }
+
+/* ── Scroll to top ───────────────────────────── */
+.scroll-top {
+  position: fixed; bottom: 28px; right: 28px; z-index: 50;
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--fg-2); cursor: pointer; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 16px; opacity: 0; pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s var(--ease), border-color 0.2s;
+  transform: translateY(8px);
+}
+.scroll-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.scroll-top:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+/* ── About ───────────────────────────────────── */
+.about-text {
+  font-size: 15px; color: var(--fg-2); line-height: 1.75; max-width: 600px;
+}
+.about-text strong { color: var(--fg-1); font-weight: 500; }
+
+/* ── Tech Stack ──────────────────────────────── */
+.stack-section { margin-bottom: 28px; }
+.stack-cat {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--fg-3); margin-bottom: 10px;
+}
+.stack-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.tech-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--mono); font-size: 11px; font-weight: 400;
+  color: var(--fg-2); background: var(--bg-card);
+  border: 1px solid var(--border-hover); border-radius: 6px;
+  padding: 5px 11px; white-space: nowrap; cursor: default;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.15s;
+}
+.tech-badge:hover { border-color: var(--accent); color: var(--fg-1); background: rgba(165,180,252,0.05); transform: translateY(-1px); }
+.tech-badge img { width: 14px; height: 14px; object-fit: contain; }
+body:not(.light) .icon-github { filter: invert(0.7); }
+
+/* ── Experience ──────────────────────────────── */
+.exp-list { display: flex; flex-direction: column; gap: 10px; }
+.exp-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.exp-card:hover { border-color: var(--border-hover); box-shadow: 0 4px 24px rgba(99,102,241,0.08); }
+.exp-header {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: start; gap: 12px; padding: 20px 24px; cursor: pointer;
+  user-select: none;
+}
+.exp-date {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
+  color: var(--fg-3); text-align: right; margin-top: 2px; white-space: nowrap;
+}
+.exp-company {
+  font-family: var(--display); font-size: 16px; font-weight: 600;
+  color: var(--fg-1); margin-bottom: 2px;
+}
+.exp-role { font-size: 12px; color: var(--fg-3); }
+.exp-toggle {
+  font-size: 18px; color: var(--fg-3); background: none; border: none;
+  cursor: pointer; padding: 0; line-height: 1;
+  transition: color 0.2s, transform 0.3s var(--ease);
+  margin-top: 2px;
+}
+.exp-card.open .exp-toggle { transform: rotate(45deg); color: var(--accent); }
+.exp-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s var(--ease), padding 0.3s ease;
+  border-top: 1px solid transparent;
+}
+.exp-card.open .exp-body {
+  max-height: 600px;
+  border-top-color: var(--border);
+  padding: 16px 24px 20px;
+}
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; margin-bottom: 16px; }
+.exp-bullets li {
+  font-size: 13px; color: var(--fg-2); padding-left: 16px;
+  position: relative; line-height: 1.5;
+}
+.exp-bullets li::before {
+  content: '–'; position: absolute; left: 0; color: var(--fg-3);
+  font-family: var(--mono); font-size: 11px;
+}
+.exp-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.exp-tag {
+  font-family: var(--mono); font-size: 9px; color: var(--accent);
+  background: rgba(165,180,252,0.07); border: 1px solid rgba(165,180,252,0.18);
+  border-radius: 4px; padding: 2px 8px;
+}
+
+/* ── Education ───────────────────────────────── */
+.edu-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.edu-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 24px 20px;
+  transition: border-color 0.25s, transform 0.25s var(--ease), box-shadow 0.25s;
+}
+.edu-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(99,102,241,0.1);
+}
+.edu-type {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 10px; opacity: 0.7;
+}
+.edu-title {
+  font-family: var(--display); font-size: 13px; font-weight: 600;
+  color: var(--fg-1); margin-bottom: 6px; line-height: 1.3;
+}
+.edu-school { font-size: 12px; color: var(--fg-2); margin-bottom: 10px; }
+.edu-dates { font-family: var(--mono); font-size: 10px; color: var(--fg-3); }
+
+/* ── Contact ─────────────────────────────────── */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.contact-lead {
+  font-family: var(--display); font-size: 26px; font-weight: 700;
+  letter-spacing: -0.03em; line-height: 1.1;
+  background: var(--grad); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 12px;
+}
+.contact-sub { font-size: 13px; color: var(--fg-2); line-height: 1.7; margin-bottom: 24px; }
+.contact-links { display: flex; flex-direction: column; gap: 8px; }
+.contact-link {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px; background: var(--bg-card);
+  border: 1px solid var(--border); border-radius: 8px; text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s var(--ease);
+}
+.contact-link:hover { border-color: var(--accent); background: rgba(165,180,252,0.04); transform: translateX(3px); }
+.contact-link-malt:hover { border-color: #FC5656 !important; background: rgba(252,86,86,0.05) !important; }
+.contact-link-malt:hover .arrow { color: #FC5656 !important; }
+.contact-link-lbl {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--fg-3); margin-bottom: 2px;
+}
+.contact-link-val { font-size: 13px; font-weight: 500; color: var(--fg-1); }
+.arrow { color: var(--fg-3); transition: color 0.2s, transform 0.2s; }
+.contact-link:hover .arrow { color: var(--accent); transform: translateX(3px); }
+
+/* ── Footer ──────────────────────────────────── */
+footer { border-top: 1px solid var(--border); padding: 28px 0; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; }
+.footer-name { font-family: var(--mono); font-size: 12px; color: var(--fg-3); }
+.footer-icons { display: flex; gap: 14px; align-items: center; }
+.footer-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 8px;
+  color: var(--fg-3); text-decoration: none;
+  border: 1px solid var(--border);
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s var(--ease);
+}
+.footer-icon svg { width: 16px; height: 16px; fill: currentColor; }
+.footer-icon img { height: 14px; width: auto; max-width: 52px; object-fit: contain; opacity: 0.6; transition: opacity 0.2s; filter: brightness(0) invert(1); }
+body.light .footer-icon img { filter: none; }
+.footer-icon:hover { color: var(--fg-1); border-color: var(--border-hover); background: rgba(165,180,252,0.05); transform: translateY(-2px); }
+.footer-icon.malt { width: auto; padding: 0 12px; }
+.footer-icon.malt:hover { border-color: rgba(252,86,86,0.5); background: rgba(252,86,86,0.06); }
+.footer-icon.malt:hover img { opacity: 1; }
+
+.hamburger { display: none; }
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 680px) {
+  nav { padding: 0 20px; height: 52px; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column; gap: 0;
+    position: fixed; top: 52px; left: 0; right: 0;
+    height: calc(100dvh - 52px);
+    background: #08080F; backdrop-filter: none;
+    padding: 32px 24px; z-index: 200;
+    border-top: 1px solid var(--border);
+    overflow-y: auto;
+  }
+  .nav-links.open li { border-bottom: 1px solid var(--border); }
+  .nav-links.open a { display: block; padding: 16px 0; font-size: 14px; color: var(--fg-2); }
+  .nav-links.open a:hover { color: var(--fg-1); }
+  .hamburger {
+    display: flex; flex-direction: column; gap: 5px; cursor: pointer;
+    background: none; border: none; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 20px; height: 1.5px;
+    background: var(--fg-2); border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  body.light .nav-links.open { background: #FAFBFF; }
+  .nav-right { gap: 10px; }
+  .nav-cta { padding: 7px 12px; font-size: 10px; }
+  .container { padding: 0 20px; }
+  section { padding: 64px 0; }
+  #hero { min-height: 100svh; align-items: flex-start; padding-top: 52px; }
+  .hero-inner { padding: 48px 0 60px; }
+  .hero-badge { font-size: 9px; padding: 5px 11px; white-space: normal; text-align: center; }
+  .hero-name { font-size: clamp(44px, 13vw, 72px); margin-bottom: 14px; }
+  .hero-role { font-size: 15px; margin-bottom: 12px; }
+  .hero-desc { font-size: 13px; max-width: 100%; margin-bottom: 8px; }
+  .hero-stack { font-size: 10px; margin-bottom: 28px; }
+  .hero-actions { flex-direction: column; gap: 8px; }
+  .btn-filled, .btn-outline, .btn-malt { width: 100%; justify-content: center; padding: 14px 20px; }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; }
+  .stat { min-width: 0; }
+  .stat:nth-child(2) { border-right: none; }
+  .stat:nth-child(3) { border-right: 1px solid var(--border); border-top: 1px solid var(--border); }
+  .stat:nth-child(4) { border-right: none; border-top: 1px solid var(--border); }
+  .exp-header { grid-template-columns: 1fr; gap: 6px; position: relative; }
+  .exp-date { text-align: left; }
+  .exp-toggle { position: absolute; top: 16px; right: 16px; }
+  .exp-header { padding: 16px; }
+  .exp-card.open .exp-body { padding: 14px 16px 16px; }
+  .edu-grid { grid-template-columns: 1fr; gap: 10px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+  .contact-lead { font-size: 22px; }
+  .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+@media (max-width: 420px) {
+  .hero-name { font-size: clamp(38px, 14vw, 60px); }
+  .hero-badge { font-size: 8px; }
+}
+
+/* ── Section label style ────────────────────── */
+.section-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-label::before {
+  content: '';
+  display: inline-block; width: 20px; height: 1px;
+  background: var(--accent); opacity: 0.5;
+}
+
+/* ── Focus-visible ───────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.nav-links a:focus-visible,
+.nav-cta:focus-visible,
+.theme-btn:focus-visible,
+.hamburger:focus-visible,
+.hero-badge:focus-visible,
+.btn-filled:focus-visible,
+.btn-outline:focus-visible,
+.btn-malt:focus-visible,
+.exp-toggle:focus-visible,
+.contact-link:focus-visible,
+.footer-icon:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ── Touch action ────────────────────────────── */
+.nav-cta, .theme-btn, .hamburger, .hero-badge,
+.btn-filled, .btn-outline, .btn-malt,
+.exp-header, .exp-toggle, .contact-link, .footer-icon {
+  touch-action: manipulation;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-inner > *, .reveal { animation: none; opacity: 1; transform: none; transition: none; }
+}
+</style>
 </head>
 <body>
+<a href="#hero" class="skip-link">Skip to content</a>
 
-  <!-- Nav -->
-  <div id="navOverlay" class="nav-overlay"></div>
-  <nav class="nav" id="nav">
-    <a href="#" class="nav-logo">QL.</a>
-    <button class="nav-burger" id="navBurger" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+<nav>
+  <a href="#" class="nav-logo"><strong>QL</strong> · lecler.dev</a>
+  <div class="nav-right">
     <ul class="nav-links" id="navLinks">
-      <li><a href="#stack">Stack</a></li>
-      <li><a href="#parcours">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about">about</a></li>
+      <li><a href="#stack">stack</a></li>
+      <li><a href="#experience">work</a></li>
+      <li><a href="#education">education</a></li>
     </ul>
-  </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({block:'start'})">Contact</button>
+    <button class="theme-btn" id="themeBtn" title="Toggle theme" onclick="toggleTheme()">🌙</button>
+  </div>
+</nav>
 
-  <!-- Hero -->
-  <header class="hero">
-    <div class="hero-scanline" aria-hidden="true"></div>
-    <div class="hero-content">
-      <p class="hero-label">Senior Full-Stack Developer</p>
-      <h1 class="hero-name">Quentin Lecler</h1>
-      <p class="hero-tagline">8+ years building mission-critical SaaS for healthcare and finance in Luxembourg.</p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Contact me</a>
-        <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn</a>
-        <a href="https://github.com/quentinlecler" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" class="hero-badge">Available for freelance missions outside working hours →</a>
+      <div class="hero-name">Quentin Lecler</div>
+      <div class="hero-role"><span id="typedRole"></span><span class="cursor"></span></div>
+      <div class="hero-desc">8+ years building mission-critical SaaS for healthcare and finance in Luxembourg. Laravel expert from v5 to v12 — architecture, APIs, real-time, full ownership.</div>
+      <div class="hero-stack">Laravel · PHP · Vue.js · React · Node.js · PostgreSQL</div>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-filled">Contact me →</a>
+        <a href="https://linkedin.com/in/qlecler" class="btn-outline" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/quentinlecler" class="btn-outline" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" class="btn-malt">Malt →</a>
       </div>
-      <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener"><div class="hero-freelance">
-        <span class="freelance-dot"></span>
-        <span class="freelance-text">Available for freelance missions outside working hours</span>
-        <span class="freelance-stack">PHP · Laravel · Vue.js · React · Node.js</span>
-        <span class="freelance-sectors">Healthcare SaaS &amp; B2B platforms</span>
-      </div></a>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Years experience</div></div>
+        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Companies</div></div>
+        <div class="stat"><div class="stat-num">3×</div><div class="stat-label">Sole developer</div></div>
+        <div class="stat"><div class="stat-num">v5→12</div><div class="stat-label">Laravel versions</div></div>
+      </div>
     </div>
-    <div class="scroll-hint">
-      <div class="scroll-mouse"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-label reveal">00. about</div>
+    <div class="about-text reveal" style="transition-delay:0.1s">
+      Senior Full-Stack Developer specializing in <strong>healthcare and finance SaaS</strong> in Luxembourg.
+      8+ years building mission-critical platforms as <strong>sole developer</strong> — from architecture to deployment.
+      Available for freelance missions outside working hours.
     </div>
-  </header>
+  </div>
+</section>
 
-  <main>
+<section id="stack">
+  <div class="container">
+    <div class="section-label reveal">01. tech stack</div>
+    <div class="section-title reveal" style="transition-delay:0.08s">Technologies</div>
 
-    <!-- About -->
-    <section id="about">
-      <p class="section-label reveal">about</p>
-      <p class="about-text reveal">Senior Full-Stack Developer specializing in healthcare and finance SaaS in Luxembourg. 8+ years building mission-critical platforms as sole developer — from architecture to deployment.</p>
-    </section>
-
-    <!-- Stack Technique -->
-    <section id="stack">
-      <p class="section-label reveal">tech stack</p>
-      <h2 class="section-title reveal">Technologies</h2>
-
-      <div class="stack-category reveal">
-        <h3 class="stack-category-title">Backend</h3>
-        <div class="stack-grid">
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 18.08c-6.63 0-12-2.72-12-6.08s5.37-6.08 12-6.08S24 8.64 24 12s-5.37 6.08-12 6.08zm-1.35-7.2c-.06.63.4 1.08 1.35 1.08 1.27 0 2.13-.72 2.2-1.68.06-.63-.4-1.08-1.33-1.08-1.28 0-2.15.72-2.22 1.68z" fill="#777BB4"/><path d="M5.52 8.64h2.33c1.58 0 2.2.78 2.13 1.83-.1 1.45-1.14 2.25-2.6 2.25h-.98l-.38 1.92H4.62l.9-6zm1.38 3.08h.56c.68 0 1.1-.36 1.14-.9.04-.48-.28-.78-.88-.78h-.48l-.34 1.68zM10.8 14.64l.9-6h1.4l-.16.84c.54-.63 1.14-.96 1.87-.96.12 0 .22.01.32.03l-.32 1.44a1.6 1.6 0 00-.36-.04c-.9 0-1.54.72-1.74 1.68l-.5 3.01h-1.41zM15.07 8.64h2.33c1.58 0 2.2.78 2.13 1.83-.1 1.45-1.14 2.25-2.6 2.25h-.98l-.38 1.92h-1.4l.9-6zm1.38 3.08h.56c.68 0 1.1-.36 1.14-.9.04-.48-.28-.78-.88-.78h-.48l-.34 1.68z" fill="#fff"/></svg>
-            <span>PHP</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M23.642 5.43a.364.364 0 01.014.1v5.149c0 .135-.073.26-.192.327l-4.323 2.49v4.934c0 .135-.074.26-.192.327l-9.04 5.21a.35.35 0 01-.13.048l-.032.006a.332.332 0 01-.165-.008l-.025-.008a.286.286 0 01-.072-.034L.456 18.697a.376.376 0 01-.192-.327V3.209c0-.034.005-.068.014-.1l.008-.026a.32.32 0 01.028-.066l.016-.024c.012-.016.026-.03.04-.044l.022-.019a.354.354 0 01.057-.038L4.907.401a.375.375 0 01.384 0L9.749 2.89l.022.02.04.043.016.024a.32.32 0 01.028.066l.008.026c.009.032.014.066.014.1v9.652l3.76-2.164V5.505c0-.034.005-.068.014-.1l.008-.026a.355.355 0 01.028-.066l.016-.024a.356.356 0 01.04-.044l.022-.019a.32.32 0 01.057-.038l4.458-2.49a.374.374 0 01.384 0l4.458 2.49a.361.361 0 01.057.038l.022.02c.014.013.028.027.04.043l.016.024c.012.02.02.043.028.066zm-.742 5.032V6.002l-1.58.91-2.178 1.254v4.46zm-4.458 7.667v-4.464l-2.142 1.222-6.494 3.706v4.512zM1.006 3.68v14.818l8.296 4.784v-4.506L5.01 16.49l-.022-.013-.02-.014a.33.33 0 01-.038-.032l-.015-.02-.015-.024-.012-.028-.01-.026-.006-.033-.005-.026V6.468L3.1 5.26l-2.094-1.58zM5.1 1.155L1.342 3.208 5.1 5.26 8.856 3.21 5.099 1.155zM6.968 15.58l2.994-1.725V3.68l-1.58.91L6.204 5.84v10.182l.764.44v-.882zm7.49-11.936l-3.757 2.054 3.758 2.053 3.757-2.053-3.758-2.053zm-.376 5.358L12.3 7.748l-1.581-.91v4.461l2.178 1.254 1.58.91V8.999zm8.296.428l-3.758 2.054v4.106l2.178-1.242 1.58-.905V9.43z" fill="#FF2D20"/></svg>
-            <span>Laravel</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M11.998 0C5.366 0 0 5.367 0 12a11.992 11.992 0 008.013 11.319c.585.108.798-.254.798-.565 0-.28-.01-1.022-.015-2.005-3.259.708-3.947-1.57-3.947-1.57-.533-1.354-1.3-1.714-1.3-1.714-1.063-.727.08-.712.08-.712 1.175.083 1.793 1.207 1.793 1.207 1.045 1.79 2.74 1.273 3.41.973.105-.757.408-1.273.743-1.566-2.602-.296-5.337-1.301-5.337-5.792 0-1.28.457-2.326 1.207-3.146-.121-.297-.523-1.489.115-3.104 0 0 .984-.315 3.225 1.202a11.237 11.237 0 012.94-.396 11.27 11.27 0 012.94.396c2.24-1.517 3.224-1.202 3.224-1.202.639 1.615.237 2.807.116 3.104.752.82 1.206 1.866 1.206 3.146 0 4.502-2.74 5.493-5.348 5.783.42.362.795 1.077.795 2.17 0 1.566-.015 2.83-.015 3.214 0 .313.21.678.803.563A11.994 11.994 0 0024 12c0-6.633-5.367-12-12.002-12z" fill="#8CC84B"/></svg>
-            <span>Node.js</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z" fill="#003545"/><path d="M6.5 7h1.75v3.8L10.5 7h1.75v10H10.5v-3.8L8.25 17H6.5V7zm7.25 0H15.5v3.8L17.75 7H19.5v10h-1.75v-3.8L15.5 17h-1.75V7z" fill="#C0765A"/></svg>
-            <span>MariaDB</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M17.128 0a10.134 10.134 0 00-2.755.403l-.063.02C12.382.65 11.87 1.136 10.5 1.56c-1.334.414-2.98.477-4.083 1.14-.558.334-1.005.81-1.253 1.522-.067.193-.117.393-.15.601l-.002.015a5.58 5.58 0 00-.05.543c-.013.259-.009.52.009.78.023.345.066.688.135 1.024l.012.06c.048.227.112.449.191.665.066.18.141.356.226.526 0 0 .01.02.015.032C4.618 10.387 3.3 12.882 2.545 15.863c-.078.31-.137.625-.177.942a8.032 8.032 0 00-.064.932c-.004.218.003.437.02.655.013.171.032.342.057.513l.003.024c.088.587.232 1.156.411 1.707a10.1 10.1 0 001.25 2.52c.62.858 1.42 1.551 2.42 1.857.496.152 1.027.194 1.558.158.47-.031.94-.121 1.395-.256a13.068 13.068 0 001.3-.478l.02-.008c.322-.133.64-.276.952-.428.168-.082.334-.168.498-.258.2-.109.396-.224.588-.345l.022-.014c.4-.253.783-.53 1.147-.827a10.072 10.072 0 003.142 1.326c.564.134 1.148.199 1.728.177a5.405 5.405 0 001.715-.345l.023-.01c.326-.133.636-.307.92-.519.318-.237.6-.52.832-.842l.02-.028c.189-.262.344-.548.459-.852.09-.236.154-.482.19-.733.021-.148.032-.298.034-.448a2.899 2.899 0 00-.06-.622 3.642 3.642 0 00-.213-.674 5.063 5.063 0 00-.372-.695c-.35-.538-.813-.995-1.34-1.35a4.856 4.856 0 00-.644-.365 4.18 4.18 0 00-.74-.28l-.09-.024a4.478 4.478 0 00-.735-.113l-.053-.004h-.021l.043-.287a11.346 11.346 0 00.1-2.354 8.478 8.478 0 00-.146-1.233 5.345 5.345 0 00-.161-.614 3.657 3.657 0 00-.115-.33l-.013-.03A3.543 3.543 0 0020.17 9.8c-.293-.384-.657-.698-1.073-.924a3.837 3.837 0 00-.839-.352l-.06-.017a4.463 4.463 0 00-.858-.136c-.264-.017-.53-.005-.793.023a6.084 6.084 0 00-1.045.207l-.095.03-.017-.116a5.528 5.528 0 00-.374-1.3 4.091 4.091 0 00-.333-.616 3.212 3.212 0 00-.393-.485l-.038-.038a3.196 3.196 0 00-.993-.677 3.476 3.476 0 00-.633-.216l-.047-.011a3.9 3.9 0 00-.712-.088c-.205-.007-.41.002-.614.028a5.186 5.186 0 00-.954.202l-.016.005a7.093 7.093 0 00-1.25.534l-.045.025c-.348.2-.68.425-.995.671l-.045.036c-.17.135-.336.276-.496.423l-.031.028c-.038.036-.076.072-.113.109l-.012.012z" fill="#336791"/></svg>
-            <span>PostgreSQL</span>
-          </div>
-        </div>
+    <div class="stack-section reveal" style="transition-delay:0.12s">
+      <div class="stack-cat">Backend</div>
+      <div class="stack-row">
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" alt="">PHP</span>
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" alt="">Laravel</span>
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="">Node.js</span>
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" alt="">MariaDB</span>
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="">PostgreSQL</span>
       </div>
-
-      <div class="stack-category reveal">
-        <h3 class="stack-category-title">Frontend</h3>
-        <div class="stack-grid">
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 12.765l-5.478 3.285L12 19.335l5.478-3.285L12 12.765z" fill="#35495E"/><path d="M18.884 2.295L12 12.765l-6.884-10.47H0L12 22.935 24 2.295h-5.116z" fill="#41B883"/><path d="M12 12.765L5.116 2.295h4.332L12 6.825l2.552-4.53h4.332L12 12.765z" fill="#35495E"/></svg>
-            <span>Vue.js</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.139" fill="#61DAFB"/><path d="M12 9.861C16.524 9.861 20.25 6.96 20.25 5.5c0-.745-1.058-1.395-2.88-1.834C15.903 3.248 14.026 3 12 3c-2.026 0-3.903.248-5.37.666C4.808 4.105 3.75 4.755 3.75 5.5c0 1.46 3.726 4.361 8.25 4.361z" stroke="#61DAFB" stroke-width="1" fill="none"/><path d="M9.861 12c-2.324 4.024-2.84 7.878-1.861 8.5.5.318 1.465-.052 2.61-1.002.944-.783 1.922-1.917 2.816-3.275.894-1.358 1.606-2.766 2.094-4.032.592-1.536.78-2.83.48-3.691-.155-.445-.458-.72-.861-.78-.978-.145-2.63 1.326-4.278 4.28z" stroke="#61DAFB" stroke-width="1" fill="none"/><path d="M9.861 12c2.324 4.024 5.016 6.654 6.278 5.5.645-.59.567-1.945-.168-3.691-.488-1.266-1.2-2.674-2.094-4.032-.894-1.358-1.872-2.492-2.816-3.275C9.916 5.552 8.951 5.182 8.001 5.5c-.978.327-1.14 2.476.86 6.5z" stroke="#61DAFB" stroke-width="1" fill="none"/></svg>
-            <span>React</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M0 12v12h24V0H0v12zm19.341-.956c.61.152 1.074.423 1.501.865.221.236.549.666.575.77.008.03-1.036.73-1.668 1.123-.023.015-.115-.084-.217-.236-.31-.45-.633-.644-1.128-.678-.728-.05-1.2.332-1.192.967a.88.88 0 00.102.45c.16.331.462.53 1.39.933 1.712.74 2.444 1.226 2.834 1.882.434.729.535 1.916.254 2.752-.308.91-1.07 1.528-2.147 1.746-.332.066-1.12.08-1.49.025-.81-.12-1.578-.544-2.087-1.152a4.26 4.26 0 01-.518-.798l.546-.325c.388-.222.558-.31.578-.283.015.02.143.218.283.44.406.636.81.914 1.44.99.893.109 1.725-.27 1.838-.84.05-.254.013-.39-.165-.633-.227-.31-.65-.54-1.72-1.004-1.225-.53-1.752-.856-2.198-1.372a3.16 3.16 0 01-.56-1.218c-.073-.362-.092-1.27-.032-1.632.2-1.2 1.07-2.034 2.394-2.294.353-.066 1.18-.042 1.537.045zM14.255 12.2l.01 1.18H10.54v8.59H8.564v-8.59H4.839V12.22c0-.652.01-1.2.022-1.21.01-.015 2.115-.023 4.68-.018l4.656.015.058 1.194z" fill="#3178C6"/></svg>
-            <span>TypeScript</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 0L1.608 6v12L12 24l10.392-6V6L12 0zm-1.09 17.496l-4.392-2.1a.6.6 0 01-.342-.543V9.147a.6.6 0 01.342-.543l4.392-2.1a.6.6 0 01.516 0l4.392 2.1a.6.6 0 01.342.543v5.706a.6.6 0 01-.342.543l-4.392 2.1a.6.6 0 01-.516 0z" fill="#CF649A"/></svg>
-            <span>Sass</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="stack-category reveal">
-        <h3 class="stack-category-title">Infrastructure</h3>
-        <div class="stack-grid">
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-1.933a.186.186 0 01-.185-.185V6.749a.186.186 0 01.185-.186h1.933a.186.186 0 00.186-.185V4.49a.186.186 0 00-.186-.186h-2.119a2.067 2.067 0 00-2.068 2.068v2.639a2.067 2.067 0 002.068 2.067zm-6.054 0h2.12a.186.186 0 00.185-.185V4.49a.186.186 0 00-.186-.186H7.93a2.067 2.067 0 00-2.068 2.068v2.64a2.067 2.067 0 002.068 2.066zm10.894-5.223a.186.186 0 01.186.186v1.887a.186.186 0 01-.186.186h-1.933a.186.186 0 00-.186.185v1.887a.186.186 0 00.186.185h2.12a2.067 2.067 0 002.066-2.067V6.371a2.067 2.067 0 00-2.067-2.068h-2.12a.186.186 0 00-.185.186v1.887a.186.186 0 00.186.186h1.933zM4.252 12.922H2.186A2.067 2.067 0 00.119 14.99v2.639a2.067 2.067 0 002.067 2.068h2.12a.186.186 0 00.185-.186v-1.887a.186.186 0 00-.185-.186H2.373a.186.186 0 01-.186-.185v-1.887a.186.186 0 01.186-.186h1.879a.186.186 0 00.186-.185v-1.887a.186.186 0 00-.186-.186zm17.482 0h-2.119a2.067 2.067 0 00-2.068 2.068v2.639a2.067 2.067 0 002.068 2.068h2.119a.186.186 0 00.186-.186V17.624a.186.186 0 00-.186-.186h-1.933a.186.186 0 01-.185-.185V15.366a.186.186 0 01.185-.186h1.933a.186.186 0 00.186-.185v-1.887a.186.186 0 00-.186-.186z" fill="#2496ED"/><path d="M12.85 12.922H10.73a2.067 2.067 0 00-2.068 2.068v2.639a2.067 2.067 0 002.068 2.068h2.12a.186.186 0 00.185-.186v-6.403a.186.186 0 00-.186-.186zm-1.934 5.213a.186.186 0 01-.185-.186v-1.887a.186.186 0 01.185-.185h1.748v2.258h-1.748zm-2.946-5.213H5.85a.186.186 0 00-.186.186v1.887a.186.186 0 00.186.186H7.784a.186.186 0 01.186.185v1.887a.186.186 0 01-.186.186H5.85a.186.186 0 00-.186.185v1.887a.186.186 0 00.186.186H7.97a2.067 2.067 0 002.068-2.068V14.99a2.067 2.067 0 00-2.068-2.068z" fill="#2496ED"/></svg>
-            <span>Docker</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5.5 3.21V20.8c0 .45.34.79.79.79h2.21V3.21H5.5z" fill="#6C757D"/><rect x="9.5" y="6" width="9" height="4" rx=".5" fill="#6C757D"/><rect x="9.5" y="12" width="7" height="4" rx=".5" fill="#6C757D"/></svg>
-            <span>REST APIs</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18L19 6.3v4.7c0 4.83-3.13 9.37-7 10.82V3.18z" fill="#6C757D"/></svg>
-            <span>OAuth2</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 15l-4-4 1.41-1.41L11 13.17l6.59-6.59L19 8l-8 8z" fill="#6C757D"/></svg>
-            <span>OpenID Connect</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM12 3v10l3-3h6V3h-9z" fill="#FF2D20"/></svg>
-            <span>Laravel Reverb</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.5 14H8c-.55 0-1-.45-1-1V9c0-.55.45-1 1-1h8.5c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1zm-4-5.5l-4 2.5V9l4 2.5zm4-2.5l-4 2.5L16.5 9z" fill="#6C757D"/></svg>
-            <span>GitHub Actions</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm1 13h-2v-6h2v6zm0-8h-2V4h2v2z" fill="#009639"/></svg>
-            <span>Nginx</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM6.5 9h2v6h-2V9zm3.5 0h2v1.5c.55-.9 1.5-1.6 2.5-1.5v2c-1.1-.1-2.5.6-2.5 2.3V15H10V9zm5 0h2v6h-2V9z" fill="#CC0000"/></svg>
-            <span>Apache2</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="4" rx="1" fill="#6C757D"/><rect x="3" y="10" width="18" height="4" rx="1" fill="#6C757D"/><rect x="3" y="16" width="18" height="4" rx="1" fill="#6C757D"/><circle cx="20" cy="6" r="2" fill="#4CAF50"/><circle cx="20" cy="12" r="2" fill="#4CAF50"/><circle cx="20" cy="18" r="2" fill="#6C757D"/></svg>
-            <span>Supervisord</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="stack-category reveal">
-        <h3 class="stack-category-title">Testing & Quality</h3>
-        <div class="stack-grid">
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 14l-4-4 1.41-1.41L11 12.17l6.59-6.59L19 7l-8 8z" fill="#6E4BEC"/></svg>
-            <span>PHPUnit</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#FCC72B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Vitest</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#2ECC40"/></svg>
-            <span>Playwright E2E</span>
-          </div>
-          <div class="stack-item" title="TDD · 80%+ coverage">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="#2ECC40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="#6C757D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>TDD · 80%+ cov&#8230;</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="stack-category reveal">
-        <h3 class="stack-category-title">Networking & Security</h3>
-        <div class="stack-grid">
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="#049FD9"/></svg>
-            <span>CCNA</span>
-          </div>
-          <div class="stack-item">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" fill="#049FD9"/></svg>
-            <span>CyberOps</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Parcours -->
-    <section id="parcours">
-      <p class="section-label reveal">professional experience</p>
-      <h2 class="section-title reveal">Experience</h2>
-
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <h3 class="exp-company">Doctipro</h3>
-          <span class="exp-date">July 2025 — Present</span>
-        </div>
-        <p class="exp-type">Healthcare SaaS — Luxembourg</p>
-        <ul class="exp-list">
-          <li>Real-time virtual waiting room via WebSocket</li>
-          <li>Integrated Nidek ophthalmic equipment via Node.js</li>
-          <li>Full EMR module — medical exams, patient photos, history, intra-hospital sharing</li>
-          <li>Unified prescription management glasses and lenses</li>
-          <li>Direct payment processing CNS PID V2</li>
-          <li>Third-party laboratory OAuth2 integration (Bionext)</li>
-          <li>Database migration MyISAM &rarr; InnoDB — performance and integrity</li>
-        </ul>
-        <div class="exp-tags">
-          <span class="exp-tag">PHP</span>
-          <span class="exp-tag">Laravel 8→12</span>
-          <span class="exp-tag">Laravel Reverb</span>
-          <span class="exp-tag">MariaDB</span>
-          <span class="exp-tag">Node.js</span>
-          <span class="exp-tag">REST APIs</span>
-          <span class="exp-tag">OAuth2</span>
-          <span class="exp-tag">PHPUnit</span>
-          <span class="exp-tag">Playwright E2E</span>
-          <span class="exp-tag">GitHub Actions</span>
-          <span class="exp-tag">Nginx</span>
-          <span class="exp-tag">Supervisord</span>
-          <span class="exp-tag">Sass</span>
-          <span class="exp-tag">CNS PID V2</span>
-          <span class="exp-tag">CNS eCIT</span>
-        </div>
-      </div>
-
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <h3 class="exp-company">R&eacute;f&eacute;renceur</h3>
-          <span class="exp-date">January 2024 — July 2025</span>
-        </div>
-        <p class="exp-type">Financial SaaS — Luxembourg</p>
-        <ul class="exp-list">
-          <li>Sole developer — No-code landing page configurator — layout, simulator, form, colors, fonts, domain &rarr; publish instantly</li>
-          <li>Custom loan simulator and lead generation forms</li>
-          <li>Custom domain and email management per broker</li>
-          <li>Complete loan request workflow</li>
-          <li>Role-based access control granular permissions</li>
-          <li>Billing automation via Zoho API</li>
-          <li>CLIP payment gateway integration</li>
-          <li>Anysoft broker platform API integration</li>
-        </ul>
-        <div class="exp-tags">
-          <span class="exp-tag">PHP</span>
-          <span class="exp-tag">Laravel</span>
-          <span class="exp-tag">PostgreSQL</span>
-          <span class="exp-tag">React</span>
-          <span class="exp-tag">Vue.js</span>
-          <span class="exp-tag">TypeScript</span>
-          <span class="exp-tag">Sass</span>
-          <span class="exp-tag">REST APIs</span>
-          <span class="exp-tag">Adobe XD</span>
-          <span class="exp-tag">Zoho API</span>
-        </div>
-      </div>
-
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <h3 class="exp-company">Anysoft</h3>
-          <span class="exp-date">April 2019 — January 2024</span>
-        </div>
-        <p class="exp-type">Financial SaaS — Luxembourg</p>
-        <ul class="exp-list">
-          <li>Full migration Windows/desktop &rarr; web SaaS — sole developer</li>
-          <li>Complete mortgage and consumer credit management SaaS in React</li>
-          <li>Integrated Belfius, Cofidis, BNP Paribas Fortis, Elantis</li>
-          <li>API gateways for loan submission to banking partners</li>
-          <li>Identity verification with card reader</li>
-          <li>SMS/email communication system</li>
-          <li>Hundreds of brokers across Benelux</li>
-        </ul>
-        <div class="exp-tags">
-          <span class="exp-tag">React</span>
-          <span class="exp-tag">TypeScript</span>
-          <span class="exp-tag">Node.js</span>
-          <span class="exp-tag">Sybase</span>
-          <span class="exp-tag">REST APIs</span>
-        </div>
-      </div>
-
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <h3 class="exp-company">ESI Informatique</h3>
-          <span class="exp-date">June 2017 — April 2019</span>
-        </div>
-        <p class="exp-type">Agri-food & Quality Control — Belgium</p>
-        <ul class="exp-list">
-          <li>Quality Control SaaS for Vin&ccedil;otte inspectors at Belgium's largest Carrefour distribution center</li>
-          <li>Companion mobile app iOS & Android for warehouse inspections</li>
-          <li>Brunswick Marine client integration</li>
-          <li>Full ownership frontend, backend, database and mobile</li>
-        </ul>
-        <div class="exp-tags">
-          <span class="exp-tag">PHP</span>
-          <span class="exp-tag">Zend Framework</span>
-          <span class="exp-tag">PostgreSQL</span>
-          <span class="exp-tag">Angular.js</span>
-          <span class="exp-tag">React</span>
-          <span class="exp-tag">Ionic</span>
-          <span class="exp-tag">Cordova</span>
-          <span class="exp-tag">Mobile iOS & Android</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Formation -->
-    <section id="formation">
-      <p class="section-label reveal">education & certifications</p>
-      <h2 class="section-title reveal">Education</h2>
-
-      <div class="edu-grid">
-        <div class="edu-card reveal">
-          <div class="edu-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
-          </div>
-          <div class="edu-info">
-            <h3>Bachelor's in Computer Science & Management</h3>
-            <p>IPEPS Verviers</p>
-            <p class="edu-date">2016 — 2018</p>
-          </div>
-        </div>
-
-        <div class="edu-card reveal">
-          <div class="edu-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <div class="edu-info">
-            <h3>CCNA — Cisco Certified Network Associate</h3>
-            <p>Cisco Networking Academy</p>
-            <p class="edu-date">2016 — 2017</p>
-          </div>
-        </div>
-
-        <div class="edu-card reveal">
-          <div class="edu-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
-          </div>
-          <div class="edu-info">
-            <h3>CyberOps Associate</h3>
-            <p>Cisco Networking Academy</p>
-            <p class="edu-date">2017 — 2018</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="contact">
-      <div class="contact-inner reveal">
-        <p class="section-label">contact</p>
-        <h2 class="contact-title">Let's work together</h2>
-        <p class="contact-text">Available for freelance missions outside working hours. Healthcare SaaS, B2B platforms, full-stack.</p>
-        <div class="contact-cta">
-          <a href="mailto:quentin@lecler.dev" class="btn btn-primary">quentin@lecler.dev</a>
-          <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn</a>
-        </div>
-        <p class="contact-malt"><a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener">Freelance profile &rarr; Malt</a></p>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-links">
-      <a href="mailto:quentin@lecler.dev" aria-label="Email">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#ffffff" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"/><polyline points="2,4 12,13 22,4"/></svg>
-      </a>
-      <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
-      <a href="https://github.com/quentinlecler" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      </a>
-      <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" aria-label="Malt">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.5 17.5h-2v-5.25l-3.5 5.25-3.5-5.25V17.5h-2v-11h2l3.5 5.25 3.5-5.25h2v11z"/></svg>
-      </a>
     </div>
-    <p class="footer-copy">&copy; <script>document.write(new Date().getFullYear())</script> Quentin Lecler</p>
-  </footer>
+    <div class="stack-section reveal" style="transition-delay:0.18s">
+      <div class="stack-cat">Frontend</div>
+      <div class="stack-row">
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" alt="">Vue.js</span>
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="">React</span>
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="">TypeScript</span>
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg" alt="">Sass</span>
+      </div>
+    </div>
+    <div class="stack-section reveal" style="transition-delay:0.24s">
+      <div class="stack-cat">Infrastructure</div>
+      <div class="stack-row">
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="">Docker</span>
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" alt="">Nginx</span>
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apache/apache-original.svg" alt="">Apache2</span>
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" class="icon-github">GitHub Actions</span>
+        <span class="tech-badge">REST APIs</span>
+        <span class="tech-badge">OAuth2</span>
+        <span class="tech-badge">OpenID Connect</span>
+        <span class="tech-badge">Laravel Reverb</span>
+        <span class="tech-badge">Supervisord</span>
+      </div>
+    </div>
+    <div class="stack-section reveal" style="transition-delay:0.30s">
+      <div class="stack-cat">Testing & Quality</div>
+      <div class="stack-row">
+        <span class="tech-badge">PHPUnit</span>
+        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitest/vitest-original.svg" alt="">Vitest</span>
+        <span class="tech-badge">Playwright E2E</span>
+        <span class="tech-badge">TDD · 80%+ cov.</span>
+      </div>
+    </div>
+    <div class="stack-section reveal" style="transition-delay:0.36s">
+      <div class="stack-cat">Networking & Security</div>
+      <div class="stack-row">
+        <span class="tech-badge">CCNA</span>
+        <span class="tech-badge">CyberOps</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    // Nav scroll effect
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
+<section id="experience">
+  <div class="container">
+    <div class="section-label reveal">02. professional experience</div>
+    <div class="section-title reveal" style="transition-delay:0.08s">Experience</div>
+    <div class="exp-list">
 
-    // Mobile burger menu
-    const burger = document.getElementById('navBurger');
-    const navLinks = document.getElementById('navLinks');
-    const overlay = document.getElementById('navOverlay');
+      <div class="exp-card open reveal" style="transition-delay:0.12s">
+        <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
+          <div>
+            <div class="exp-company">Doctipro</div>
+            <div class="exp-role">Healthcare SaaS · Luxembourg</div>
+          </div>
+          <div style="text-align:right">
+            <div class="exp-date">July 2025 — Present</div>
+            <button class="exp-toggle" aria-label="Toggle">+</button>
+          </div>
+        </div>
+        <div class="exp-body">
+          <ul class="exp-bullets">
+            <li>Real-time virtual waiting room via WebSocket</li>
+            <li>Integrated Nidek ophthalmic equipment via Node.js</li>
+            <li>Full EMR module — medical exams, patient photos, history, intra-hospital sharing</li>
+            <li>Unified prescription management glasses and lenses</li>
+            <li>Direct payment processing CNS PID V2</li>
+            <li>Third-party laboratory OAuth2 integration (Bionext)</li>
+            <li>Database migration MyISAM → InnoDB — performance and integrity</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag">PHP</span><span class="exp-tag">Laravel 8→12</span><span class="exp-tag">Laravel Reverb</span><span class="exp-tag">MariaDB</span><span class="exp-tag">Node.js</span><span class="exp-tag">OAuth2</span><span class="exp-tag">PHPUnit</span><span class="exp-tag">Playwright E2E</span><span class="exp-tag">GitHub Actions</span><span class="exp-tag">Nginx</span><span class="exp-tag">CNS PID V2</span>
+          </div>
+        </div>
+      </div>
 
-    function closeMenu() {
-      burger.classList.remove('active');
-      navLinks.classList.remove('open');
-      overlay.classList.remove('open');
+      <div class="exp-card reveal" style="transition-delay:0.18s">
+        <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
+          <div>
+            <div class="exp-company">Référenceur</div>
+            <div class="exp-role">Financial SaaS · Luxembourg</div>
+          </div>
+          <div style="text-align:right">
+            <div class="exp-date">Jan 2024 — Jul 2025</div>
+            <button class="exp-toggle" aria-label="Toggle">+</button>
+          </div>
+        </div>
+        <div class="exp-body">
+          <ul class="exp-bullets">
+            <li>Sole developer — No-code landing page configurator → publish instantly</li>
+            <li>Custom loan simulator and lead generation forms</li>
+            <li>Custom domain and email management per broker</li>
+            <li>Complete loan request workflow</li>
+            <li>Role-based access control granular permissions</li>
+            <li>Billing automation via Zoho API</li>
+            <li>CLIP payment gateway & Anysoft broker platform integration</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag">PHP</span><span class="exp-tag">Laravel</span><span class="exp-tag">PostgreSQL</span><span class="exp-tag">React</span><span class="exp-tag">Vue.js</span><span class="exp-tag">TypeScript</span><span class="exp-tag">Zoho API</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card reveal" style="transition-delay:0.24s">
+        <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
+          <div>
+            <div class="exp-company">Anysoft</div>
+            <div class="exp-role">Financial SaaS · Luxembourg</div>
+          </div>
+          <div style="text-align:right">
+            <div class="exp-date">Apr 2019 — Jan 2024</div>
+            <button class="exp-toggle" aria-label="Toggle">+</button>
+          </div>
+        </div>
+        <div class="exp-body">
+          <ul class="exp-bullets">
+            <li>Full migration Windows/desktop → web SaaS — sole developer</li>
+            <li>Complete mortgage and consumer credit management SaaS in React</li>
+            <li>Integrated Belfius, Cofidis, BNP Paribas Fortis, Elantis</li>
+            <li>API gateways for loan submission to banking partners</li>
+            <li>Identity verification with card reader</li>
+            <li>Hundreds of brokers across Benelux</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag">React</span><span class="exp-tag">TypeScript</span><span class="exp-tag">Node.js</span><span class="exp-tag">Sybase</span><span class="exp-tag">REST APIs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card reveal" style="transition-delay:0.30s">
+        <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
+          <div>
+            <div class="exp-company">ESI Informatique</div>
+            <div class="exp-role">Agri-food & Quality Control · Belgium</div>
+          </div>
+          <div style="text-align:right">
+            <div class="exp-date">Jun 2017 — Apr 2019</div>
+            <button class="exp-toggle" aria-label="Toggle">+</button>
+          </div>
+        </div>
+        <div class="exp-body">
+          <ul class="exp-bullets">
+            <li>Quality Control SaaS for Vinçotte inspectors — Carrefour distribution center</li>
+            <li>Companion mobile app iOS & Android for warehouse inspections</li>
+            <li>Brunswick Marine client integration</li>
+            <li>Full ownership frontend, backend, database and mobile</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="exp-tag">PHP</span><span class="exp-tag">Zend Framework</span><span class="exp-tag">PostgreSQL</span><span class="exp-tag">Angular.js</span><span class="exp-tag">React</span><span class="exp-tag">Ionic</span><span class="exp-tag">Cordova</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="section-label reveal">03. education & certifications</div>
+    <div class="section-title reveal" style="transition-delay:0.08s">Education</div>
+    <div class="edu-grid">
+      <div class="edu-card reveal" style="transition-delay:0.12s">
+        <div class="edu-type">Bachelor's Degree</div>
+        <div class="edu-title">Computer Science & Management</div>
+        <div class="edu-school">IPEPS Verviers</div>
+        <div class="edu-dates">2016 — 2018</div>
+      </div>
+      <div class="edu-card reveal" style="transition-delay:0.20s">
+        <div class="edu-type">Certification</div>
+        <div class="edu-title">CCNA — Cisco Certified Network Associate</div>
+        <div class="edu-school">Cisco Networking Academy</div>
+        <div class="edu-dates">2016 — 2017</div>
+      </div>
+      <div class="edu-card reveal" style="transition-delay:0.28s">
+        <div class="edu-type">Certification</div>
+        <div class="edu-title">CyberOps Associate</div>
+        <div class="edu-school">Cisco Networking Academy</div>
+        <div class="edu-dates">2017 — 2018</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-label reveal">04. contact</div>
+    <div class="contact-grid">
+      <div class="reveal" style="transition-delay:0.1s">
+        <div class="contact-lead">Let's work<br>together</div>
+        <div class="contact-sub">Available for freelance missions outside working hours. Healthcare SaaS, B2B platforms, full-stack.</div>
+        <a href="/cdn-cgi/l/email-protection#abdadecec5dfc2c5ebc7cec8c7ced985cfcedd" class="btn-filled"><span class="__cf_email__" data-cfemail="1e6f6b7b706a77705e727b7d727b6c307a7b68">[email&#160;protected]</span> →</a>
+      </div>
+      <div class="contact-links reveal" style="transition-delay:0.2s">
+        <a href="/cdn-cgi/l/email-protection#3d4c4858534954537d51585e51584f1359584b" class="contact-link">
+          <div><div class="contact-link-lbl">Email</div><div class="contact-link-val"><span class="__cf_email__" data-cfemail="acddd9c9c2d8c5c2ecc0c9cfc0c9de82c8c9da">[email&#160;protected]</span></div></div>
+          <span class="arrow">→</span>
+        </a>
+        <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" class="contact-link contact-link-malt" style="border-color:rgba(252,86,86,0.3)">
+          <div><div class="contact-link-lbl" style="color:#FC5656">Freelance — Malt</div><div class="contact-link-val">en.malt.be/profile/quentinlecler</div></div>
+          <span class="arrow" style="color:#FC5656">→</span>
+        </a>
+        <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" class="contact-link">
+          <div><div class="contact-link-lbl">LinkedIn</div><div class="contact-link-val">linkedin.com/in/qlecler</div></div>
+          <span class="arrow">→</span>
+        </a>
+        <a href="https://github.com/quentinlecler" target="_blank" rel="noopener" class="contact-link">
+          <div><div class="contact-link-lbl">GitHub</div><div class="contact-link-val">github.com/quentinlecler</div></div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-name">Quentin Lecler · Belgium</div>
+      <div class="footer-icons">
+        <a href="https://github.com/quentinlecler" target="_blank" rel="noopener" class="footer-icon" title="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" class="footer-icon" title="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" class="footer-icon malt" title="Malt">
+          <img src="https://dam.malt.com/cms-front/maltLogo.png?w=110&h=32" alt="Malt">
+        </a>
+        <a href="/cdn-cgi/l/email-protection#afdedacac1dbc6c1efc3caccc3cadd81cbcad9" class="footer-icon" title="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" id="scrollTop" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ── Typing effect ── */
+(function() {
+  const roles = [
+    'Senior Full-Stack Developer',
+    'Laravel & PHP Specialist',
+    'Healthcare SaaS Builder',
+    'Available for Freelance'
+  ];
+  let ri = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typedRole');
+  if (!el) return;
+  function type() {
+    const word = roles[ri];
+    if (!deleting) {
+      el.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; setTimeout(type, 2200); return; }
+      setTimeout(type, 52);
+    } else {
+      el.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; setTimeout(type, 320); return; }
+      setTimeout(type, 28);
     }
+  }
+  setTimeout(type, 900);
+})();
 
-    burger.addEventListener('click', () => {
-      burger.classList.toggle('active');
-      navLinks.classList.toggle('open');
-      overlay.classList.toggle('open');
-    });
-    overlay.addEventListener('click', closeMenu);
-    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+/* ── Scroll to top ── */
+const scrollTopBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+}, {passive: true});
 
-    // Scroll-spy: highlight active nav link
-    const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
-    const sections = [...navAnchors].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+/* ── Experience accordion ── */
+function toggleExp(card) {
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.exp-card').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
 
-    function updateActiveSpy() {
-      const mid = window.innerHeight * 0.4;
-      let closest = null;
-      let closestDist = Infinity;
-      sections.forEach(s => {
-        const top = s.getBoundingClientRect().top;
-        const dist = Math.abs(top - mid);
-        if (top <= mid + 10 && dist < closestDist) {
-          closestDist = dist;
-          closest = s;
-        }
-      });
-      navAnchors.forEach(a => a.classList.remove('active'));
-      if (closest) {
-        const active = [...navAnchors].find(a => a.getAttribute('href') === '#' + closest.id);
-        if (active) active.classList.add('active');
-      }
+/* ── Nav scroll-spy ── */
+const sections = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  navAs.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+}, {passive: true});
+
+/* ── Scroll reveal ── */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
     }
+  });
+}, {threshold: 0.12});
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-    window.addEventListener('scroll', updateActiveSpy, { passive: true });
-    updateActiveSpy();
+/* ── Theme ── */
+function toggleTheme() {
+  const light = document.body.classList.toggle('light');
+  document.getElementById('themeBtn').textContent = light ? '☀️' : '🌙';
+  localStorage.setItem('ql-theme', light ? 'light' : 'dark');
+}
+if (localStorage.getItem('ql-theme') === 'light') {
+  document.body.classList.add('light');
+  document.getElementById('themeBtn').textContent = '☀️';
+}
 
-    // Scroll reveal with IntersectionObserver
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          // Stagger siblings
-          const siblings = entry.target.parentElement.querySelectorAll('.reveal');
-          let delay = 0;
-          siblings.forEach((sib) => {
-            if (sib === entry.target) {
-              entry.target.style.transitionDelay = delay + 'ms';
-            }
-            delay += 80;
-          });
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    reveals.forEach((el) => observer.observe(el));
-  </script>
+/* ── Mobile menu ── */
+function closeMenu() {
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+function toggleMenu() {
+  const links = document.getElementById('navLinks');
+  const btn = document.getElementById('hamburger');
+  const open = links.classList.toggle('open');
+  btn.classList.toggle('open', open);
+}
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', closeMenu));
+document.addEventListener('click', e => {
+  if (!e.target.closest('nav')) closeMenu();
+});
+</script>
 </body>
 </html>
