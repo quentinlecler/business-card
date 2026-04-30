@@ -1,6 +1,3 @@
-.idea/
-.mcp.json
-*.png
-!og.png
 .claude
+.playwright
 .playwright-cli
