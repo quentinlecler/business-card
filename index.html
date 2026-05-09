@@ -11,6 +11,9 @@
 <meta property="og:url" content="https://lecler.dev">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lecler.dev">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Quentin Lecler","jobTitle":"Senior Full-Stack Developer","url":"https://lecler.dev","email":"quentin@lecler.dev","sameAs":["https://github.com/quentinlecler","https://www.linkedin.com/in/qlecler","https://en.malt.be/profile/quentinlecler"],"knowsLanguage":["fr","en"],"address":{"@type":"PostalAddress","addressCountry":"BE"}}
+</script>
 <style>
 .skip-link{position:absolute;top:-120px;left:16px;background:var(--accent-solid,#6366F1);color:#fff;padding:8px 16px;border-radius:6px;font-family:monospace;font-size:12px;text-decoration:none;z-index:9999;transition:top 0.2s}
 .skip-link:focus{top:8px}
@@ -361,10 +364,6 @@ section + section { border-top: 1px solid var(--border); }
 .btn-malt:active { transform: scale(0.97); }
 
 /* ── Sections ────────────────────────────────── */
-.section-label {
-  font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em;
-  text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
-}
 .section-title {
   font-family: var(--display); font-size: 28px; font-weight: 700;
   letter-spacing: -0.03em; color: var(--fg-1); margin-bottom: 36px;
@@ -486,7 +485,7 @@ body:not(.light) .icon-github { filter: invert(0.7); }
   border-top: 1px solid transparent;
 }
 .exp-card.open .exp-body {
-  max-height: 600px;
+  max-height: 1200px;
   border-top-color: var(--border);
   padding: 16px 24px 20px;
 }
@@ -801,6 +800,7 @@ body.light .footer-icon img { filter: none; }
         <a href="https://linkedin.com/in/qlecler" class="btn-outline" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/quentinlecler" class="btn-outline" target="_blank" rel="noopener">GitHub</a>
         <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" class="btn-malt">Malt →</a>
+        <a href="/quentin-lecler-cv.pdf" download class="btn-outline">CV PDF ↓</a>
       </div>
       <div class="hero-stats">
         <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Years experience</div></div>
@@ -820,6 +820,10 @@ body.light .footer-icon img { filter: none; }
       8+ years building mission-critical platforms as <strong>sole developer</strong> — from architecture to deployment.
       Available for freelance missions.
     </div>
+    <div class="hero-stack reveal" style="transition-delay:0.18s; margin-top: 16px;">
+      <span class="hero-stack-badge">FR — Native</span>
+      <span class="hero-stack-badge">EN — Fluent</span>
+    </div>
   </div>
 </section>
 
@@ -831,29 +835,29 @@ body.light .footer-icon img { filter: none; }
     <div class="stack-section reveal" style="transition-delay:0.12s">
       <div class="stack-cat">Backend</div>
       <div class="stack-row">
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" alt="">PHP</span>
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" alt="">Laravel</span>
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="">Node.js</span>
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" alt="">MariaDB</span>
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="">PostgreSQL</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" alt="">PHP</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" alt="">Laravel</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="">Node.js</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" alt="">MariaDB</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="">PostgreSQL</span>
       </div>
     </div>
     <div class="stack-section reveal" style="transition-delay:0.18s">
       <div class="stack-cat">Frontend</div>
       <div class="stack-row">
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" alt="">Vue.js</span>
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="">React</span>
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="">TypeScript</span>
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg" alt="">Sass</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" alt="">Vue.js</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="">React</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="">TypeScript</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg" alt="">Sass</span>
       </div>
     </div>
     <div class="stack-section reveal" style="transition-delay:0.24s">
       <div class="stack-cat">Infrastructure</div>
       <div class="stack-row">
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="">Docker</span>
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" alt="">Nginx</span>
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apache/apache-original.svg" alt="">Apache2</span>
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" class="icon-github">GitHub Actions</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="">Docker</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" alt="">Nginx</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apache/apache-original.svg" alt="">Apache2</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" class="icon-github">GitHub Actions</span>
         <span class="tech-badge">REST APIs</span>
         <span class="tech-badge">OAuth2</span>
         <span class="tech-badge">OpenID Connect</span>
@@ -865,7 +869,7 @@ body.light .footer-icon img { filter: none; }
       <div class="stack-cat">Testing & Quality</div>
       <div class="stack-row">
         <span class="tech-badge">PHPUnit</span>
-        <span class="tech-badge"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitest/vitest-original.svg" alt="">Vitest</span>
+        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitest/vitest-original.svg" alt="">Vitest</span>
         <span class="tech-badge">Playwright E2E</span>
         <span class="tech-badge">TDD · 80%+ cov.</span>
       </div>
