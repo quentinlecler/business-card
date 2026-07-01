@@ -271,6 +271,7 @@ section + section { border-top: 1px solid var(--border); }
 .hero-inner > *:nth-child(5) { animation-delay: 0.50s; }
 .hero-inner > *:nth-child(6) { animation-delay: 0.60s; }
 
+.badge-short { display: none; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 7px;
   font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
@@ -623,6 +624,8 @@ body.light .footer-icon img { filter: none; }
   #hero { min-height: 100svh; align-items: flex-start; padding-top: 52px; }
   .hero-inner { padding: 48px 0 60px; }
   .hero-badge { font-size: 9px; padding: 5px 11px; white-space: normal; text-align: center; }
+  .badge-full { display: none; }
+  .badge-short { display: inline; }
   .hero-name { font-size: clamp(44px, 13vw, 72px); margin-bottom: 14px; }
   .hero-role { font-size: 15px; margin-bottom: 12px; }
   .hero-desc { font-size: 13px; max-width: 100%; margin-bottom: 8px; }
@@ -783,7 +786,10 @@ body.light .footer-icon img { filter: none; }
   <div class="hero-glow"></div>
   <div class="container">
     <div class="hero-inner">
-      <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" class="hero-badge">Available for freelance missions starting August 1, 2026 →</a>
+      <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" class="hero-badge">
+        <span class="badge-full">Available for freelance missions starting August 1, 2026 →</span>
+        <span class="badge-short">Freelance · Aug 1, 2026 →</span>
+      </a>
       <div class="hero-name">Quentin Lecler</div>
       <div class="hero-role"><span id="typedRole"></span><span class="cursor"></span></div>
       <div class="hero-desc">8+ years building mission-critical SaaS for healthcare and finance in Luxembourg. Laravel expert from v5 to v13 — architecture, APIs, real-time, full ownership. AI-augmented workflows — Claude Code in production.</div>
