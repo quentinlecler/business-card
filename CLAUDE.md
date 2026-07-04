@@ -32,7 +32,7 @@ Then open `http://localhost:8080`.
 
 ## Assets
 
-- `og.png` — Open Graph preview image. Must be regenerated manually when hero content changes (see commit history for context).
+- `og.jpg` — Open Graph preview image. Must be regenerated manually when hero content changes (see commit history for context).
 - `CNAME` — Contains `lecler.dev` for GitHub Pages custom domain.
 
 ## Deployment
