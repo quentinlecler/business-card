@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quentin Lecler — Senior Full-Stack Developer (Laravel & Node.js)</title>
 <meta name="description" content="Senior Full-Stack Developer — 8+ years building mission-critical SaaS for healthcare and finance in Luxembourg, across Laravel/PHP and Node.js backends.">
+<meta property="og:type" content="profile">
 <meta property="og:title" content="Quentin Lecler — Senior Full-Stack Developer (Laravel & Node.js)">
 <meta property="og:description" content="8+ years building mission-critical SaaS for healthcare and finance in Luxembourg. Laravel & Node.js — architecture, APIs, real-time integrations, full ownership.">
 <meta property="og:image" content="https://lecler.dev/og.jpg">
@@ -21,9 +22,68 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧑‍💻</text></svg>">
 <meta name="theme-color" content="#08080F" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#FAFBFF" media="(prefers-color-scheme: light)">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" href="fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* ── Fonts (self-hosted) ─────────────────── */
+/* Space Grotesk, JetBrains Mono, DM Sans — SIL Open Font License 1.1
+   Licences complètes : fonts/OFL-*.txt */
+/* DM Sans - latin-ext */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/dm-sans-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* DM Sans - latin */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/dm-sans-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* JetBrains Mono - latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(fonts/jetbrains-mono-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* JetBrains Mono - latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(fonts/jetbrains-mono-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* Space Grotesk - latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/space-grotesk-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Space Grotesk - latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/space-grotesk-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* ── Reset ─────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-padding-top: 58px; }
@@ -841,36 +901,36 @@ body.light .footer-icon img { filter: none; }
     <div class="stack-section reveal" style="transition-delay:0.12s">
       <div class="stack-cat">Backend</div>
       <div class="stack-row">
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" alt="">PHP</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" alt="">Laravel</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="">Node.js</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" alt="">Express</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="">Python</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg" alt="">Django</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/php.svg" alt="">PHP</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/laravel.svg" alt="">Laravel</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/nodejs.svg" alt="">Node.js</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/express.svg" alt="">Express</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/python.svg" alt="">Python</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/django.svg" alt="">Django</span>
         <span class="tech-badge">Sequelize</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" alt="">MariaDB</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="">PostgreSQL</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="">MySQL</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/mariadb.svg" alt="">MariaDB</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/postgresql.svg" alt="">PostgreSQL</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/mysql.svg" alt="">MySQL</span>
       </div>
     </div>
     <div class="stack-section reveal" style="transition-delay:0.18s">
       <div class="stack-cat">Frontend</div>
       <div class="stack-row">
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg" alt="">Vue.js</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="">React</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="">TypeScript</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg" alt="">Sass</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" alt="">Vite</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/vuejs.svg" alt="">Vue.js</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/react.svg" alt="">React</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/typescript.svg" alt="">TypeScript</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/sass.svg" alt="">Sass</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/vitejs.svg" alt="">Vite</span>
       </div>
     </div>
     <div class="stack-section reveal" style="transition-delay:0.24s">
       <div class="stack-cat">Infrastructure</div>
       <div class="stack-row">
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="">Docker</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" alt="">Nginx</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apache/apache-original.svg" alt="">Apache2</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="" class="icon-github">GitHub Actions</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg" alt="">GitLab CI/CD</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/docker.svg" alt="">Docker</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/nginx.svg" alt="">Nginx</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/apache.svg" alt="">Apache2</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/github.svg" alt="" class="icon-github">GitHub Actions</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/gitlab.svg" alt="">GitLab CI/CD</span>
         <span class="tech-badge">REST APIs</span>
         <span class="tech-badge">OAuth2</span>
         <span class="tech-badge">OpenID Connect</span>
@@ -883,7 +943,7 @@ body.light .footer-icon img { filter: none; }
       <div class="stack-cat">Testing & Quality</div>
       <div class="stack-row">
         <span class="tech-badge">PHPUnit</span>
-        <span class="tech-badge"><img width="14" height="14" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitest/vitest-original.svg" alt="">Vitest</span>
+        <span class="tech-badge"><img width="14" height="14" src="icons/vitest.svg" alt="">Vitest</span>
         <span class="tech-badge">Playwright E2E</span>
         <span class="tech-badge">TDD · 80%+ cov.</span>
         <span class="tech-badge">Integration testing</span>
