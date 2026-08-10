@@ -100,8 +100,8 @@ body {
 :root {
   --bg: #07070E; --bg-surface: #0C0D1A; --bg-card: #0A0B18;
   --border: #191B32; --border-hover: #2E3060;
-  --fg-1: #EEF0FF; --fg-2: #8890C4; --fg-3: #3E4272;
-  --accent: #A5B4FC; --accent-solid: #6366F1;
+  --fg-1: #EEF0FF; --fg-2: #8890C4; --fg-3: #7A7FBC; /* 3E4272 échouait le contraste AA (2.12) */
+  --accent: #A5B4FC; --accent-solid: #5B5EEA; /* 6366F1 : blanc dessus à 4.47, sous le seuil 4.5 */
   --grad: linear-gradient(135deg, #EEF0FF 0%, #A5B4FC 100%);
   --mono: 'JetBrains Mono', monospace;
   --display: 'Space Grotesk', system-ui, sans-serif;
@@ -121,7 +121,7 @@ body.light {
   --bg-surface: #F5F6FB;
   --bg-card: #FFFFFF;
   --border: #D4D8EE; --border-hover: #9BA3D0;
-  --fg-1: #0D0F1A; --fg-2: #3D4270; --fg-3: #8A8FB8;
+  --fg-1: #0D0F1A; --fg-2: #3D4270; --fg-3: #5C6089; /* 8A8FB8 échouait le contraste AA (2.71) */
   --accent: #4F46E5; --accent-solid: #4F46E5;
 }
 
@@ -161,7 +161,7 @@ body.light .hero-badge { color: #4F46E5; background: rgba(79,70,229,0.07); borde
 body.light .hero-badge::before { background: #4F46E5; }
 body.light .section-label { color: #4F46E5; }
 body.light .section-label::before { background: #4F46E5; }
-body.light .edu-type { color: #4F46E5; }
+body.light .edu-type { color: #4F46E5; opacity: 1; } /* opacity .7 ferait chuter le contraste à 3.29 */
 body.light .exp-tag { background: rgba(79,70,229,0.07); border-color: rgba(79,70,229,0.2); color: #4F46E5; }
 
 /* Tech badges: fond blanc sur bg lavande = contraste réel */
@@ -224,15 +224,14 @@ body.light .stat-num {
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-body.light .stat-label { color: #8A8FB8; }
 
 /* #9 — Contraste texte secondaire */
-body.light .exp-date { color: #7a7a9a; }
-body.light .exp-role { color: #7a7a9a; }
-body.light .edu-school { color: #7a7a9a; }
-body.light .edu-dates { color: #7a7a9a; }
-body.light .stat-label { color: #7a7a9a; }
-body.light .contact-link-lbl { color: #7a7a9a; }
+body.light .exp-date { color: #6a6a88; }
+body.light .exp-role { color: #6a6a88; }
+body.light .edu-school { color: #6a6a88; }
+body.light .edu-dates { color: #6a6a88; }
+body.light .stat-label { color: #6a6a88; }
+body.light .contact-link-lbl { color: #6a6a88; }
 
 /* #10 — Séparateurs section */
 body.light section + section { border-top-color: #d0d0e8; }
@@ -812,7 +811,9 @@ body.light .footer-icon img { filter: none; }
 </style>
 </head>
 <body>
-<a href="#hero" class="skip-link">Skip to content</a>
+<script>/* Applique le thème avant le premier rendu pour éviter le flash */
+(function(){try{if(localStorage.getItem('ql-theme')==='light')document.body.classList.add('light');}catch(e){}})();</script>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <nav>
   <a href="#" class="nav-logo"><strong>QL</strong> · lecler.dev</a>
@@ -830,7 +831,7 @@ body.light .footer-icon img { filter: none; }
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         </a>
         <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" title="Malt" class="malt-link">
-          <img src="https://dam.malt.com/cms-front/maltLogo.png?w=110&h=32" alt="Malt">
+          <img src="icons/malt.png" width="110" height="32" alt="Malt">
         </a>
       </div>
     </ul>
@@ -842,6 +843,7 @@ body.light .footer-icon img { filter: none; }
   </div>
 </nav>
 
+<main id="main">
 <section id="hero">
   <div class="hero-glow"></div>
   <div class="container">
@@ -1140,6 +1142,8 @@ body.light .footer-icon img { filter: none; }
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -1152,7 +1156,7 @@ body.light .footer-icon img { filter: none; }
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         </a>
         <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" class="footer-icon malt" title="Malt">
-          <img src="https://dam.malt.com/cms-front/maltLogo.png?w=110&h=32" alt="Malt">
+          <img src="icons/malt.png" width="110" height="32" alt="Malt">
         </a>
         <a href="/cdn-cgi/l/email-protection#afdedacac1dbc6c1efc3caccc3cadd81cbcad9" class="footer-icon" title="Email">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -1232,8 +1236,9 @@ function toggleTheme() {
   document.getElementById('themeBtn').textContent = light ? '☀️' : '🌙';
   localStorage.setItem('ql-theme', light ? 'light' : 'dark');
 }
-if (localStorage.getItem('ql-theme') === 'light') {
-  document.body.classList.add('light');
+/* La classe .light est déjà posée par le script inline en tête de <body> ;
+   ici on ne fait que synchroniser le libellé du bouton. */
+if (document.body.classList.contains('light')) {
   document.getElementById('themeBtn').textContent = '☀️';
 }
 
