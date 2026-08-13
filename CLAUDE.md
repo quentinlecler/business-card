@@ -38,7 +38,7 @@ Then open `http://localhost:8080`.
 
 - `og.jpg` — Open Graph preview image. Must be regenerated manually when hero content changes (see commit history for context).
 - `CNAME` — Contains `lecler.dev` for GitHub Pages custom domain.
-- `fonts/` — Self-hosted woff2 fonts (Instrument Sans, DM Sans, JetBrains Mono) + their OFL licenses. Instrument Sans is the `--display` font (headings/name); Space Grotesk's files are still present from a prior design but currently unused — safe to remove if no longer referenced.
+- `fonts/` — Self-hosted woff2 fonts (Instrument Sans, DM Sans, JetBrains Mono) + their OFL licenses. Instrument Sans is the `--display` font (headings/name).
 - `icons/` — Self-hosted image assets (currently just `malt.webp`; the `#stack` bento grid uses inline SVG line icons, not files, so no per-tech icon files are needed there anymore).
 - `quentin-lecler-cv.pdf` — CV linked from the site; keep in sync manually, no auto-generation.
 
