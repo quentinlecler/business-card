@@ -210,7 +210,7 @@ body.light .mesh-blob.b2{background:radial-gradient(circle,#A78BFA,transparent 7
 .reveal{opacity:0;transform:translateY(8px) scale(.98);transition:opacity 0.5s var(--ease-em),transform 0.5s var(--ease-em)}
 .reveal.visible{opacity:1;transform:none}
 
-.stats-strip{position:relative;overflow:hidden;padding:52px 0;background:rgba(129,140,248,0.06);backdrop-filter:blur(20px) saturate(140%);border-top:1px solid var(--border) !important;border-bottom:1px solid var(--border)}
+.stats-strip{position:relative;overflow:hidden;padding:52px 0;background:linear-gradient(to bottom,transparent,rgba(129,140,248,0.06) 25%,rgba(129,140,248,0.06) 75%,transparent);backdrop-filter:blur(20px) saturate(140%);border-top:1px solid var(--border) !important}
 .stats-strip::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 90% at 50% 0%,rgba(99,102,241,0.10),transparent 70%)}
 .stats-strip .stat-num{color:var(--fg-1)}
 .stats-strip .stat-label{color:var(--fg-3)}
