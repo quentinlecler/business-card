@@ -411,6 +411,7 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
 .exp-card,.edu-card,.bento-card{transition:none !important}
 }
 </style>
+<script src="https://www.google.com/recaptcha/enterprise.js?render=6LcUpoQtAAAAACUNPXeXRaBYnUsdnUv4M1wabYPD" async defer></script>
 </head>
 <body>
 <script>/* Applique le thème avant le premier rendu pour éviter le flash */
@@ -783,6 +784,22 @@ document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',
 document.addEventListener('click',e=>{if(!e.target.closest('nav'))closeMenu()});
 
 /* ── Contact form (Formspree, AJAX submit) ── */
+const RECAPTCHA_SITE_KEY='6LcUpoQtAAAAACUNPXeXRaBYnUsdnUv4M1wabYPD';
+function getRecaptchaToken(){
+  return new Promise(resolve=>{
+    if(typeof grecaptcha==='undefined'||!grecaptcha.enterprise){resolve(null);return}
+    const timeout=setTimeout(()=>resolve(null),3000);
+    try{
+      grecaptcha.enterprise.ready(async()=>{
+        try{
+          const token=await grecaptcha.enterprise.execute(RECAPTCHA_SITE_KEY,{action:'contact_submit'});
+          clearTimeout(timeout);
+          resolve(token);
+        }catch{clearTimeout(timeout);resolve(null)}
+      });
+    }catch{clearTimeout(timeout);resolve(null)}
+  });
+}
 (function(){
   const form=document.getElementById('contactForm');
   if(!form)return;
@@ -794,7 +811,10 @@ document.addEventListener('click',e=>{if(!e.target.closest('nav'))closeMenu()});
     status.textContent='Sending…';
     status.className='form-status';
     try{
-      const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+      const token=await getRecaptchaToken();
+      const fd=new FormData(form);
+      if(token)fd.append('g-recaptcha-response',token);
+      const res=await fetch(form.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}});
       let data=null;
       try{data=await res.json();}catch{}
       const ok=res.ok && !(data&&(data.errors||data.error||data._status==='error'||data.ok===false));
