@@ -57,3 +57,13 @@ Use the `/playwright-cli` skill for browser testing and automation. The Playwrig
 playwright-cli open --browser=chrome --headed http://localhost:8080
 ```
 Never omit `--headed` — without it, playwright-cli defaults to headless.
+
+## Content conventions
+
+- **AI-assisted development is a deliberate highlight** (aligned with the CV repo `~/Projects/resume`): `AI-Assisted` in `<title>`/og:title, a sentence in the hero and `#about`, `AI-Assisted Developer` in the typed roles, the `AI & Tooling` bento card placed **first**, Claude Code bullets + tag on Doctipro and Référenceur. Only claim facts verifiable in `~/Projects/doctiprodev` (CLAUDE.md, `.claude/skills/`, the mandatory code-review step in the `push-staging`/`push-master` skills). No AI claims before 2025 / for Anysoft. No "LLM APIs" claim — Quentin has never integrated an LLM API (confirmed 2026-09-24); the AI experience is Claude Code as a development tool.
+- CyberOps Associate was **never completed** — it is shown as `Training` in `#education`, never as a certification. The only real certification is CCNA.
+- `quentin-lecler-cv.pdf` = copy of `~/Projects/resume/quentin-lecler-cv-original.pdf`.
+
+## Regenerating `og.jpg`
+
+No `playwright-cli` needed: render a temporary copy of `index.html` (with `fonts/` and `icons/` symlinked next to it) that hides `nav` and `.grecaptcha-badge`, shifts `#hero` up by the nav height (`margin-top:-58px`), and swaps `#typedRole` for a static span after load (otherwise the typing animation is captured mid-word). Then run the Playwright-bundled Chromium: `~/.cache/ms-playwright/chromium-*/chrome-linux64/chrome --headless=new --hide-scrollbars --window-size=1200,630 --virtual-time-budget=8000 --screenshot=og.png http://localhost:PORT/`, and convert to JPEG (quality 85).
