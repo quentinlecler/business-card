@@ -6,7 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A static single-page personal business card / portfolio site for Quentin Lecler, deployed to GitHub Pages at `lecler.dev`.
 
-**No build system, no package manager, no framework.** Everything lives in a single file: `index.html` (≈890 lines of HTML + inline CSS + inline JS).
+**No build system, no framework, no runtime dependency.** Everything lives in a single file: `index.html` (≈890 lines of HTML + inline CSS + inline JS).
+
+`package.json` exists **only for testing tooling**: `@playwright/cli` is a `devDependency` (browser automation / visual checks). The site itself never loads anything from `node_modules` — nothing is built, bundled or deployed from it. `node_modules/` is gitignored.
 
 ## Development
 
@@ -52,9 +54,18 @@ Note: Cloudflare (sitting in front of the domain) auto-injects a `<script src="/
 
 Use the `/playwright-cli` skill for browser testing and automation. The Playwright MCP server is disabled — do not use it.
 
+`playwright-cli` is installed **locally in the project** (devDependency), not globally, and its browser lives in `node_modules` too. Setup after a fresh clone:
+
+```bash
+npm install
+PLAYWRIGHT_BROWSERS_PATH=0 npx --no-install playwright-cli install-browser chrome-for-testing
+```
+
+Then always call it via `npx --no-install playwright-cli ...` with `PLAYWRIGHT_BROWSERS_PATH=0` (so it uses the project-local browser, not `~/.cache`). Google Chrome is not installed on this machine → use `--browser=chromium`, not `--browser=chrome`.
+
 **Always open the browser in headed (visible) mode:**
 ```bash
-playwright-cli open --browser=chrome --headed http://localhost:8080
+PLAYWRIGHT_BROWSERS_PATH=0 npx --no-install playwright-cli open --browser=chromium --headed http://localhost:8080
 ```
 Never omit `--headed` — without it, playwright-cli defaults to headless.
 
@@ -66,4 +77,4 @@ Never omit `--headed` — without it, playwright-cli defaults to headless.
 
 ## Regenerating `og.jpg`
 
-No `playwright-cli` needed: render a temporary copy of `index.html` (with `fonts/` and `icons/` symlinked next to it) that hides `nav` and `.grecaptcha-badge`, shifts `#hero` up by the nav height (`margin-top:-58px`), and swaps `#typedRole` for a static span after load (otherwise the typing animation is captured mid-word). Then run the Playwright-bundled Chromium: `~/.cache/ms-playwright/chromium-*/chrome-linux64/chrome --headless=new --hide-scrollbars --window-size=1200,630 --virtual-time-budget=8000 --screenshot=og.png http://localhost:PORT/`, and convert to JPEG (quality 85).
+No `playwright-cli` needed: render a temporary copy of `index.html` (with `fonts/` and `icons/` symlinked next to it) that hides `nav` and `.grecaptcha-badge`, shifts `#hero` up by the nav height (`margin-top:-58px`), and swaps `#typedRole` for a static span after load (otherwise the typing animation is captured mid-word). Then run the Playwright-bundled Chromium: `node_modules/playwright-core/.local-browsers/chromium-*/chrome-linux64/chrome --headless=new --hide-scrollbars --window-size=1200,630 --virtual-time-budget=8000 --screenshot=og.png http://localhost:PORT/`, and convert to JPEG (quality 85).
