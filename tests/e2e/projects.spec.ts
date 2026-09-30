@@ -34,6 +34,15 @@ for (const lang of ['en', 'fr']) {
   });
 }
 
+test('the Anysoft cards quote the recommendation letter, in both languages, with attribution', async ({ page }) => {
+  for (const lang of ['en', 'fr']) {
+    await page.goto(`/?lang=${lang}`);
+    await waitForI18n(page);
+    await expect(page.locator('#projects .work-quote')).toHaveCount(2);
+    for (const source of await page.locator('#projects .work-quote-src').allInnerTexts()) expect(source).toContain('Anysoft S.A.');
+  }
+});
+
 test('the section content is translated (French differs from English)', async ({ page }) => {
   const text = async (lang: string) => {
     await page.goto(`/?lang=${lang}`);

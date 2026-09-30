@@ -24,7 +24,7 @@ const CONTAINMENT: Record<string, string[]> = {
   '.bento-card': ['.bento-top', '.bento-title', '.bento-desc'],
   '.exp-card': ['.exp-header', '.exp-body', '.exp-bullets', '.exp-tags'],
   '.edu-card': ['.edu-type', '.edu-title', '.edu-school', '.edu-dates'],
-  '.work-card': ['.edu-type', '.edu-title', '.work-desc', '.work-part', '.work-tags', '.work-links', '.work-seen'],
+  '.work-card': ['.edu-type', '.edu-title', '.work-desc', '.work-part', '.work-quote', '.work-tags', '.work-links', '.work-seen'],
   '.stat': ['.stat-num', '.stat-label'],
   '.about-langs-row': ['.about-lang', '.about-langs-title'],
 };

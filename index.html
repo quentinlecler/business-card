@@ -313,6 +313,9 @@ body:not(.light) .icon-github{filter:invert(0.7)}
 .work-desc{font-size:14px;color:var(--fg-2);line-height:1.7;margin:0 0 8px}
 .work-part{font-size:14px;color:var(--fg-1);line-height:1.7;margin:0 0 14px}
 .work-tags{margin-bottom:14px}
+.work-quote{margin:0 0 14px;padding:10px 14px;border-left:2px solid var(--accent);font-size:13px;line-height:1.7;color:var(--fg-2)}
+.work-quote p{margin:0 0 6px;font-style:italic}
+.work-quote-src{font-family:var(--mono);font-size:11px;color:var(--fg-3)}
 .work-links,.work-seen{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--mono);font-size:12px}
 .work-seen{margin-top:10px;color:var(--fg-3)}
 .work-card a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
@@ -693,7 +696,11 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
         <div class="edu-title">CLIP</div>
         <p data-i18n="work.c1.desc" class="work-desc">Consumer credit management software, multi-user and multi-agency, published by Anysoft.</p>
         <p data-i18n="work.c1.part" class="work-part">I led its full migration from a legacy Windows desktop application to a web-based SaaS, solo, and integrated five banking APIs (Belfius, BNP Paribas Fortis, Cofidis, Elantis, DHB Bank).</p>
-        <div class="exp-tags work-tags"><span class="exp-tag">React</span><span class="exp-tag">TypeScript</span><span class="exp-tag">Node.js</span><span class="exp-tag">Express</span><span class="exp-tag">C#</span><span class="exp-tag">.NET Core</span></div>
+        <blockquote class="work-quote">
+          <p data-i18n="work.q1.text">"The efficiency of his work has greatly satisfied us for each of the applications he was able to develop."</p>
+          <div class="work-quote-src" data-i18n="work.q1.source">Anysoft S.A., letter of recommendation (translated from French) · full letter available on request</div>
+        </blockquote>
+        <div class="exp-tags work-tags"><span class="exp-tag">React</span><span class="exp-tag">Redux</span><span class="exp-tag">TypeScript</span><span class="exp-tag">Node.js</span><span class="exp-tag">Express</span><span class="exp-tag">C#</span><span class="exp-tag">.NET Core</span><span class="exp-tag">.NET 6</span><span class="exp-tag">PHP</span><span class="exp-tag">MySQL</span><span class="exp-tag">Sybase</span></div>
         <div class="work-links"><a href="https://anysoft.lu" target="_blank" rel="noopener">anysoft.lu ↗</a></div>
       </div>
       <div class="edu-card work-card reveal" style="transition-delay:0.24s">
@@ -701,7 +708,11 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
         <div data-i18n="work.c2.title" class="edu-title">HYPOTOOLS — credit simulators</div>
         <p data-i18n="work.c2.desc" class="work-desc">Web application for mortgage credit management: fee calculators, rate simulator with APR, document management.</p>
         <p data-i18n="work.c2.part" class="work-part">I built the credit simulator and request forms in React, on a C# .NET Core Web API, connected to CLIP and HYPOTOOLS.</p>
-        <div class="exp-tags work-tags"><span class="exp-tag">React</span><span class="exp-tag">TypeScript</span><span class="exp-tag">C#</span><span class="exp-tag">.NET Core</span><span class="exp-tag">REST APIs</span></div>
+        <blockquote class="work-quote">
+          <p data-i18n="work.q2.text">"… for the development of the web versions of our applications C.L.I.P (…) and HYPOTOOLS (…) as well as for the simulators and credit request forms of our brokers in Belgium and Luxembourg."</p>
+          <div class="work-quote-src" data-i18n="work.q2.source">Anysoft S.A., letter of recommendation (translated from French) · full letter available on request</div>
+        </blockquote>
+        <div class="exp-tags work-tags"><span class="exp-tag">React</span><span class="exp-tag">Redux</span><span class="exp-tag">TypeScript</span><span class="exp-tag">C#</span><span class="exp-tag">.NET Core</span><span class="exp-tag">.NET 6</span><span class="exp-tag">REST APIs</span></div>
         <div class="work-links"><a href="https://anysoft.lu" target="_blank" rel="noopener">anysoft.lu ↗</a></div>
         <div class="work-seen"><span data-i18n="work.c2.seen">Seen on:</span> <a href="https://www.leemanskredieten.be/lenen/tariefplannen/reno-plan-leemans/" target="_blank" rel="noopener">leemanskredieten.be</a> · <a href="https://clicredit.be/" target="_blank" rel="noopener">clicredit.be</a> · <a href="https://wallfin.be/" target="_blank" rel="noopener">wallfin.be</a> · <a href="https://www.euro-finances.be/fr/" target="_blank" rel="noopener">euro-finances.be</a></div>
       </div>

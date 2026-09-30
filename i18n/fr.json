@@ -141,5 +141,9 @@
   "work.c5.part": "J'ai conçu et développé seul toute la plateforme, hors maquettes : architecture, back end, front end, moteur en marque blanche (domaine, e-mail et identité visuelle par courtier, simulateurs configurables sans code), soumission aux API bancaires, automatisation de la facturation Zoho et suite de tests.",
   "work.c6.title": "Brunswick Marine — application repas",
   "work.c6.desc": "Application web pour choisir et réserver son repas de midi, avec gestion des commandes et des livraisons.",
-  "work.c6.part": "Je l'ai développée de bout en bout : front end, back end, gestion des commandes et des livraisons."
+  "work.c6.part": "Je l'ai développée de bout en bout : front end, back end, gestion des commandes et des livraisons.",
+  "work.q1.text": "« L'efficacité de son travail nous a grandement satisfait pour chacune des applications qu'il a pu développer. »",
+  "work.q2.text": "« … pour le développement des versions web de nos applications C.L.I.P (…) et HYPOTOOLS (…) ainsi que pour les simulateurs et formulaires de demandes de crédits de nos courtiers en Belgique et au Luxembourg. »",
+  "work.q1.source": "Anysoft S.A., lettre de recommandation · lettre complète disponible sur demande",
+  "work.q2.source": "Anysoft S.A., lettre de recommandation · lettre complète disponible sur demande"
 }

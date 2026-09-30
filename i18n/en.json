@@ -141,5 +141,9 @@
   "work.c5.part": "I designed and built the whole platform on my own, except the UI mockups: architecture, back end, front end, white-label engine (domain, email and branding per broker, simulators configurable without code), submission to banking APIs, Zoho billing automation and the test suite.",
   "work.c6.title": "Brunswick Marine — lunch app",
   "work.c6.desc": "Web app to choose and book your midday meal, with order and delivery management.",
-  "work.c6.part": "I built it end to end: front end, back end, order and delivery management."
+  "work.c6.part": "I built it end to end: front end, back end, order and delivery management.",
+  "work.q1.text": "\"The efficiency of his work has greatly satisfied us for each of the applications he was able to develop.\"",
+  "work.q2.text": "\"… for the development of the web versions of our applications C.L.I.P (…) and HYPOTOOLS (…) as well as for the simulators and credit request forms of our brokers in Belgium and Luxembourg.\"",
+  "work.q1.source": "Anysoft S.A., letter of recommendation (translated from French) · full letter available on request",
+  "work.q2.source": "Anysoft S.A., letter of recommendation (translated from French) · full letter available on request"
 }
