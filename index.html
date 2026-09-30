@@ -433,7 +433,7 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
 </head>
 <body>
 <script>/* Applique le thème avant le premier rendu pour éviter le flash */
-(function(){try{if(localStorage.getItem('ql-theme')==='light')document.body.classList.add('light');}catch(e){}})();</script>
+(function(){try{var t=localStorage.getItem('ql-theme');if(t==='light'||(t!=='dark'&&matchMedia('(prefers-color-scheme: light)').matches))document.body.classList.add('light');}catch(e){}})();</script>
 <div class="mesh-bg" aria-hidden="true"><div class="mesh-blob b1"></div><div class="mesh-blob b2"></div></div>
 <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
 <a data-i18n="global.skip_link" href="#hero" class="skip-link">Skip to content</a>
@@ -799,7 +799,13 @@ function toggleTheme(){
   document.getElementById('themeBtn').textContent=light?'☀️':'🌙';
   localStorage.setItem('ql-theme',light?'light':'dark');
 }
-if(localStorage.getItem('ql-theme')==='light'){document.body.classList.add('light');document.getElementById('themeBtn').textContent='☀️'}
+if(document.body.classList.contains('light'))document.getElementById('themeBtn').textContent='☀️';
+/* Sans choix explicite (ql-theme), le thème suit les préférences système, y compris en direct */
+try{matchMedia('(prefers-color-scheme: light)').addEventListener('change',e=>{
+  if(localStorage.getItem('ql-theme'))return;
+  document.body.classList.toggle('light',e.matches);
+  document.getElementById('themeBtn').textContent=e.matches?'☀️':'🌙';
+});}catch(err){}
 
 /* Mobile menu */
 function closeMenu(){document.getElementById('navLinks').classList.remove('open');document.getElementById('hamburger').classList.remove('open')}
