@@ -15,7 +15,7 @@ Zero framework, zero build step, zero third-party CDN. One hand-written `index.h
 - Contact form posts to [Formspree](https://formspree.io) via `fetch()`, protected by reCAPTCHA Enterprise + Formshield
 - Dark/light theme with no flash-of-wrong-theme on load
 
-Deployed on [GitHub Pages](https://pages.github.com/) with a custom domain (`CNAME`). Push to `main` → live, no CI pipeline (a local `pre-push` hook runs the tests).
+Deployed on [GitHub Pages](https://pages.github.com/) with a custom domain (`CNAME`). Push to `main` → GitHub Actions runs the unit and end-to-end tests, then deploys; a failing test means no deployment.
 
 ## Local development
 
@@ -30,8 +30,8 @@ Then open `http://localhost:8080`. See `CLAUDE.md` for the full architecture bre
 ```bash
 npm install          # also enables the pre-push hook (git config core.hooksPath .githooks)
 PLAYWRIGHT_BROWSERS_PATH=0 npx --no-install playwright-cli install-browser chrome-for-testing
-npm test             # static checks: translation keys, forbidden claims, referenced files
-npm run test:e2e     # headless browser: language switch, CV links, mobile nav
+npm run test:unit    # vitest: translations, markup, content rules, i18n loader, theme
+npm run test:e2e     # Playwright: language, theme, layout (no overflow), real scroll + burger menu on phones
 ```
 
 After changing i18next's version: `npm run vendor` copies its browser builds into `vendor/` (committed, GitHub Pages doesn't run npm). `node_modules/` is never served.

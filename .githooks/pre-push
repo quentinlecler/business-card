@@ -1,8 +1,8 @@
 #!/bin/sh
-# Blocks a push when the i18n checks fail. GitHub Pages deploys straight from main with no CI,
-# so this is the only gate before the site goes live. Skip once with: git push --no-verify
+# Local safety net: runs the unit and end-to-end tests before a push. The real gate is the CI
+# (.github/workflows/ci.yml): the site is only deployed when the tests pass there. Skip once with: git push --no-verify
 set -e
-echo "pre-push: npm test"
-npm test --silent
+echo "pre-push: npm run test:unit"
+npm run test:unit --silent
 echo "pre-push: npm run test:e2e"
 npm run test:e2e --silent

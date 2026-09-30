@@ -10,7 +10,7 @@ A static single-page personal business card / portfolio site for Quentin Lecler,
 
 `package.json` holds two kinds of packages:
 - **Runtime dependencies** (`i18next`, `i18next-browser-languagedetector`, `i18next-http-backend`, exact versions): GitHub Pages does not run `npm install`, so their browser builds are **copied into `vendor/` and committed** with `npm run vendor` (script `vendor.mjs`). The site never loads anything from `node_modules` (gitignored) or from a CDN. To upgrade: bump the version, `npm install`, `npm run vendor`, `npm test && npm run test:e2e`, commit `vendor/` too.
-- **Testing tooling** (`vitest`, `@playwright/cli`, `devDependencies`): tests run with vitest (`vitest.config.mjs`).
+- **Testing tooling** (`devDependencies`, exact versions): `vitest` + `jsdom` (unit tests), `@playwright/test` (end-to-end tests; same version as the `playwright-core` pulled by `@playwright/cli`, so they share one project-local Chromium), `@playwright/cli` (manual browser automation).
 
 ## Internationalisation (EN / FR)
 
@@ -23,10 +23,9 @@ A static single-page personal business card / portfolio site for Quentin Lecler,
 
 ## Tests
 
-- `npm test` (vitest, `tests/i18n.test.mjs`): static checks (Node, no browser): en/fr key parity, every `data-i18n` key exists, HTML text equals `en.json`, no forbidden claim (SharePoint, Azure, AWS, Kubernetes, Kafka, Terraform, diploma wording…), CyberOps stays a training, referenced files exist.
-- `npm run test:e2e` (vitest, `tests/*.e2e.mjs`): headless Chromium (project-local, see Browser Automation) on a throw-away static server: language detection, EN↔FR switch, persistence, CV links per language, mobile nav, PDFs served.
-- `.githooks/pre-push` runs both before every push (enabled by `npm install` via the `prepare` script → `core.hooksPath`). GitHub Pages deploys from `main` without CI, so this hook is the only gate. Skip once with `git push --no-verify`.
-- `tests/layout.e2e.mjs` guards UI regressions with geometry (no screenshots): in EN/FR × light/dark × 320/375/768/1280 px nothing sticks out of its card, no horizontal scroll, nav controls don't overlap or wrap; on phone widths it scrolls for real to the bottom and opens/closes the burger menu. It was checked to fail on the known-broken commit `a170454`. Aesthetics, contrast and spacing are **not** covered: look at the page in the browser.
+- **Unit tests** (`npm run test:unit`, vitest, `tests/unit/*.test.ts`, no browser): translation catalog (key parity, tags, roles), HTML markup (`data-i18n` keys, drift between `index.html` and `en.json`), content rules (forbidden claims, CyberOps = training, CCNA the only certification, "développeur solo"), referenced files, `i18n/loader.js` (language resolution, `?lang=`, storage, applying text/attrs/meta/roles, switch button, libraries missing) and the inline theme script, both run in jsdom.
+- **End-to-end tests** (`npm run test:e2e`, Playwright Test, `tests/e2e/*.spec.ts`, config `playwright.config.ts`): they first run `npm run build:site` (assembles `_site/`, exactly what is deployed) and test that folder through a throw-away static server. Specs: `i18n` (detection, switch, persistence, CV per language), `theme` (system preference, saved choice, live change), `assets` (PDFs, CNAME, JSON), `layout` (geometry matrix: EN/FR × light/dark × 320…1280 px — nothing sticks out of its card, no horizontal scroll, nav neither overlaps nor wraps), `phone` (real scroll to the very bottom + burger menu open/close at 320/375/414 px) and `device` (same on Pixel 7 emulation). No screenshots; aesthetics, contrast and spacing are **not** covered: look at the page. Verified to fail on the known-broken commit `a170454`.
+- **CI/CD** (`.github/workflows/ci.yml`): unit + e2e on every push and PR; the `deploy` job (GitHub Pages) `needs` both and only runs on `main`, so red tests = no deployment. This requires **Settings → Pages → Source = "GitHub Actions"**; to also reject merges, protect `main` (require a PR and the `Unit tests` / `End-to-end tests` checks). `.githooks/pre-push` runs both locally before every push (enabled by `npm install` via `prepare`); skip once with `--no-verify`. Locally, install the browser once: `PLAYWRIGHT_BROWSERS_PATH=0 npx --no-install playwright install chromium`.
 - **Never push UI changes without checking the real behaviour first** (burger menu open, real scroll to the very bottom at 375 px, no horizontal scroll) and without the owner's go-ahead.
 
 ## Development
@@ -65,7 +64,7 @@ Then open `http://localhost:8080`.
 
 ## Deployment
 
-Push to `main` → GitHub Pages auto-deploys. No CI pipeline: the local `pre-push` hook runs the tests (see Tests). Cloudflare caches static files for up to 4 h, so `index.html` and `i18n/*.json` can briefly be out of sync after a push (missing French text then falls back to English).
+Push to `main` → the CI runs the tests, then the `deploy` job publishes `_site/` to GitHub Pages (see Tests > CI/CD); nothing is deployed if a test fails. Cloudflare caches static files for up to 4 h, so `index.html` and `i18n/*.json` can briefly be out of sync after a push (missing French text then falls back to English).
 
 Note: Cloudflare (sitting in front of the domain) auto-injects a `<script src="/cdn-cgi/scripts/.../email-decode.min.js">` tag before `</body>` to obfuscate the mailto link — this is not something added to the source and isn't a third-party dependency to maintain; it won't appear when previewing via a local static server.
 
