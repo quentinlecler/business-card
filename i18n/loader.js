@@ -34,6 +34,7 @@
   function ready(){root.classList.remove('i18n-pending')}
 
   function init(){
+    bindSwitch(); // bound whatever happens next: the button must never be dead
     if(!window.i18next||!window.i18nextHttpBackend||!window.i18nextBrowserLanguageDetector){ready();return}
     var qs=(location.search.match(/[?&]lang=([a-zA-Z-]+)/)||[])[1];
     if(qs&&SUPPORTED.indexOf(base(qs))>-1){try{localStorage.setItem(STORE,base(qs))}catch(e){}}
@@ -44,16 +45,21 @@
       interpolation:{escapeValue:false},
       backend:{loadPath:'i18n/{{lng}}.json'},
       detection:{order:['querystring','localStorage','navigator'],lookupQuerystring:'lang',lookupLocalStorage:STORE,caches:[]}
-    }).then(function(){apply();ready();bindSwitch()},function(){ready()});
+    }).then(function(){try{apply()}catch(e){}ready()},function(){ready()});
   }
 
   function bindSwitch(){
     var btn=document.getElementById('langBtn');
     if(!btn)return;
     btn.addEventListener('click',function(){
-      var next=base(i18next.language)==='fr'?'en':'fr';
-      try{localStorage.setItem(STORE,next)}catch(e){}
-      i18next.changeLanguage(next).then(apply);
+      if(!window.i18next||!i18next.isInitialized)return;
+      var prev=base(i18next.language),next=prev==='fr'?'en':'fr';
+      i18next.changeLanguage(next).then(function(){
+        // The file could not be loaded: go back to the current language and do not save the failed choice
+        if(!i18next.hasResourceBundle(next,'translation'))return i18next.changeLanguage(prev);
+        try{localStorage.setItem(STORE,next)}catch(e){}
+        apply();
+      }).catch(function(){});
     });
   }
 

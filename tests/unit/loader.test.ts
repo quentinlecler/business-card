@@ -23,12 +23,15 @@ const PAGE = `<!doctype html><html lang="en" class="i18n-pending"><head>
   <button id="langBtn" data-i18n="nav.lang_btn">FR</button>
 </body></html>`;
 
+let failing: string[] = []; // languages whose JSON "fails to load" in the current test
+
 class MemoryBackend {
   static type = 'backend';
   type = 'backend';
   init() {}
   read(language: string, _ns: string, callback: (err: unknown, data?: unknown) => void) {
-    dictionaries[language] ? callback(null, dictionaries[language]) : callback(new Error(`no dictionary for ${language}`));
+    if (failing.includes(language) || !dictionaries[language]) callback(new Error(`cannot load ${language}`));
+    else callback(null, dictionaries[language]);
   }
 }
 
@@ -37,9 +40,11 @@ interface BootOptions {
   navigatorLanguage?: string;
   stored?: string;
   withLibraries?: boolean;
+  failing?: string[];
 }
 
-async function boot({ search = '', navigatorLanguage = 'en-US', stored, withLibraries = true }: BootOptions = {}) {
+async function boot({ search = '', navigatorLanguage = 'en-US', stored, withLibraries = true, failing: failingLanguages = [] }: BootOptions = {}) {
+  failing = failingLanguages;
   const dom = new JSDOM(PAGE, { url: `http://localhost/${search}`, runScripts: 'outside-only', pretendToBeVisual: true });
   const win = dom.window as any;
   Object.defineProperty(win.navigator, 'language', { value: navigatorLanguage, configurable: true });
@@ -145,5 +150,32 @@ describe('i18n/loader.js — language switch button', () => {
     expect(page.win.document.documentElement.lang).toBe('en');
     expect(page.win.localStorage.getItem('ql-lang')).toBe('en');
     expect(page.win.document.getElementById('label').innerHTML).toBe(en['stats.stat_label.3']);
+  });
+});
+
+describe('i18n/loader.js — when a translation file cannot be loaded', () => {
+  it('still reveals the page and keeps the switch button working (French visitor, fr.json down)', async () => {
+    const page = await boot({ navigatorLanguage: 'fr', failing: ['fr'] });
+    expect(page.pending).toBe(false);
+    await page.click();
+    expect(page.win.document.documentElement.lang).toBe('en');
+    expect(page.win.document.getElementById('label').innerHTML).toBe(en['stats.stat_label.3']);
+  });
+
+  it('stays on the current language and does not save the failed choice (English visitor clicks FR, fr.json down)', async () => {
+    const page = await boot({ navigatorLanguage: 'en-US', failing: ['fr'] });
+    await page.click();
+    expect(page.win.document.documentElement.lang).toBe('en');
+    expect(page.win.localStorage.getItem('ql-lang')).toBeNull();
+    expect(page.win.document.getElementById('label').innerHTML).toBe(en['stats.stat_label.3']);
+    // a later click still does not break anything
+    await page.click();
+    expect(page.win.document.documentElement.lang).toBe('en');
+  });
+
+  it('saves the choice only once the language really switched', async () => {
+    const page = await boot({ navigatorLanguage: 'en-US' });
+    await page.click();
+    expect(page.win.localStorage.getItem('ql-lang')).toBe('fr');
   });
 });

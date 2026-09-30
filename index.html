@@ -13,8 +13,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lecler.dev">
 <meta property="og:locale" content="en_US">
-<script>/* Guess the language early so a non-English visitor never sees the English flash. Real detection: i18n/loader.js */
-(function(){try{var m=location.search.match(/[?&]lang=([a-zA-Z-]+)/),l=(m&&m[1])||localStorage.getItem('ql-lang')||navigator.language||'en';l=l.toLowerCase().split('-')[0];
+<script>/* Guess the language early so a French visitor never sees the English flash. Must resolve the language like i18n/loader.js: ?lang= → saved choice → navigator.languages, supported languages only */
+(function(){try{var S=['en','fr'];function ok(v){v=String(v||'').toLowerCase().split('-')[0];return S.indexOf(v)>-1?v:null}
+var m=location.search.match(/[?&]lang=([a-zA-Z-]+)/),l=m&&ok(m[1]);
+if(!l){try{l=ok(localStorage.getItem('ql-lang'))}catch(e){}}
+if(!l){var n=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language];for(var i=0;i<n.length&&!l;i++)l=ok(n[i])}
 if(l==='fr'){document.documentElement.classList.add('i18n-pending');document.documentElement.lang='fr';setTimeout(function(){document.documentElement.classList.remove('i18n-pending')},2500)}}catch(e){}})();</script>
 <style>html.i18n-pending body{visibility:hidden}</style>
 <script type="application/ld+json">
