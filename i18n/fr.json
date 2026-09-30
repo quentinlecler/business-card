@@ -6,7 +6,7 @@
   "nav.link_education": "formation",
   "nav.avail_pill": "Disponible immédiatement — temps plein et freelance",
   "nav.contact_btn": "Contact",
-  "hero.desc": "Développeur full-stack senior avec 9 ans d'expérience, dont 7 ans à concevoir des SaaS critiques pour la santé et la finance au Luxembourg. Laravel, Node.js et C#/.NET Core — architecture, API, intégrations temps réel, responsabilité de bout en bout. Workflow natif IA depuis 2025 — développement agentique quotidien avec Claude Code, chaque changement vérifié en test-first et validé par la CI. Disponible immédiatement — temps plein ou freelance.",
+  "hero.desc": "Développeur full-stack senior avec 9 ans d'expérience, dont 7 ans à concevoir des SaaS critiques pour la santé et la finance au Luxembourg. Workflow natif IA depuis 2025 avec Claude Code, chaque changement vérifié en test-first. Basé en Belgique, ouvert à la relocalisation — disponible immédiatement, temps plein ou freelance.",
   "hero.cta_contact": "Me contacter →",
   "hero.link_experience": "Voir l'expérience ↓",
   "hero.link_cv": "Télécharger le CV (PDF) ↓",
@@ -145,5 +145,6 @@
   "work.q1.text": "« L'efficacité de son travail nous a grandement satisfait pour chacune des applications qu'il a pu développer. »",
   "work.q2.text": "« … pour le développement des versions web de nos applications C.L.I.P (…) et HYPOTOOLS (…) ainsi que pour les simulateurs et formulaires de demandes de crédits de nos courtiers en Belgique et au Luxembourg. »",
   "work.q1.source": "Anysoft S.A., lettre de recommandation · lettre complète disponible sur demande",
-  "work.q2.source": "Anysoft S.A., lettre de recommandation · lettre complète disponible sur demande"
+  "work.q2.source": "Anysoft S.A., lettre de recommandation · lettre complète disponible sur demande",
+  "hero.link_projects": "Voir les réalisations ↓"
 }

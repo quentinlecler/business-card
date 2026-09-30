@@ -6,7 +6,7 @@
   "nav.link_education": "education",
   "nav.avail_pill": "Available immediately — full-time &amp; freelance",
   "nav.contact_btn": "Contact",
-  "hero.desc": "Senior Full-Stack Developer with 9 years of experience, including 7 years building mission-critical SaaS for healthcare and finance in Luxembourg. Laravel, Node.js &amp; C#/.NET Core — architecture, APIs, real-time integrations, full ownership. AI-native workflow since 2025 — daily agentic development with Claude Code, every change verified test-first and gated by CI. Available immediately — full-time or freelance.",
+  "hero.desc": "Senior full-stack developer with 9 years of experience, 7 of them building mission-critical healthcare and finance SaaS in Luxembourg. AI-native workflow since 2025 with Claude Code, every change verified test-first. Based in Belgium, open to relocation — available immediately, full-time or freelance.",
   "hero.cta_contact": "Contact me →",
   "hero.link_experience": "View experience ↓",
   "hero.link_cv": "Download CV (PDF) ↓",
@@ -145,5 +145,6 @@
   "work.q1.text": "\"The efficiency of his work has greatly satisfied us for each of the applications he was able to develop.\"",
   "work.q2.text": "\"… for the development of the web versions of our applications C.L.I.P (…) and HYPOTOOLS (…) as well as for the simulators and credit request forms of our brokers in Belgium and Luxembourg.\"",
   "work.q1.source": "Anysoft S.A., letter of recommendation (translated from French) · full letter available on request",
-  "work.q2.source": "Anysoft S.A., letter of recommendation (translated from French) · full letter available on request"
+  "work.q2.source": "Anysoft S.A., letter of recommendation (translated from French) · full letter available on request",
+  "hero.link_projects": "View public work ↓"
 }

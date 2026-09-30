@@ -55,3 +55,17 @@ test('the section content is translated (French differs from English)', async ({
   expect(fr).toContain('Réalisations publiques');
   expect(fr).not.toEqual(en);
 });
+
+test.describe('hero', () => {
+  for (const lang of ['en', 'fr']) {
+    test(`links to the public work and the CV, and says where Quentin is (${lang})`, async ({ page }) => {
+      await page.goto(`/?lang=${lang}`);
+      await waitForI18n(page);
+      await expect(page.locator('#hero a[href="#projects"]')).toBeVisible();
+      await expect(page.locator('#hero a.hero-cv-link')).toBeVisible();
+      await expect(page.locator('#hero .hero-desc')).toContainText(lang === 'en' ? 'open to relocation' : 'ouvert à la relocalisation');
+      await page.click('#hero a[href="#projects"]');
+      await expect(page.locator('#projects')).toBeInViewport();
+    });
+  }
+});
