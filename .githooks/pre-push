@@ -1,0 +1,8 @@
+#!/bin/sh
+# Blocks a push when the i18n checks fail. GitHub Pages deploys straight from main with no CI,
+# so this is the only gate before the site goes live. Skip once with: git push --no-verify
+set -e
+echo "pre-push: npm test"
+npm test --silent
+echo "pre-push: npm run test:e2e"
+npm run test:e2e --silent

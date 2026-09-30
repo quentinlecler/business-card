@@ -12,6 +12,11 @@
 <meta property="og:url" content="https://lecler.dev">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lecler.dev">
+<meta property="og:locale" content="en_US">
+<script>/* Guess the language early so a non-English visitor never sees the English flash. Real detection: i18n/loader.js */
+(function(){try{var m=location.search.match(/[?&]lang=([a-zA-Z-]+)/),l=(m&&m[1])||localStorage.getItem('ql-lang')||navigator.language||'en';l=l.toLowerCase().split('-')[0];
+if(l==='fr'){document.documentElement.classList.add('i18n-pending');document.documentElement.lang='fr';setTimeout(function(){document.documentElement.classList.remove('i18n-pending')},2500)}}catch(e){}})();</script>
+<style>html.i18n-pending body{visibility:hidden}</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Quentin Lecler","jobTitle":"Senior Full-Stack Developer","url":"https://lecler.dev","email":"quentin@lecler.dev","sameAs":["https://github.com/quentinlecler","https://www.linkedin.com/in/qlecler","https://en.malt.be/profile/quentinlecler"],"knowsLanguage":["fr","en"],"nationality":[{"@type":"Country","name":"Belgium"},{"@type":"Country","name":"Luxembourg"}],"address":{"@type":"PostalAddress","addressCountry":"BE"}}
 </script>
@@ -155,6 +160,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-cta:hover{background:#4F46E5}
 .theme-btn{display:flex;align-items:center;justify-content:center;width:34px;height:34px;background:rgba(129,140,248,0.08);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:background 0.2s,border-color 0.2s,transform 0.2s;font-size:15px;flex-shrink:0}
 .theme-btn:hover{background:rgba(129,140,248,0.15);border-color:var(--border-hover);transform:rotate(12deg)}
+.lang-btn{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:0.04em;color:var(--fg-2)}
+.lang-btn:hover{transform:none;color:var(--fg-1)}
 
 .container{max-width:840px;margin:0 auto;padding:0 32px}
 section{padding:96px 0}
@@ -347,14 +354,16 @@ nav{padding:0 20px;height:52px}
 .nav-links.open a svg{display:inline-block;opacity:0.5;flex-shrink:0;transition:opacity 0.2s}
 .nav-links.open a:hover svg{opacity:1}
 .nav-links.open a:hover{color:var(--fg-1)}
-.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;order:99}
 .hamburger span{display:block;width:20px;height:1.5px;background:var(--fg-2);border-radius:2px;transition:transform 0.25s,opacity 0.25s}
 .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 body.light .nav-links.open{background:#eeeef8 !important}
-.nav-right{gap:10px}
-.nav-cta{padding:7px 12px;font-size:10px}
+.nav-right{gap:6px}
+.nav-logo{white-space:nowrap;font-size:12px}
+.theme-btn{width:32px;height:32px}
+.nav-cta{padding:7px 10px;font-size:10px}
 .container{padding:0 20px}
 section{padding:64px 0}
 #hero{min-height:100svh;align-items:flex-start;padding-top:52px}
@@ -412,32 +421,37 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
 }
 </style>
 <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcUpoQtAAAAACUNPXeXRaBYnUsdnUv4M1wabYPD" async defer></script>
+<script defer src="vendor/i18next.min.js"></script>
+<script defer src="vendor/i18next-browser-languagedetector.min.js"></script>
+<script defer src="vendor/i18next-http-backend.min.js"></script>
+<script defer src="i18n/loader.js"></script>
 </head>
 <body>
 <script>/* Applique le thème avant le premier rendu pour éviter le flash */
 (function(){try{if(localStorage.getItem('ql-theme')==='light')document.body.classList.add('light');}catch(e){}})();</script>
 <div class="mesh-bg" aria-hidden="true"><div class="mesh-blob b1"></div><div class="mesh-blob b2"></div></div>
 <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
-<a href="#hero" class="skip-link">Skip to content</a>
+<a data-i18n="global.skip_link" href="#hero" class="skip-link">Skip to content</a>
 
 <nav>
   <a href="#" class="nav-logo"><strong>QL</strong> · lecler.dev</a>
   <div class="nav-right">
     <ul class="nav-links" id="navLinks">
-      <li><a href="#about"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>about</a></li>
-      <li><a href="#stack"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>stack</a></li>
-      <li><a href="#experience"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>work</a></li>
-      <li><a href="#education"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5"/></svg>education</a></li>
+      <li><a href="#about"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span data-i18n="nav.link_about">about</span></a></li>
+      <li><a href="#stack"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span data-i18n="nav.link_stack">stack</span></a></li>
+      <li><a href="#experience"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span data-i18n="nav.link_work">work</span></a></li>
+      <li><a href="#education"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5"/></svg><span data-i18n="nav.link_education">education</span></a></li>
       <div class="nav-mobile-social">
         <a href="https://github.com/quentinlecler" target="_blank" rel="noopener" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
         <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
         <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" title="Malt" class="malt-link"><img src="icons/malt.webp" width="110" height="32" alt="Malt"></a>
       </div>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
-    <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" class="avail-pill"><span class="avail-dot"></span><span>Available immediately — full-time &amp; freelance</span></a>
-    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({block:'start'})">Contact</button>
-    <button class="theme-btn" id="themeBtn" title="Toggle theme" onclick="toggleTheme()">🌙</button>
+    <button class="hamburger" id="hamburger" aria-label="Menu" data-i18n-attr="aria-label:attr.menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" class="avail-pill"><span class="avail-dot"></span><span data-i18n="nav.avail_pill">Available immediately — full-time &amp; freelance</span></a>
+    <button data-i18n="nav.contact_btn" class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({block:'start'})">Contact</button>
+    <button class="theme-btn lang-btn" id="langBtn" title="Voir en français" data-i18n="nav.lang_btn" data-i18n-attr="title:attr.lang_switch">FR</button>
+    <button class="theme-btn" id="themeBtn" title="Toggle theme" data-i18n-attr="title:attr.theme" onclick="toggleTheme()">🌙</button>
   </div>
 </nav>
 
@@ -447,12 +461,12 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
     <div class="hero-inner">
       <div class="hero-name">Quentin Lecler</div>
       <div class="hero-role"><span id="typedRole"></span><span class="cursor"></span></div>
-      <div class="hero-desc">Senior Full-Stack Developer with 9 years of experience, including 7 years building mission-critical SaaS for healthcare and finance in Luxembourg. Laravel, Node.js &amp; C#/.NET Core — architecture, APIs, real-time integrations, full ownership. AI-native workflow since 2025 — daily agentic development with Claude Code, every change verified test-first and gated by CI. Available immediately — full-time or freelance.</div>
+      <div data-i18n="hero.desc" class="hero-desc">Senior Full-Stack Developer with 9 years of experience, including 7 years building mission-critical SaaS for healthcare and finance in Luxembourg. Laravel, Node.js &amp; C#/.NET Core — architecture, APIs, real-time integrations, full ownership. AI-native workflow since 2025 — daily agentic development with Claude Code, every change verified test-first and gated by CI. Available immediately — full-time or freelance.</div>
       <div class="hero-stack"><span>Laravel</span> · <span>PHP</span> · <span>C#/.NET Core</span> · <span>Vue.js</span> · <span>React</span> · <span>Node.js</span> · <span>PostgreSQL</span> · <span>Claude Code</span></div>
       <div class="hero-actions">
-        <a href="#contact" class="btn-filled">Contact me →</a>
-        <a href="#experience" class="hero-secondary-link">View experience ↓</a>
-        <a href="/quentin-lecler-cv.pdf" target="_blank" rel="noopener" class="hero-secondary-link">Download CV (PDF) ↓</a>
+        <a data-i18n="hero.cta_contact" href="#contact" class="btn-filled">Contact me →</a>
+        <a data-i18n="hero.link_experience" href="#experience" class="hero-secondary-link">View experience ↓</a>
+        <a data-i18n="hero.link_cv" href="/quentin-lecler-cv.pdf" target="_blank" rel="noopener" class="hero-secondary-link" data-i18n-attr="href:attr.cv_url">Download CV (PDF) ↓</a>
       </div>
     </div>
   </div>
@@ -461,28 +475,28 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
 <section class="stats-strip">
   <div class="container">
     <div class="hero-stats">
-      <div class="stat"><div class="stat-num">9+</div><div class="stat-label">Years experience</div></div>
-      <div class="stat"><div class="stat-num">4</div><div class="stat-label">Companies</div></div>
-      <div class="stat"><div class="stat-num">3×</div><div class="stat-label">Sole developer</div></div>
-      <div class="stat"><div class="stat-num">v5→13</div><div class="stat-label">Laravel versions</div></div>
+      <div class="stat"><div class="stat-num">9+</div><div data-i18n="stats.stat_label.1" class="stat-label">Years experience</div></div>
+      <div class="stat"><div class="stat-num">4</div><div data-i18n="stats.stat_label.2" class="stat-label">Companies</div></div>
+      <div class="stat"><div class="stat-num">3×</div><div data-i18n="stats.stat_label.3" class="stat-label">Sole developer</div></div>
+      <div class="stat"><div class="stat-num">v5→13</div><div data-i18n="stats.stat_label.4" class="stat-label">Laravel versions</div></div>
     </div>
   </div>
 </section>
 
 <section id="about">
   <div class="container">
-    <div class="section-label reveal">00. about</div>
+    <div data-i18n="about.section_label.1" class="section-label reveal">00. about</div>
     <div class="about-lead reveal" style="transition-delay:0.1s">
-        <div class="about-text">
+        <div data-i18n="about.text" class="about-text">
           Senior Full-Stack Developer specializing in <strong>healthcare and finance SaaS</strong> in Luxembourg, across Laravel/PHP and Node.js backends.
           9+ years building mission-critical platforms as <strong>sole developer</strong> — from architecture to deployment.
           <strong>AI-native workflow since 2025</strong>: daily agentic development with Claude Code — custom skills, MCP servers, project-wide AI guidelines and AI code-review gates — with every change verified test-first.
           Belgian and Luxembourg national. <strong>Available immediately</strong> for full-time and freelance roles.
         </div>
         <div class="about-langs-row">
-          <div class="about-langs-title">Languages</div>
-          <div class="about-lang"><span>French</span><span class="lang-level"><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span></span><strong>Native</strong></div>
-          <div class="about-lang"><span>English</span><span class="lang-level"><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot"></span></span><strong>Fluent · C1</strong></div>
+          <div data-i18n="about.langs_title" class="about-langs-title">Languages</div>
+          <div class="about-lang"><span data-i18n="about.lang_fr_name">French</span><span class="lang-level"><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span></span><strong data-i18n="about.lang_fr_level">Native</strong></div>
+          <div class="about-lang"><span data-i18n="about.lang_en_name">English</span><span class="lang-level"><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot"></span></span><strong data-i18n="about.lang_en_level">Fluent · C1</strong></div>
         </div>
       </div>
   </div>
@@ -490,39 +504,39 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
 
 <section id="stack">
   <div class="container">
-    <div class="section-label reveal">01. tech stack</div>
-    <div class="section-title reveal" style="transition-delay:0.08s">Technologies</div>
+    <div data-i18n="stack.section_label.1" class="section-label reveal">01. tech stack</div>
+    <div data-i18n="stack.section_title.1" class="section-title reveal" style="transition-delay:0.08s">Technologies</div>
 
     <div class="bento-grid">
       <div class="bento-card reveal" style="--tint:#A855F7;transition-delay:0.12s">
         <div class="bento-top"><div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="bento-num">01</div></div>
-        <div class="bento-title">AI &amp; Tooling</div>
-        <div class="bento-desc">Claude Code (daily since 2025) · Agentic workflows · Prompt Engineering · Custom skills · MCP servers · AI code-review gates · TDD-guarded AI changes</div>
+        <div data-i18n="stack.bento_title.1" class="bento-title">AI &amp; Tooling</div>
+        <div data-i18n="stack.bento_desc.1" class="bento-desc">Claude Code (daily since 2025) · Agentic workflows · Prompt Engineering · Custom skills · MCP servers · AI code-review gates · TDD-guarded AI changes</div>
       </div>
       <div class="bento-card reveal" style="--tint:#6366F1;transition-delay:0.16s">
         <div class="bento-top"><div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div><div class="bento-num">02</div></div>
-        <div class="bento-title">Backend</div>
-        <div class="bento-desc">PHP · Laravel · Node.js · Express · Python · Django (2017–2019) · Sequelize · MariaDB · PostgreSQL · MySQL</div>
+        <div data-i18n="stack.bento_title.2" class="bento-title">Backend</div>
+        <div data-i18n="stack.bento_desc.2" class="bento-desc">PHP · Laravel · Node.js · Express · Python · Django (2017–2019) · Sequelize · MariaDB · PostgreSQL · MySQL</div>
       </div>
       <div class="bento-card reveal" style="--tint:#06B6D4;transition-delay:0.20s">
         <div class="bento-top"><div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="bento-num">03</div></div>
-        <div class="bento-title">Frontend</div>
-        <div class="bento-desc">Vue.js · React · TypeScript · Sass · Vite</div>
+        <div data-i18n="stack.bento_title.3" class="bento-title">Frontend</div>
+        <div data-i18n="stack.bento_desc.3" class="bento-desc">Vue.js · React · TypeScript · Sass · Vite</div>
       </div>
       <div class="bento-card reveal" style="--tint:#F59E0B;transition-delay:0.24s">
         <div class="bento-top"><div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><div class="bento-num">04</div></div>
-        <div class="bento-title">Infrastructure</div>
-        <div class="bento-desc">Docker · Nginx · Apache2 · GitHub Actions · GitLab CI/CD · REST APIs · OAuth2 · OpenID Connect · Keycloak · Laravel Reverb · Supervisord</div>
+        <div data-i18n="stack.bento_title.4" class="bento-title">Infrastructure</div>
+        <div data-i18n="stack.bento_desc.4" class="bento-desc">Docker · Nginx · Apache2 · GitHub Actions · GitLab CI/CD · REST APIs · OAuth2 · OpenID Connect · Keycloak · Laravel Reverb · Supervisord</div>
       </div>
       <div class="bento-card reveal" style="--tint:#10B981;transition-delay:0.28s">
         <div class="bento-top"><div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 16 10"/></svg></div><div class="bento-num">05</div></div>
-        <div class="bento-title">Testing &amp; Quality</div>
-        <div class="bento-desc">PHPUnit · Vitest · Playwright E2E · TDD (80%+ coverage) · Integration testing</div>
+        <div data-i18n="stack.bento_title.5" class="bento-title">Testing &amp; Quality</div>
+        <div data-i18n="stack.bento_desc.5" class="bento-desc">PHPUnit · Vitest · Playwright E2E · TDD (80%+ coverage) · Integration testing</div>
       </div>
       <div class="bento-card reveal" style="--tint:#F43F5E;transition-delay:0.32s">
         <div class="bento-top"><div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="bento-num">06</div></div>
-        <div class="bento-title">Networking &amp; Security</div>
-        <div class="bento-desc">Application Security · Pentesting · CCNA · CyberOps training</div>
+        <div data-i18n="stack.bento_title.6" class="bento-title">Networking &amp; Security</div>
+        <div data-i18n="stack.bento_desc.6" class="bento-desc">Application Security · Pentesting · CCNA · CyberOps training</div>
       </div>
     </div>
   </div>
@@ -530,28 +544,28 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
 
 <section id="experience">
   <div class="container">
-    <div class="section-label reveal">02. professional experience</div>
-    <div class="section-title reveal" style="transition-delay:0.08s">Experience</div>
+    <div data-i18n="experience.section_label.1" class="section-label reveal">02. professional experience</div>
+    <div data-i18n="experience.section_title.1" class="section-title reveal" style="transition-delay:0.08s">Experience</div>
     <div class="exp-list">
 
       <div class="exp-card open reveal" style="transition-delay:0.12s">
         <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
           <div>
             <div class="exp-company">Doctipro (MIP-IT SARL)</div>
-            <div class="exp-role">Full-Stack Developer &amp; Tech Lead · Healthcare SaaS · Luxembourg</div>
+            <div data-i18n="experience.exp_role.1" class="exp-role">Full-Stack Developer &amp; Tech Lead · Healthcare SaaS · Luxembourg</div>
           </div>
-          <div style="text-align:right"><div class="exp-date">July 2025 — July 2026</div><button class="exp-toggle" aria-label="Toggle">+</button></div>
+          <div style="text-align:right"><div data-i18n="experience.exp_date.1" class="exp-date">July 2025 — July 2026</div><button class="exp-toggle" aria-label="Toggle" data-i18n-attr="aria-label:attr.toggle">+</button></div>
         </div>
         <div class="exp-body">
           <ul class="exp-bullets">
-            <li>Architected and delivered an ophthalmology SaaS integrated with the Luxembourg national health system — CNS PID V2, CNS eCIT &amp; LuxTrust</li>
-            <li>Obtained eCIT labellisation and led full PID V2 + MHV2 eConnector SaaS implementation end-to-end</li>
-            <li>Designed the project's AI-assisted development workflow with Claude Code — 570-line AI guidelines (CLAUDE.md), 8 custom skills (security audit, Playwright E2E, deployment), MCP servers (MySQL, Context7, Laravel Boost) and an 80% test-coverage rule on all new code</li>
-            <li>Mandatory AI code-review gate on every staging and production merge — Claude Code review agent checks security, patient-data confidentiality and correctness; CRITICAL/HIGH findings block the merge</li>
-            <li>Led technical architecture, technology decisions, and code review gating — introduced CI/CD via GitHub Actions and agile sprint tracking with GitHub Projects for PO collaboration</li>
-            <li>Identified and patched critical security vulnerabilities (RCE, IDOR, XSS) through defensive pentesting</li>
-            <li>Designed DevOps infrastructure — Nginx reverse proxy and Supervisord for Laravel Reverb process management</li>
-            <li>Integrated ophthalmic medical devices (Nidek) via Node.js — serial protocol parsing, CIFS photo extraction, local WebSocket bridge into the SaaS</li>
+            <li data-i18n="experience.li.1">Architected and delivered an ophthalmology SaaS integrated with the Luxembourg national health system — CNS PID V2, CNS eCIT &amp; LuxTrust</li>
+            <li data-i18n="experience.li.2">Obtained eCIT labellisation and led full PID V2 + MHV2 eConnector SaaS implementation end-to-end</li>
+            <li data-i18n="experience.li.3">Designed the project's AI-assisted development workflow with Claude Code — 570-line AI guidelines (CLAUDE.md), 8 custom skills (security audit, Playwright E2E, deployment), MCP servers (MySQL, Context7, Laravel Boost) and an 80% test-coverage rule on all new code</li>
+            <li data-i18n="experience.li.4">Mandatory AI code-review gate on every staging and production merge — Claude Code review agent checks security, patient-data confidentiality and correctness; CRITICAL/HIGH findings block the merge</li>
+            <li data-i18n="experience.li.5">Led technical architecture, technology decisions, and code review gating — introduced CI/CD via GitHub Actions and agile sprint tracking with GitHub Projects for PO collaboration</li>
+            <li data-i18n="experience.li.6">Identified and patched critical security vulnerabilities (RCE, IDOR, XSS) through defensive pentesting</li>
+            <li data-i18n="experience.li.7">Designed DevOps infrastructure — Nginx reverse proxy and Supervisord for Laravel Reverb process management</li>
+            <li data-i18n="experience.li.8">Integrated ophthalmic medical devices (Nidek) via Node.js — serial protocol parsing, CIFS photo extraction, local WebSocket bridge into the SaaS</li>
           </ul>
           <div class="exp-tags"><span class="exp-tag">Claude Code</span><span class="exp-tag">PHP</span><span class="exp-tag">Laravel 8→13</span><span class="exp-tag">Laravel Reverb</span><span class="exp-tag">MariaDB</span><span class="exp-tag">Node.js</span><span class="exp-tag">Express</span><span class="exp-tag">WebSocket</span><span class="exp-tag">OAuth2</span><span class="exp-tag">PHPUnit</span><span class="exp-tag">Playwright E2E</span><span class="exp-tag">GitHub Actions</span><span class="exp-tag">Nginx</span><span class="exp-tag">Docker</span><span class="exp-tag">CNS PID V2</span><span class="exp-tag">CNS eCIT</span><span class="exp-tag">LuxTrust</span></div>
         </div>
@@ -561,18 +575,18 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
         <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
           <div>
             <div class="exp-company">Référenceur</div>
-            <div class="exp-role">Full Stack Developer · Financial SaaS · Luxembourg</div>
+            <div data-i18n="experience.exp_role.2" class="exp-role">Full Stack Developer · Financial SaaS · Luxembourg</div>
           </div>
-          <div style="text-align:right"><div class="exp-date">Jan 2024 — Jul 2025</div><button class="exp-toggle" aria-label="Toggle">+</button></div>
+          <div style="text-align:right"><div data-i18n="experience.exp_date.2" class="exp-date">Jan 2024 — Jul 2025</div><button class="exp-toggle" aria-label="Toggle" data-i18n-attr="aria-label:attr.toggle">+</button></div>
         </div>
         <div class="exp-body">
           <ul class="exp-bullets">
-            <li>Sole architect and developer of a white-label financial SaaS — mortgage &amp; credit management with submission to external banking APIs, from requirements analysis to production</li>
-            <li>Adopted Claude Code in 2025 for AI-assisted development — test-first changes validated against the PHPUnit and Playwright E2E suites</li>
-            <li>Implemented full test coverage — Playwright E2E, feature and unit tests across the entire platform</li>
-            <li>Built a fully customizable white-label engine — per-broker domain, email, branding, loan simulators and forms, configurable without code</li>
-            <li>Managed project delivery end-to-end — client needs analysis, ticket management and sprint planning solo</li>
-            <li>Billing automation via Zoho API; CLIP payment gateway integration</li>
+            <li data-i18n="experience.li.9">Sole architect and developer of a white-label financial SaaS — mortgage &amp; credit management with submission to external banking APIs, from requirements analysis to production</li>
+            <li data-i18n="experience.li.10">Adopted Claude Code in 2025 for AI-assisted development — test-first changes validated against the PHPUnit and Playwright E2E suites</li>
+            <li data-i18n="experience.li.11">Implemented full test coverage — Playwright E2E, feature and unit tests across the entire platform</li>
+            <li data-i18n="experience.li.12">Built a fully customizable white-label engine — per-broker domain, email, branding, loan simulators and forms, configurable without code</li>
+            <li data-i18n="experience.li.13">Managed project delivery end-to-end — client needs analysis, ticket management and sprint planning solo</li>
+            <li data-i18n="experience.li.14">Billing automation via Zoho API; CLIP payment gateway integration</li>
           </ul>
           <div class="exp-tags"><span class="exp-tag">Claude Code</span><span class="exp-tag">PHP</span><span class="exp-tag">Laravel</span><span class="exp-tag">PostgreSQL</span><span class="exp-tag">React</span><span class="exp-tag">Vue.js</span><span class="exp-tag">TypeScript</span><span class="exp-tag">Sass</span><span class="exp-tag">REST APIs</span><span class="exp-tag">Zoho API</span><span class="exp-tag">Adobe XD</span><span class="exp-tag">GitHub Actions</span><span class="exp-tag">CI/CD</span></div>
         </div>
@@ -582,17 +596,17 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
         <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
           <div>
             <div class="exp-company">Anysoft Luxembourg</div>
-            <div class="exp-role">Full Stack Developer · Financial SaaS · Luxembourg</div>
+            <div data-i18n="experience.exp_role.3" class="exp-role">Full Stack Developer · Financial SaaS · Luxembourg</div>
           </div>
-          <div style="text-align:right"><div class="exp-date">Apr 2019 — Jan 2024</div><button class="exp-toggle" aria-label="Toggle">+</button></div>
+          <div style="text-align:right"><div data-i18n="experience.exp_date.3" class="exp-date">Apr 2019 — Jan 2024</div><button class="exp-toggle" aria-label="Toggle" data-i18n-attr="aria-label:attr.toggle">+</button></div>
         </div>
         <div class="exp-body">
           <ul class="exp-bullets">
-            <li>Led full migration of CLIP from legacy Windows desktop app to modern web-based SaaS — mortgage &amp; consumer credit management, 100% solo</li>
-            <li>Integrated Belfius, Cofidis, BNP Paribas Fortis, Elantis and DHB Bank banking APIs</li>
-            <li>Built Node.js/Express and C# .NET Core API gateways — JWT-secured — bridging the React frontend to loan submission, status updates and payment integrations with banking partners</li>
-            <li>Identity verification with card reader</li>
-            <li>Platform serving 200+ broker agencies across Benelux</li>
+            <li data-i18n="experience.li.15">Led full migration of CLIP from legacy Windows desktop app to modern web-based SaaS — mortgage &amp; consumer credit management, 100% solo</li>
+            <li data-i18n="experience.li.16">Integrated Belfius, Cofidis, BNP Paribas Fortis, Elantis and DHB Bank banking APIs</li>
+            <li data-i18n="experience.li.17">Built Node.js/Express and C# .NET Core API gateways — JWT-secured — bridging the React frontend to loan submission, status updates and payment integrations with banking partners</li>
+            <li data-i18n="experience.li.18">Identity verification with card reader</li>
+            <li data-i18n="experience.li.19">Platform serving 200+ broker agencies across Benelux</li>
           </ul>
           <div class="exp-tags"><span class="exp-tag">React</span><span class="exp-tag">TypeScript</span><span class="exp-tag">Node.js</span><span class="exp-tag">Express</span><span class="exp-tag">JWT</span><span class="exp-tag">C#</span><span class="exp-tag">.NET Core</span><span class="exp-tag">Sybase</span><span class="exp-tag">REST APIs</span></div>
         </div>
@@ -602,17 +616,17 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
         <div class="exp-header" onclick="toggleExp(this.closest('.exp-card'))">
           <div>
             <div class="exp-company">ESI Informatique</div>
-            <div class="exp-role">Full Stack Developer · Agri-food &amp; Quality Control · Belgium</div>
+            <div data-i18n="experience.exp_role.4" class="exp-role">Full Stack Developer · Agri-food &amp; Quality Control · Belgium</div>
           </div>
-          <div style="text-align:right"><div class="exp-date">Jun 2017 — Apr 2019</div><button class="exp-toggle" aria-label="Toggle">+</button></div>
+          <div style="text-align:right"><div data-i18n="experience.exp_date.4" class="exp-date">Jun 2017 — Apr 2019</div><button class="exp-toggle" aria-label="Toggle" data-i18n-attr="aria-label:attr.toggle">+</button></div>
         </div>
         <div class="exp-body">
           <ul class="exp-bullets">
-            <li>Quality Control SaaS for Vinçotte inspectors — Carrefour distribution center</li>
-            <li>Companion mobile app iOS &amp; Android for warehouse inspections</li>
-            <li>Brunswick Marine client integration</li>
-            <li>Full ownership frontend, backend, database and mobile</li>
-            <li>Built Node.js/Express REST APIs (Sequelize, PostgreSQL) with JWT auth for React-based modules</li>
+            <li data-i18n="experience.li.20">Quality Control SaaS for Vinçotte inspectors — Carrefour distribution center</li>
+            <li data-i18n="experience.li.21">Companion mobile app iOS &amp; Android for warehouse inspections</li>
+            <li data-i18n="experience.li.22">Brunswick Marine client integration</li>
+            <li data-i18n="experience.li.23">Full ownership frontend, backend, database and mobile</li>
+            <li data-i18n="experience.li.24">Built Node.js/Express REST APIs (Sequelize, PostgreSQL) with JWT auth for React-based modules</li>
           </ul>
           <div class="exp-tags"><span class="exp-tag">PHP</span><span class="exp-tag">Zend Framework</span><span class="exp-tag">Python</span><span class="exp-tag">Django</span><span class="exp-tag">Node.js</span><span class="exp-tag">Express</span><span class="exp-tag">Sequelize</span><span class="exp-tag">JWT</span><span class="exp-tag">PostgreSQL</span><span class="exp-tag">Angular.js</span><span class="exp-tag">React</span><span class="exp-tag">Ionic</span><span class="exp-tag">Cordova</span><span class="exp-tag">iOS</span><span class="exp-tag">Android</span></div>
         </div>
@@ -624,24 +638,24 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
 
 <section id="education">
   <div class="container">
-    <div class="section-label reveal">03. education &amp; certifications</div>
-    <div class="section-title reveal" style="transition-delay:0.08s">Education</div>
+    <div data-i18n="education.section_label.1" class="section-label reveal">03. education &amp; certifications</div>
+    <div data-i18n="education.section_title.1" class="section-title reveal" style="transition-delay:0.08s">Education</div>
     <div class="edu-grid">
       <div class="edu-card reveal" style="transition-delay:0.12s">
-        <div class="edu-type">Education</div>
-        <div class="edu-title">Computer Science — Business Applications</div>
+        <div data-i18n="education.edu_type.1" class="edu-type">Education</div>
+        <div data-i18n="education.edu_title.1" class="edu-title">Computer Science — Business Applications</div>
         <div class="edu-school">IPEPS Verviers</div>
         <div class="edu-dates">2016 — 2018</div>
       </div>
       <div class="edu-card reveal" style="transition-delay:0.20s">
-        <div class="edu-type">Certification</div>
-        <div class="edu-title">CCNA — Cisco Certified Network Associate</div>
+        <div data-i18n="education.edu_type.2" class="edu-type">Certification</div>
+        <div data-i18n="education.edu_title.2" class="edu-title">CCNA — Cisco Certified Network Associate</div>
         <div class="edu-school">Cisco Networking Academy</div>
         <div class="edu-dates">2016 — 2017</div>
       </div>
       <div class="edu-card reveal" style="transition-delay:0.28s">
-        <div class="edu-type">Training</div>
-        <div class="edu-title">CyberOps Associate</div>
+        <div data-i18n="education.edu_type.3" class="edu-type">Training</div>
+        <div data-i18n="education.edu_title.3" class="edu-title">CyberOps Associate</div>
         <div class="edu-school">Cisco Networking Academy</div>
         <div class="edu-dates">2017 — 2018</div>
       </div>
@@ -651,54 +665,54 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
 
 <section id="contact">
   <div class="container">
-    <div class="section-label reveal">04. contact</div>
-    <div class="section-title reveal" style="transition-delay:0.06s">Let's work together</div>
+    <div data-i18n="contact.section_label.1" class="section-label reveal">04. contact</div>
+    <div data-i18n="contact.section_title.1" class="section-title reveal" style="transition-delay:0.06s">Let's work together</div>
     <div class="contact-grid">
       <form class="contact-form reveal" id="contactForm" style="transition-delay:0.1s" action="https://formspree.io/f/xzepvzzq" method="POST">
         <div class="form-row">
-          <div class="form-field"><label for="cf-first">First name *</label><input id="cf-first" name="first_name" type="text" required></div>
-          <div class="form-field"><label for="cf-last">Last name *</label><input id="cf-last" name="last_name" type="text" required></div>
+          <div class="form-field"><label data-i18n="contact.label.1" for="cf-first">First name *</label><input id="cf-first" name="first_name" type="text" required></div>
+          <div class="form-field"><label data-i18n="contact.label.2" for="cf-last">Last name *</label><input id="cf-last" name="last_name" type="text" required></div>
         </div>
-        <div class="form-field"><label for="cf-email">Professional email *</label><input id="cf-email" name="email" type="email" required></div>
+        <div class="form-field"><label data-i18n="contact.label.3" for="cf-email">Professional email *</label><input id="cf-email" name="email" type="email" required></div>
         <div class="form-row">
-          <div class="form-field"><label for="cf-company">Company</label><input id="cf-company" name="company" type="text"></div>
-          <div class="form-field"><label for="cf-role">Role</label><input id="cf-role" name="role" type="text"></div>
+          <div class="form-field"><label data-i18n="contact.label.4" for="cf-company">Company</label><input id="cf-company" name="company" type="text"></div>
+          <div class="form-field"><label data-i18n="contact.label.5" for="cf-role">Role</label><input id="cf-role" name="role" type="text"></div>
         </div>
         <div class="form-field">
-          <label>Subject</label>
+          <label data-i18n="contact.label.6">Subject</label>
           <div class="form-pills">
-            <input type="radio" name="subject" id="cf-subj1" value="Full-time role" checked><label for="cf-subj1">Full-time role</label>
-            <input type="radio" name="subject" id="cf-subj2" value="Freelance mission"><label for="cf-subj2">Freelance mission</label>
-            <input type="radio" name="subject" id="cf-subj3" value="General inquiry"><label for="cf-subj3">General inquiry</label>
-            <input type="radio" name="subject" id="cf-subj4" value="Other"><label for="cf-subj4">Other</label>
+            <input type="radio" name="subject" id="cf-subj1" value="Full-time role" checked><label data-i18n="contact.label.7" for="cf-subj1">Full-time role</label>
+            <input type="radio" name="subject" id="cf-subj2" value="Freelance mission"><label data-i18n="contact.label.8" for="cf-subj2">Freelance mission</label>
+            <input type="radio" name="subject" id="cf-subj3" value="General inquiry"><label data-i18n="contact.label.9" for="cf-subj3">General inquiry</label>
+            <input type="radio" name="subject" id="cf-subj4" value="Other"><label data-i18n="contact.label.10" for="cf-subj4">Other</label>
           </div>
         </div>
-        <div class="form-field"><label for="cf-message">Message *</label><textarea id="cf-message" name="message" rows="5" required></textarea></div>
-        <label class="form-consent"><input type="checkbox" name="consent" required><span>I agree that my data is processed to respond to this request.</span></label>
-        <button type="submit" class="btn-filled">Send message →</button>
+        <div class="form-field"><label data-i18n="contact.label.11" for="cf-message">Message *</label><textarea id="cf-message" name="message" rows="5" required></textarea></div>
+        <label class="form-consent"><input type="checkbox" name="consent" required><span data-i18n="contact.consent">I agree that my data is processed to respond to this request.</span></label>
+        <button data-i18n="contact.submit" type="submit" class="btn-filled">Send message →</button>
         <p class="form-status" id="contactFormStatus" role="status" aria-live="polite"></p>
       </form>
       <div class="contact-info-card reveal" style="transition-delay:0.2s">
-        <div class="about-langs-title">Contact info</div>
+        <div data-i18n="contact.info_title" class="about-langs-title">Contact info</div>
         <div class="contact-links">
           <a href="mailto:quentin@lecler.dev" class="contact-link">
-            <div><div class="contact-link-lbl">Email</div><div class="contact-link-val">quentin@lecler.dev</div></div>
+            <div><div data-i18n="contact.contact_link_lbl.1" class="contact-link-lbl">Email</div><div class="contact-link-val">quentin@lecler.dev</div></div>
             <span class="arrow">→</span>
           </a>
           <a href="https://en.malt.be/profile/quentinlecler" target="_blank" rel="noopener" class="contact-link contact-link-malt" style="border-color:rgba(252,86,86,0.3)">
-            <div><div class="contact-link-lbl" style="color:#FC5656">Freelance — Malt</div><div class="contact-link-val">en.malt.be/profile/quentinlecler</div></div>
+            <div><div data-i18n="contact.contact_link_lbl.2" class="contact-link-lbl" style="color:#FC5656">Freelance — Malt</div><div class="contact-link-val">en.malt.be/profile/quentinlecler</div></div>
             <span class="arrow" style="color:#FC5656">→</span>
           </a>
           <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" class="contact-link">
-            <div><div class="contact-link-lbl">LinkedIn</div><div class="contact-link-val">linkedin.com/in/qlecler</div></div>
+            <div><div data-i18n="contact.contact_link_lbl.3" class="contact-link-lbl">LinkedIn</div><div class="contact-link-val">linkedin.com/in/qlecler</div></div>
             <span class="arrow">→</span>
           </a>
           <a href="https://github.com/quentinlecler" target="_blank" rel="noopener" class="contact-link">
-            <div><div class="contact-link-lbl">GitHub</div><div class="contact-link-val">github.com/quentinlecler</div></div>
+            <div><div data-i18n="contact.contact_link_lbl.4" class="contact-link-lbl">GitHub</div><div class="contact-link-val">github.com/quentinlecler</div></div>
             <span class="arrow">→</span>
           </a>
-          <a href="/quentin-lecler-cv.pdf" download class="contact-link">
-            <div><div class="contact-link-lbl">Resume</div><div class="contact-link-val">Download CV (PDF)</div></div>
+          <a href="/quentin-lecler-cv.pdf" download class="contact-link" data-i18n-attr="href:attr.cv_url">
+            <div><div data-i18n="contact.contact_link_lbl.5" class="contact-link-lbl">Resume</div><div data-i18n="contact.contact_link_val.1" class="contact-link-val">Download CV (PDF)</div></div>
             <span class="arrow">↓</span>
           </a>
         </div>
@@ -710,7 +724,7 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div class="footer-name">Quentin Lecler · Luxembourg · Belgium</div>
+      <div data-i18n="footer.location" class="footer-name">Quentin Lecler · Luxembourg · Belgium</div>
       <div class="footer-icons">
         <a href="https://github.com/quentinlecler" target="_blank" rel="noopener" class="footer-icon" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
         <a href="https://linkedin.com/in/qlecler" target="_blank" rel="noopener" class="footer-icon" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
@@ -721,15 +735,16 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
   </div>
 </footer>
 
-<button class="scroll-top" id="scrollTop" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button class="scroll-top" id="scrollTop" title="Back to top" data-i18n-attr="title:attr.back_to_top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* Typing effect */
 (function(){
-  const roles=['Senior Full-Stack Developer','AI-Assisted Developer','Healthcare SaaS Builder','Available Immediately'];
+  let roles=['Senior Full-Stack Developer','AI-Assisted Developer','Healthcare SaaS Builder','Available Immediately'];
   let ri=0,ci=0,deleting=false;
+  window.__setRoles=r=>{if(Array.isArray(r)&&r.length){roles=r;ri=ri%r.length}};
   const el=document.getElementById('typedRole');
   if(!el)return;
   function type(){
@@ -812,7 +827,7 @@ function getRecaptchaToken(){
     e.preventDefault();
     const btn=form.querySelector('button[type="submit"]');
     btn.disabled=true;
-    status.textContent='Sending…';
+    status.textContent=qlT('js.sending','Sending…');
     status.className='form-status';
     try{
       const token=await getRecaptchaToken();
@@ -823,15 +838,15 @@ function getRecaptchaToken(){
       try{data=await res.json();}catch{}
       const ok=res.ok && !(data&&(data.errors||data.error||data._status==='error'||data.ok===false));
       if(ok){
-        status.textContent='Message sent — thanks, I\'ll get back to you soon.';
+        status.textContent=qlT('js.sent','Message sent — thanks, I\'ll get back to you soon.');
         status.className='form-status success';
         form.reset();
       }else{
-        status.textContent='Something went wrong — please try again or email me directly.';
+        status.textContent=qlT('js.error','Something went wrong — please try again or email me directly.');
         status.className='form-status error';
       }
     }catch{
-      status.textContent='Network error — please try again or email me directly.';
+      status.textContent=qlT('js.network','Network error — please try again or email me directly.');
       status.className='form-status error';
     }finally{
       btn.disabled=false;

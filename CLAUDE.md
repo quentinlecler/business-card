@@ -6,9 +6,27 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A static single-page personal business card / portfolio site for Quentin Lecler, deployed to GitHub Pages at `lecler.dev`.
 
-**No build system, no framework, no runtime dependency.** Everything lives in a single file: `index.html` (≈890 lines of HTML + inline CSS + inline JS).
+**No build system, no framework.** The page is a single hand-written `index.html` (HTML + inline CSS + inline JS) plus `i18n/` (translations) and `vendor/` (i18next, see below).
 
-`package.json` exists **only for testing tooling**: `@playwright/cli` is a `devDependency` (browser automation / visual checks). The site itself never loads anything from `node_modules` — nothing is built, bundled or deployed from it. `node_modules/` is gitignored.
+`package.json` holds two kinds of packages:
+- **Runtime dependencies** (`i18next`, `i18next-browser-languagedetector`, `i18next-http-backend`, exact versions): GitHub Pages does not run `npm install`, so their browser builds are **copied into `vendor/` and committed** with `npm run vendor` (script `vendor.mjs`). The site never loads anything from `node_modules` (gitignored) or from a CDN. To upgrade: bump the version, `npm install`, `npm run vendor`, `npm test && npm run test:e2e`, commit `vendor/` too.
+- **Testing tooling** (`@playwright/cli`, `devDependency`).
+
+## Internationalisation (EN / FR)
+
+- English is written in `index.html` (fallback without JS, and what crawlers / link previews see). French comes from `i18n/fr.json`; `i18n/en.json` mirrors the HTML and is used to switch back.
+- Translatable elements carry `data-i18n="key"` (innerHTML, so values may contain `<strong>` and `&amp;`); attributes use `data-i18n-attr="attr:key"` (e.g. `href:attr.cv_url`, `title:attr.theme`). `meta.*` and `js.*` keys feed `<title>`, meta tags, the typed roles and the form messages.
+- `i18n/loader.js` sets up i18next: language order `?lang=` → `localStorage` (`ql-lang`) → browser language → English. A tiny inline script in `<head>` hides the page for French visitors until translations are applied (2.5 s safety timeout).
+- **Adding or changing visible text: edit `index.html` AND both `i18n/*.json` files**, keep the same keys, then run the tests. Do not leave English-only text in a translated element.
+- The CV link follows the language: `quentin-lecler-cv.pdf` (EN, name kept so old links keep working) and `quentin-lecler-cv-fr.pdf` (FR). Both are copies from `~/Projects/resume/site/`; keep them in sync manually.
+- Link previews (`og:*`) stay English for everyone: crawlers don't run JS.
+
+## Tests
+
+- `npm test`: static checks (Node, no browser): en/fr key parity, every `data-i18n` key exists, HTML text equals `en.json`, no forbidden claim (SharePoint, Azure, AWS, Kubernetes, Kafka, Terraform, diploma wording…), CyberOps stays a training, referenced files exist.
+- `npm run test:e2e`: headless Chromium (project-local, see Browser Automation) on a throw-away static server: language detection, EN↔FR switch, persistence, CV links per language, mobile nav, PDFs served.
+- `.githooks/pre-push` runs both before every push (enabled by `npm install` via the `prepare` script → `core.hooksPath`). GitHub Pages deploys from `main` without CI, so this hook is the only gate. Skip once with `git push --no-verify`.
+- Visual layout (French text overflowing a card, etc.) is **not** covered: check it in the browser.
 
 ## Development
 
@@ -42,11 +60,11 @@ Then open `http://localhost:8080`.
 - `CNAME` — Contains `lecler.dev` for GitHub Pages custom domain.
 - `fonts/` — Self-hosted woff2 fonts (Instrument Sans, DM Sans, JetBrains Mono) + their OFL licenses. Instrument Sans is the `--display` font (headings/name).
 - `icons/` — Self-hosted image assets (currently just `malt.webp`; the `#stack` bento grid uses inline SVG line icons, not files, so no per-tech icon files are needed there anymore).
-- `quentin-lecler-cv.pdf` — CV linked from the site; keep in sync manually, no auto-generation.
+- `quentin-lecler-cv.pdf` (EN) and `quentin-lecler-cv-fr.pdf` (FR) — CVs linked from the site according to the language; copies of `~/Projects/resume/site/*.pdf`, keep in sync manually, no auto-generation.
 
 ## Deployment
 
-Push to `main` → GitHub Pages auto-deploys. No CI pipeline.
+Push to `main` → GitHub Pages auto-deploys. No CI pipeline: the local `pre-push` hook runs the tests (see Tests). Cloudflare caches static files for up to 4 h, so `index.html` and `i18n/*.json` can briefly be out of sync after a push (missing French text then falls back to English).
 
 Note: Cloudflare (sitting in front of the domain) auto-injects a `<script src="/cdn-cgi/scripts/.../email-decode.min.js">` tag before `</body>` to obfuscate the mailto link — this is not something added to the source and isn't a third-party dependency to maintain; it won't appear when previewing via a local static server.
 
@@ -73,7 +91,7 @@ Never omit `--headed` — without it, playwright-cli defaults to headless.
 
 - **AI-assisted development is a deliberate highlight** (aligned with the CV repo `~/Projects/resume`): `AI-Assisted` in `<title>`/og:title, a sentence in the hero and `#about`, `AI-Assisted Developer` in the typed roles, the `AI & Tooling` bento card placed **first**, Claude Code bullets + tag on Doctipro and Référenceur. Only claim facts verifiable in `~/Projects/doctiprodev` (CLAUDE.md, `.claude/skills/`, the mandatory code-review step in the `push-staging`/`push-master` skills). No AI claims before 2025 / for Anysoft. No "LLM APIs" claim — Quentin has never integrated an LLM API (confirmed 2026-09-24); the AI experience is Claude Code as a development tool.
 - CyberOps Associate was **never completed** — it is shown as `Training` in `#education`, never as a certification. The only real certification is CCNA.
-- `quentin-lecler-cv.pdf` = copy of `~/Projects/resume/quentin-lecler-cv-original.pdf`.
+- `quentin-lecler-cv.pdf` / `quentin-lecler-cv-fr.pdf` = copies of `~/Projects/resume/site/quentin-lecler-cv.pdf` and `~/Projects/resume/site/quentin-lecler-cv-fr.pdf` (produced in the separate resume session; do not edit CVs from this repo).
 
 ## Regenerating `og.jpg`
 

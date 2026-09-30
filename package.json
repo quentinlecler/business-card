@@ -1,5 +1,16 @@
 {
   "devDependencies": {
     "@playwright/cli": "^0.1.21"
+  },
+  "dependencies": {
+    "i18next": "26.4.2",
+    "i18next-browser-languagedetector": "8.2.1",
+    "i18next-http-backend": "4.0.2"
+  },
+  "scripts": {
+    "vendor": "node vendor.mjs",
+    "test": "node --test tests/i18n.test.mjs",
+    "test:e2e": "node --test tests/i18n.e2e.mjs",
+    "prepare": "git config core.hooksPath .githooks"
   }
 }
