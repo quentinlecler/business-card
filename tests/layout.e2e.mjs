@@ -2,7 +2,7 @@
 // nav controls not overlapping, in EN/FR × light/dark × 320/375/768/1280 px. Run: npm run test:e2e
 // Layout is checked with geometry (bounding boxes), not screenshots: robust across machines, no baselines to maintain.
 // What it can NOT judge: aesthetics, contrast, spacing — look at the page for that.
-import { test, before, after } from 'node:test';
+import { test, beforeAll as before, afterAll as after } from 'vitest';
 import assert from 'node:assert/strict';
 import http from 'node:http';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
@@ -101,6 +101,57 @@ for (const lang of ['en', 'fr']) for (const scheme of ['light', 'dark']) for (co
       for (const h of await page.$$('.exp-card:not(.open) .exp-header')) await h.click();
       await page.waitForTimeout(700);
       assert.deepEqual(await audit(page), []);
+    } finally { await ctx.close(); }
+  });
+}
+
+// Real behaviour on a phone: scroll for real (no forced classes) down to the very bottom, then open the burger menu.
+// Regression guard for: horizontal scroll appearing at the bottom of the page, broken mobile menu.
+for (const lang of ['en', 'fr']) for (const scheme of ['light', 'dark']) for (const width of [320, 375, 414]) {
+  test(`phone ${lang} / ${scheme} / ${width}px: real scroll to the bottom, then burger menu`, async () => {
+    const ctx = await browser.newContext({ viewport: { width, height: 700 }, colorScheme: scheme, hasTouch: true });
+    try {
+      const page = await ctx.newPage();
+      await page.goto(`${base}/?lang=${lang}`);
+      await page.waitForFunction(() => window.i18next?.isInitialized && !document.documentElement.classList.contains('i18n-pending'));
+      const widths = () => page.evaluate(() => ({ sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth, x: Math.round(scrollX) }));
+      const problems = [];
+      for (let i = 0; i < 80; i++) {
+        await page.mouse.wheel(0, 350);
+        await page.waitForTimeout(60);
+        const w = await widths();
+        if (w.sw > w.cw + 1 || w.x !== 0) { problems.push(`horizontal scroll while scrolling (step ${i}): scrollWidth ${w.sw} > ${w.cw}, scrollX ${w.x}`); break; }
+        if (await page.evaluate(() => Math.ceil(scrollY + innerHeight) >= document.documentElement.scrollHeight)) break;
+      }
+      await page.waitForTimeout(600);
+      const bottom = await widths();
+      if (bottom.sw > bottom.cw + 1) problems.push(`horizontal scroll at the bottom: scrollWidth ${bottom.sw} > ${bottom.cw}`);
+      assert.deepEqual(await audit(page), [], 'layout at the bottom of the page');
+      // Burger menu
+      await page.evaluate(() => scrollTo(0, 0));
+      await page.click('#hamburger');
+      await page.waitForTimeout(500);
+      const menu = await page.evaluate(() => {
+        const nav = document.getElementById('navLinks');
+        const links = [...nav.querySelectorAll('a')].filter((a) => a.getBoundingClientRect().width > 0);
+        const vw = document.documentElement.clientWidth, vh = innerHeight;
+        return {
+          open: nav.classList.contains('open'),
+          links: links.length,
+          offscreen: links.filter((a) => { const r = a.getBoundingClientRect(); return r.left < 0 || r.right > vw + 1 || r.bottom > vh + 1 || r.top < 0; }).map((a) => a.textContent.trim()),
+          sw: document.documentElement.scrollWidth, cw: vw,
+          burger: (() => { const r = document.getElementById('hamburger').getBoundingClientRect(); return r.left >= 0 && r.right <= vw + 1; })(),
+        };
+      });
+      if (!menu.open) problems.push('burger menu did not open');
+      if (menu.links < 4) problems.push(`burger menu shows ${menu.links} links (expected ≥ 4)`);
+      if (menu.offscreen.length) problems.push(`burger menu links off screen: ${menu.offscreen.join(', ')}`);
+      if (menu.sw > menu.cw + 1) problems.push(`horizontal scroll with the menu open: ${menu.sw} > ${menu.cw}`);
+      if (!menu.burger) problems.push('burger / close button is off screen');
+      await page.click('#hamburger');
+      await page.waitForTimeout(300);
+      if (await page.evaluate(() => document.getElementById('navLinks').classList.contains('open'))) problems.push('burger menu did not close');
+      assert.deepEqual(problems, []);
     } finally { await ctx.close(); }
   });
 }

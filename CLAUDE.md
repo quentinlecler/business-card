@@ -10,7 +10,7 @@ A static single-page personal business card / portfolio site for Quentin Lecler,
 
 `package.json` holds two kinds of packages:
 - **Runtime dependencies** (`i18next`, `i18next-browser-languagedetector`, `i18next-http-backend`, exact versions): GitHub Pages does not run `npm install`, so their browser builds are **copied into `vendor/` and committed** with `npm run vendor` (script `vendor.mjs`). The site never loads anything from `node_modules` (gitignored) or from a CDN. To upgrade: bump the version, `npm install`, `npm run vendor`, `npm test && npm run test:e2e`, commit `vendor/` too.
-- **Testing tooling** (`@playwright/cli`, `devDependency`).
+- **Testing tooling** (`vitest`, `@playwright/cli`, `devDependencies`): tests run with vitest (`vitest.config.mjs`).
 
 ## Internationalisation (EN / FR)
 
@@ -23,10 +23,11 @@ A static single-page personal business card / portfolio site for Quentin Lecler,
 
 ## Tests
 
-- `npm test`: static checks (Node, no browser): en/fr key parity, every `data-i18n` key exists, HTML text equals `en.json`, no forbidden claim (SharePoint, Azure, AWS, Kubernetes, Kafka, Terraform, diploma wording…), CyberOps stays a training, referenced files exist.
-- `npm run test:e2e`: headless Chromium (project-local, see Browser Automation) on a throw-away static server: language detection, EN↔FR switch, persistence, CV links per language, mobile nav, PDFs served.
+- `npm test` (vitest, `tests/i18n.test.mjs`): static checks (Node, no browser): en/fr key parity, every `data-i18n` key exists, HTML text equals `en.json`, no forbidden claim (SharePoint, Azure, AWS, Kubernetes, Kafka, Terraform, diploma wording…), CyberOps stays a training, referenced files exist.
+- `npm run test:e2e` (vitest, `tests/*.e2e.mjs`): headless Chromium (project-local, see Browser Automation) on a throw-away static server: language detection, EN↔FR switch, persistence, CV links per language, mobile nav, PDFs served.
 - `.githooks/pre-push` runs both before every push (enabled by `npm install` via the `prepare` script → `core.hooksPath`). GitHub Pages deploys from `main` without CI, so this hook is the only gate. Skip once with `git push --no-verify`.
-- Visual layout (French text overflowing a card, etc.) is **not** covered: check it in the browser.
+- `tests/layout.e2e.mjs` guards UI regressions with geometry (no screenshots): in EN/FR × light/dark × 320/375/768/1280 px nothing sticks out of its card, no horizontal scroll, nav controls don't overlap or wrap; on phone widths it scrolls for real to the bottom and opens/closes the burger menu. It was checked to fail on the known-broken commit `a170454`. Aesthetics, contrast and spacing are **not** covered: look at the page in the browser.
+- **Never push UI changes without checking the real behaviour first** (burger menu open, real scroll to the very bottom at 375 px, no horizontal scroll) and without the owner's go-ahead.
 
 ## Development
 

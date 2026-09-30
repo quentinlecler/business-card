@@ -1,6 +1,6 @@
 // Browser tests of the language switch (FR/EN). Run: npm run test:e2e
 // Uses the project-local Chromium (see CLAUDE.md > Browser Automation), headless, with a throw-away static server.
-import { test, before, after } from 'node:test';
+import { test, beforeAll as before, afterAll as after } from 'vitest';
 import assert from 'node:assert/strict';
 import http from 'node:http';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';

@@ -1,5 +1,5 @@
 // Static checks on the translation files and the HTML markup (no browser). Run: npm test
-import { test } from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 
