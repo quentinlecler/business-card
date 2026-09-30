@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 import { auditLayout, exerciseBurgerMenu, scrollToBottom, waitForI18n } from './helpers';
 
 // Runs in the "pixel" project (Pixel 7 emulation: mobile viewport, touch, device pixel ratio, mobile user agent).

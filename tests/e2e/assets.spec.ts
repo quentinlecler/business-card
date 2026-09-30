@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 
 test.describe('deployed files', () => {
   for (const file of ['quentin-lecler-cv.pdf', 'quentin-lecler-cv-fr.pdf']) {

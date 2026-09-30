@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 import { auditLayout, exerciseBurgerMenu, scrollToBottom, waitForI18n } from './helpers';
 
 // What a visitor does on a phone: scroll for real to the very bottom (no forced classes), then open and close the burger menu.

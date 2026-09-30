@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 import { auditLayout, waitForI18n } from './helpers';
 
 // UI regressions, checked with geometry (bounding boxes), not screenshots: nothing sticks out of its card,

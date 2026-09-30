@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 
 const isLight = (page) => page.evaluate(() => document.body.classList.contains('light'));
 
