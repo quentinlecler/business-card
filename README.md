@@ -1,5 +1,7 @@
 # Quentin Lecler — Portfolio
 
+[![CI/CD](https://github.com/quentinlecler/business-card/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/quentinlecler/business-card/actions/workflows/ci.yml)
+
 [![lecler.dev](og.jpg)](https://lecler.dev)
 
 **[lecler.dev](https://lecler.dev)** — personal portfolio / business card for Quentin Lecler, Senior Full-Stack Developer.
@@ -29,7 +31,7 @@ Then open `http://localhost:8080`. See `CLAUDE.md` for the full architecture bre
 
 ```bash
 npm install          # also enables the pre-push hook (git config core.hooksPath .githooks)
-PLAYWRIGHT_BROWSERS_PATH=0 npx --no-install playwright-cli install-browser chrome-for-testing
+PLAYWRIGHT_BROWSERS_PATH=0 npx --no-install playwright install chromium   # once, for the e2e tests
 npm run test:unit    # vitest: translations, markup, content rules, i18n loader, theme
 npm run test:e2e     # Playwright: language, theme, layout (no overflow), real scroll + burger menu on phones
 ```
