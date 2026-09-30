@@ -12,9 +12,10 @@ on:
 permissions:
   contents: read
 
+# A newer push cancels the tests of an older PR run, but never a run on main (it may be in the middle of a deployment).
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   PLAYWRIGHT_BROWSERS_PATH: 0 # install the browser inside node_modules, like locally

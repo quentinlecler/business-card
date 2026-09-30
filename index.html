@@ -760,14 +760,14 @@ const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 (function(){
   let roles=['Senior Full-Stack Developer','AI-Assisted Developer','Healthcare SaaS Builder','Available Immediately'];
   let ri=0,ci=0,deleting=false;
-  window.__setRoles=r=>{if(Array.isArray(r)&&r.length){roles=r;ri=ri%r.length}};
+  window.__setRoles=r=>{if(Array.isArray(r)&&r.length){roles=r;ri=ri%r.length;ci=Math.min(ci,roles[ri].length)}};
   const el=document.getElementById('typedRole');
   if(!el)return;
   function type(){
     const word=roles[ri];
     if(!deleting){
       el.textContent=word.slice(0,++ci);
-      if(ci===word.length){deleting=true;setTimeout(type,2200);return}
+      if(ci>=word.length){deleting=true;setTimeout(type,2200);return}
       setTimeout(type,52);
     }else{
       el.textContent=word.slice(0,--ci);
@@ -845,6 +845,7 @@ function getRecaptchaToken(){
   const form=document.getElementById('contactForm');
   if(!form)return;
   const status=document.getElementById('contactFormStatus');
+  const qlT=(k,f)=>window.qlT?window.qlT(k,f):f; // i18n/loader.js may be missing: fall back to the English text
   form.addEventListener('submit',async e=>{
     e.preventDefault();
     const btn=form.querySelector('button[type="submit"]');
