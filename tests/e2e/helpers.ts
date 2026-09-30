@@ -16,7 +16,7 @@ export function collectProblems(page: Page): string[] {
 
 /** parent selector → children that must stay inside it */
 const CONTAINMENT: Record<string, string[]> = {
-  '.container': ['.bento-card', '.exp-card', '.edu-card', '.contact-form', '.contact-grid > *', '.about-langs-row', '.hero-actions', '.hero-stack', '.stat'],
+  '.container': ['.bento-card', '.exp-card', '.edu-card', '.work-card', '.contact-form', '.contact-grid > *', '.about-langs-row', '.hero-actions', '.hero-stack', '.stat'],
   '.contact-form': ['.form-row', '.form-field', 'input:not([type=radio]):not([type=checkbox])', 'textarea', '.form-pills', '.form-consent', 'button[type=submit]'],
   '.form-row': ['.form-field'],
   '.contact-grid > *:not(.contact-form)': ['.contact-link'],
@@ -24,6 +24,7 @@ const CONTAINMENT: Record<string, string[]> = {
   '.bento-card': ['.bento-top', '.bento-title', '.bento-desc'],
   '.exp-card': ['.exp-header', '.exp-body', '.exp-bullets', '.exp-tags'],
   '.edu-card': ['.edu-type', '.edu-title', '.edu-school', '.edu-dates'],
+  '.work-card': ['.edu-type', '.edu-title', '.work-desc', '.work-part', '.work-tags', '.work-links', '.work-seen'],
   '.stat': ['.stat-num', '.stat-label'],
   '.about-langs-row': ['.about-lang', '.about-langs-title'],
 };

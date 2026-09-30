@@ -305,6 +305,18 @@ body:not(.light) .icon-github{filter:invert(0.7)}
 .edu-title{font-family:var(--display);font-size:13px;font-weight:600;color:var(--fg-1);margin-bottom:6px;line-height:1.3}
 .edu-school{font-size:12px;color:var(--fg-2);margin-bottom:10px}
 .edu-dates{font-family:var(--mono);font-size:10px;color:var(--fg-3)}
+.work-grid{display:grid;gap:14px}
+.work-intro{font-size:14px;color:var(--fg-2);max-width:680px;margin:0 0 28px;line-height:1.7}
+.work-card{padding:24px 26px}
+.work-card:hover{transform:translateY(-2px)}
+.work-card .edu-title{font-size:16px}
+.work-desc{font-size:14px;color:var(--fg-2);line-height:1.7;margin:0 0 8px}
+.work-part{font-size:14px;color:var(--fg-1);line-height:1.7;margin:0 0 14px}
+.work-tags{margin-bottom:14px}
+.work-links,.work-seen{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--mono);font-size:12px}
+.work-seen{margin-top:10px;color:var(--fg-3)}
+.work-card a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+.work-card a:hover{border-bottom-color:var(--accent)}
 
 .contact-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start}
 .contact-grid>*{min-width:0}
@@ -358,6 +370,9 @@ body.light .footer-icon img{filter:none}
 @media (min-width:681px) and (max-width:1100px){
 .avail-pill span:last-child{display:none}
 .nav-logo,.nav-links a{white-space:nowrap}
+nav{padding:0 24px}
+.nav-links{gap:14px}
+.nav-right{gap:10px}
 }
 @media (max-width:360px){
 nav{padding:0 14px !important}
@@ -459,6 +474,7 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
       <li><a href="#about"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span data-i18n="nav.link_about">about</span></a></li>
       <li><a href="#stack"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span data-i18n="nav.link_stack">stack</span></a></li>
       <li><a href="#experience"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span data-i18n="nav.link_work">work</span></a></li>
+      <li><a href="#projects"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span data-i18n="nav.link_projects">projects</span></a></li>
       <li><a href="#education"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5"/></svg><span data-i18n="nav.link_education">education</span></a></li>
       <div class="nav-mobile-social">
         <a href="https://github.com/quentinlecler" target="_blank" rel="noopener" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
@@ -655,9 +671,44 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
   </div>
 </section>
 
+<section id="projects">
+  <div class="container">
+    <div data-i18n="work.section_label.1" class="section-label reveal">03. public work</div>
+    <div data-i18n="work.section_title.1" class="section-title reveal" style="transition-delay:0.08s">Public work</div>
+    <p data-i18n="work.intro.1" class="work-intro reveal" style="transition-delay:0.1s">Products and projects you can open in your browser. Code and data owned by employers are not shown.</p>
+    <div class="work-grid">
+      <div class="edu-card work-card reveal" style="transition-delay:0.12s">
+        <div class="edu-type">Anysoft · 2019 — 2024</div>
+        <div class="edu-title">CLIP</div>
+        <p data-i18n="work.c1.desc" class="work-desc">Consumer credit management software, multi-user and multi-agency, published by Anysoft.</p>
+        <p data-i18n="work.c1.part" class="work-part">I led its full migration from a legacy Windows desktop application to a web-based SaaS, solo, and integrated five banking APIs (Belfius, BNP Paribas Fortis, Cofidis, Elantis, DHB Bank).</p>
+        <div class="exp-tags work-tags"><span class="exp-tag">React</span><span class="exp-tag">TypeScript</span><span class="exp-tag">Node.js</span><span class="exp-tag">Express</span><span class="exp-tag">C#</span><span class="exp-tag">.NET Core</span></div>
+        <div class="work-links"><a href="https://anysoft.lu" target="_blank" rel="noopener">anysoft.lu ↗</a></div>
+      </div>
+      <div class="edu-card work-card reveal" style="transition-delay:0.2s">
+        <div class="edu-type">Anysoft · 2019 — 2024</div>
+        <div data-i18n="work.c2.title" class="edu-title">HYPOTOOLS — credit simulators</div>
+        <p data-i18n="work.c2.desc" class="work-desc">Web application for mortgage credit management: fee calculators, rate simulator with APR, document management.</p>
+        <p data-i18n="work.c2.part" class="work-part">I built the credit simulator and request forms in React, on a C# .NET Core Web API, connected to CLIP and HYPOTOOLS.</p>
+        <div class="exp-tags work-tags"><span class="exp-tag">React</span><span class="exp-tag">TypeScript</span><span class="exp-tag">C#</span><span class="exp-tag">.NET Core</span><span class="exp-tag">REST APIs</span></div>
+        <div class="work-links"><a href="https://anysoft.lu" target="_blank" rel="noopener">anysoft.lu ↗</a></div>
+        <div class="work-seen"><span data-i18n="work.c2.seen">Seen on:</span> <a href="https://clicredit.be/" target="_blank" rel="noopener">clicredit.be</a> · <a href="https://wallfin.be/" target="_blank" rel="noopener">wallfin.be</a> · <a href="https://www.euro-finances.be/fr/" target="_blank" rel="noopener">euro-finances.be</a></div>
+      </div>
+      <div class="edu-card work-card reveal" style="transition-delay:0.28s">
+        <div data-i18n="work.c3.type" class="edu-type">Personal project</div>
+        <div data-i18n="work.c3.title" class="edu-title">lecler.dev — this site</div>
+        <p data-i18n="work.c3.desc" class="work-desc">Bilingual (EN/FR) portfolio, hand-written HTML, CSS and JavaScript, no framework.</p>
+        <p data-i18n="work.c3.part" class="work-part">Unit tests (Vitest) and end-to-end tests (Playwright); GitHub Actions blocks the deployment to GitHub Pages when a test fails.</p>
+        <div class="exp-tags work-tags"><span class="exp-tag">HTML</span><span class="exp-tag">CSS</span><span class="exp-tag">JavaScript</span><span class="exp-tag">Vitest</span><span class="exp-tag">Playwright</span><span class="exp-tag">GitHub Actions</span></div>
+        <div class="work-links"><a data-i18n="work.c3.repo" href="https://github.com/quentinlecler/business-card" target="_blank" rel="noopener">GitHub repository ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="education">
   <div class="container">
-    <div data-i18n="education.section_label.1" class="section-label reveal">03. education &amp; certifications</div>
+    <div data-i18n="education.section_label.1" class="section-label reveal">04. education &amp; certifications</div>
     <div data-i18n="education.section_title.1" class="section-title reveal" style="transition-delay:0.08s">Education</div>
     <div class="edu-grid">
       <div class="edu-card reveal" style="transition-delay:0.12s">
@@ -684,7 +735,7 @@ body.light .nav-mobile-social .malt-link img{filter:none;opacity:0.8}
 
 <section id="contact">
   <div class="container">
-    <div data-i18n="contact.section_label.1" class="section-label reveal">04. contact</div>
+    <div data-i18n="contact.section_label.1" class="section-label reveal">05. contact</div>
     <div data-i18n="contact.section_title.1" class="section-title reveal" style="transition-delay:0.06s">Let's work together</div>
     <div class="contact-grid">
       <form class="contact-form reveal" id="contactForm" style="transition-delay:0.1s" action="https://formspree.io/f/xzepvzzq" method="POST">
