@@ -15,7 +15,7 @@
   "stats.stat_label.3": "Sole developer",
   "stats.stat_label.4": "Laravel versions",
   "about.section_label.1": "00. about",
-  "about.text": "Senior Full-Stack Developer specializing in <strong>healthcare and finance SaaS</strong> in Luxembourg, across Laravel/PHP and Node.js backends. 9+ years building mission-critical platforms as <strong>sole developer</strong> — from architecture to deployment. <strong>AI-native workflow since 2025</strong>: daily agentic development with Claude Code — custom skills, MCP servers, project-wide AI guidelines and AI code-review gates — with every change verified test-first. Belgian and Luxembourg national. <strong>Available immediately</strong> for full-time and freelance roles.",
+  "about.text": "Senior Full-Stack Developer specializing in <strong>healthcare and finance SaaS</strong> in Luxembourg (Laravel/PHP, Node.js). 9+ years building mission-critical platforms as <strong>sole developer</strong>, from architecture to deployment. <strong>AI-native workflow since 2025</strong>: daily agentic development with Claude Code, every change verified test-first. Belgian and Luxembourg national. <strong>Available immediately</strong> for full-time and freelance roles.",
   "about.langs_title": "Languages",
   "about.lang_fr_name": "French",
   "about.lang_fr_level": "Native",
@@ -138,5 +138,8 @@
   "work.c4.desc": "Online medical appointment booking platform for patients in Luxembourg.",
   "work.c4.part": "I developed the ophthalmology and waiting-room modules, patient registration and the client area on the existing codebase, fixed bugs, cleaned up controllers and worked on defensive security. I also set up the CI/CD pipeline and the Playwright end-to-end tests.",
   "work.c5.desc": "Credit management software for credit companies in Belgium, France and Luxembourg: customizable credit simulators, application forms and a management interface for loan requests.",
-  "work.c5.part": "I designed and built the whole platform on my own, except the UI mockups: architecture, back end, front end, white-label engine (domain, email and branding per broker, simulators configurable without code), submission to banking APIs, Zoho billing automation and the test suite."
+  "work.c5.part": "I designed and built the whole platform on my own, except the UI mockups: architecture, back end, front end, white-label engine (domain, email and branding per broker, simulators configurable without code), submission to banking APIs, Zoho billing automation and the test suite.",
+  "work.c6.title": "Brunswick Marine — lunch app",
+  "work.c6.desc": "Web app to choose and book your midday meal, with order and delivery management.",
+  "work.c6.part": "I built it end to end: front end, back end, order and delivery management."
 }
