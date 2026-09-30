@@ -9,7 +9,7 @@ A static single-page personal business card / portfolio site for Quentin Lecler,
 **No build system, no framework.** The page is a single hand-written `index.html` (HTML + inline CSS + inline JS) plus `i18n/` (translations) and `vendor/` (i18next, see below).
 
 `package.json` holds two kinds of packages:
-- **Runtime dependencies** (`i18next`, `i18next-browser-languagedetector`, `i18next-http-backend`, exact versions): GitHub Pages does not run `npm install`, so their browser builds are **copied into `vendor/` and committed** with `npm run vendor` (script `vendor.mjs`). The site never loads anything from `node_modules` (gitignored) or from a CDN. To upgrade: bump the version, `npm install`, `npm run vendor`, `npm test && npm run test:e2e`, commit `vendor/` too.
+- **Runtime dependencies** (`i18next`, `i18next-browser-languagedetector`, `i18next-http-backend`, exact versions): GitHub Pages does not run `npm install`, so their browser builds are **copied into `vendor/` and committed** with `npm run vendor` (script `vendor.mjs`). The site never loads anything from `node_modules` (gitignored) or from a CDN. To upgrade: bump the version, `npm install`, `npm run vendor`, `npm test` (unit + e2e), commit `vendor/` too.
 - **Testing tooling** (`devDependencies`, exact versions): `vitest` + `jsdom` (unit tests), `@playwright/test` (end-to-end tests; same version as the `playwright-core` pulled by `@playwright/cli`, so they share one project-local Chromium), `@playwright/cli` (manual browser automation).
 
 ## Internationalisation (EN / FR)

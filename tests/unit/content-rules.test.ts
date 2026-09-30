@@ -9,8 +9,14 @@ describe('content rules', () => {
     ['fr.json', JSON.stringify(fr)],
   ];
 
+  // "dipl[oô]m" is a stem on purpose: it also catches diplômé, diplômée, diplômes, diplomas…
+  const forbidden = /\b(sharepoint|power platform|azure|aws|kubernetes|kafka|terraform|bachelor|bachelier|dipl[oô]m\w*|sans emploi|unemployed)\b/i;
+
+  it.each(['diplôme', 'diplômé', 'diplômée', 'diplômés', 'diploma', 'diplomas', 'diplomé', 'Bachelor', 'AWS'])('the forbidden-claims pattern catches "%s"', (word) => {
+    expect(`Titulaire d'un ${word} en informatique`).toMatch(forbidden);
+  });
+
   it.each(sources)('%s makes none of the forbidden claims', (_name, text) => {
-    const forbidden = /\b(sharepoint|power platform|azure|aws|kubernetes|kafka|terraform|bachelor|bachelier|diplôme|diploma|sans emploi|unemployed)\b/i;
     expect(text.match(forbidden)?.[0] ?? null).toBeNull();
   });
 

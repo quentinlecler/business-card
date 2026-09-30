@@ -2,8 +2,9 @@
 import http from 'node:http';
 import { readFileSync, existsSync, statSync } from 'node:fs';
 import { join, extname, normalize } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = join(new URL('../..', import.meta.url).pathname, '_site');
+const ROOT = join(fileURLToPath(new URL('../..', import.meta.url)), '_site');
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.json': 'application/json', '.pdf': 'application/pdf', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.woff2': 'font/woff2', '.txt': 'text/plain', '.css': 'text/css' };
 
 http.createServer((req, res) => {

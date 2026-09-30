@@ -2,8 +2,9 @@
 // Tests (e2e) run against this folder, so what is tested is what is deployed. Run: npm run build:site
 import { cpSync, rmSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = new URL('..', import.meta.url).pathname;
+const root = fileURLToPath(new URL('..', import.meta.url));
 const out = join(root, '_site');
 
 const files = ['index.html', 'CNAME', 'og.jpg', 'quentin-lecler-cv.pdf', 'quentin-lecler-cv-fr.pdf'];
