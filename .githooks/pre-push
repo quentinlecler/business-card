@@ -1,8 +1,6 @@
 #!/bin/sh
-# Local safety net: runs the unit and end-to-end tests before a push. The real gate is the CI
-# (.github/workflows/ci.yml): the site is only deployed when the tests pass there. Skip once with: git push --no-verify
+# Local safety net: runs the fast unit tests before a push. The end-to-end tests run in the CI (.github/workflows/ci.yml),
+# and the site is only deployed when they pass there. Run them locally with: npm run test:e2e. Skip once with: git push --no-verify
 set -e
 echo "pre-push: npm run test:unit"
 npm run test:unit --silent
-echo "pre-push: npm run test:e2e"
-npm run test:e2e --silent

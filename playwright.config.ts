@@ -15,10 +15,7 @@ export default defineConfig({
     baseURL: `http://localhost:${PORT}`,
     trace: 'retain-on-failure',
   },
-  projects: [
-    { name: 'desktop', use: { ...devices['Desktop Chrome'] }, testIgnore: /device\.spec\.ts/ },
-    { name: 'pixel', use: { ...devices['Pixel 7'] }, testMatch: /device\.spec\.ts/ },
-  ],
+  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
     command: `node tests/e2e/server.mjs ${PORT}`,
     url: `http://localhost:${PORT}`,

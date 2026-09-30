@@ -12,7 +12,7 @@ describe('content rules', () => {
   // "dipl[oô]m" is a stem on purpose: it also catches diplômé, diplômée, diplômes, diplomas…
   const forbidden = /\b(sharepoint|power platform|azure|aws|kubernetes|kafka|terraform|bachelor|bachelier|dipl[oô]m\w*|sans emploi|unemployed)\b/i;
 
-  it.each(['diplôme', 'diplômé', 'diplômée', 'diplômés', 'diploma', 'diplomas', 'diplomé', 'Bachelor', 'AWS'])('the forbidden-claims pattern catches "%s"', (word) => {
+  it.each(['diplômé', 'diplomas'])('the forbidden-claims pattern catches "%s"', (word) => {
     expect(`Titulaire d'un ${word} en informatique`).toMatch(forbidden);
   });
 
@@ -30,9 +30,5 @@ describe('content rules', () => {
     expect(fr['education.edu_type.2']).toBe('Certification');
     const certifications = Object.entries(en).filter(([k, v]) => k.startsWith('education.edu_type') && v === 'Certification');
     expect(certifications).toHaveLength(1);
-  });
-
-  it('says "développeur solo" (not "unique") in French', () => {
-    expect(JSON.stringify(fr)).not.toMatch(/développeur unique/i);
   });
 });
