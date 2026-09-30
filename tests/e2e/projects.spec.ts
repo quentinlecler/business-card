@@ -3,6 +3,7 @@ import { waitForI18n } from './helpers';
 
 // Every link of the "public work" section must point to a public page and open safely in a new tab.
 const LINKS = [
+  'https://doctipro.lu',
   'https://anysoft.lu',
   'https://clicredit.be/',
   'https://wallfin.be/',
@@ -12,11 +13,11 @@ const LINKS = [
 
 for (const lang of ['en', 'fr']) {
   test.describe(`public work section (${lang})`, () => {
-    test('is in the nav, shows the three cards and only the expected links', async ({ page }) => {
+    test('is in the nav, shows the four cards and only the expected links', async ({ page }) => {
       await page.goto(`/?lang=${lang}`);
       await waitForI18n(page);
       await expect(page.locator('#navLinks a[href="#projects"]')).toHaveCount(1);
-      await expect(page.locator('#projects .work-card')).toHaveCount(3);
+      await expect(page.locator('#projects .work-card')).toHaveCount(4);
       const hrefs = await page.$$eval('#projects a', (links) => links.map((a) => a.getAttribute('href')));
       expect(new Set(hrefs)).toEqual(new Set(LINKS));
     });
