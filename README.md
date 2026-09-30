@@ -36,4 +36,15 @@ npm run test:unit    # vitest: translations, markup, content rules, i18n loader,
 npm run test:e2e     # Playwright: language, theme, layout (no overflow), real scroll + burger menu on phones
 ```
 
+## Quality
+
+A one-page site, but it is treated like a product: nothing reaches production unless the tests pass.
+
+- **Unit tests** ([vitest](https://vitest.dev) + jsdom, no browser): translation catalogs (same keys, same inline tags in EN and FR), HTML markup against `en.json`, content rules (claims the site must never make, CyberOps shown as a training, CCNA the only certification), the i18n loader (language resolution, `?lang=`, saved choice, switch button, missing translation files), the early `<head>` script and the theme script.
+- **End-to-end tests** ([Playwright](https://playwright.dev), headless Chromium, run against `_site/`, exactly the files that get deployed): language detection and switching, theme (system preference and saved choice), contact form (Formspree mocked), layout geometry at phone-to-desktop widths (nothing overflows or overlaps), and what a phone visitor does — real scrolling to the bottom and opening the burger menu. Third-party requests (reCAPTCHA) are stubbed, so the tests never depend on the network.
+- **CI/CD** ([GitHub Actions](.github/workflows/ci.yml)): unit and e2e tests on every push and pull request; the GitHub Pages deployment only runs on `main` and only after both test jobs passed. A red test means no deployment.
+- **Regression tests**: each bug fixed (frozen typing animation on language switch, contact form stuck without the i18n loader, horizontal scroll on phones) got a test that fails on the broken code and passes on the fixed one.
+
+Limits, stated plainly: no coverage metric, Chromium only, no screenshot comparison. Looks, contrast and spacing are checked by eye, not by the tests.
+
 After changing i18next's version: `npm run vendor` copies its browser builds into `vendor/` (committed, GitHub Pages doesn't run npm). `node_modules/` is never served.
