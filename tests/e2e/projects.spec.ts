@@ -5,6 +5,7 @@ import { waitForI18n } from './helpers';
 const LINKS = [
   'https://doctipro.lu',
   'https://anysoft.lu',
+  'https://www.leemanskredieten.be/lenen/tariefplannen/reno-plan-leemans/',
   'https://clicredit.be/',
   'https://wallfin.be/',
   'https://www.euro-finances.be/fr/',
