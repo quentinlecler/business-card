@@ -4,6 +4,7 @@ import { waitForI18n } from './helpers';
 // Every link of the "public work" section must point to a public page and open safely in a new tab.
 const LINKS = [
   'https://doctipro.lu',
+  'https://logiciel-ophtalmologie.lu',
   'https://lunch.brunswick-marine.com/',
   'https://simsy.lu',
   'https://anysoft.lu',
