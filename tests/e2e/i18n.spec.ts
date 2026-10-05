@@ -29,7 +29,7 @@ test.describe('English browser', () => {
     expect(s.lang).toBe('en');
     expect(s.btn).toBe('FR');
     expect(s.title).toContain('Senior Full-Stack Developer');
-    expect(s.cv).toEqual(['/quentin-lecler-cv.pdf', '/quentin-lecler-cv.pdf']);
+    expect(s.cv).toEqual(['/resume/quentin-lecler-cv-en.pdf', '/resume/quentin-lecler-cv-en.pdf']);
     expect(problems).toEqual([]);
   });
 });
@@ -44,7 +44,7 @@ test.describe('French browser (fr-CA)', () => {
     expect(s.lang).toBe('fr');
     expect(s.btn).toBe('EN');
     expect(s.title).toContain('Développeur full-stack senior');
-    expect(s.cv).toEqual(['/quentin-lecler-cv-fr.pdf', '/quentin-lecler-cv-fr.pdf']);
+    expect(s.cv).toEqual(['/resume/quentin-lecler-cv-fr.pdf', '/resume/quentin-lecler-cv-fr.pdf']);
     expect(problems).toEqual([]);
   });
 
@@ -77,7 +77,7 @@ test.describe('language choice', () => {
     await switchLang(page);
     let s = await state(page);
     expect([s.lang, s.btn, s.stored]).toEqual(['fr', 'EN', 'fr']);
-    expect(s.cv).toEqual(['/quentin-lecler-cv-fr.pdf', '/quentin-lecler-cv-fr.pdf']);
+    expect(s.cv).toEqual(['/resume/quentin-lecler-cv-fr.pdf', '/resume/quentin-lecler-cv-fr.pdf']);
     expect(await texts(page)).not.toEqual(original);
 
     await page.reload();
@@ -87,7 +87,7 @@ test.describe('language choice', () => {
     await switchLang(page);
     s = await state(page);
     expect([s.lang, s.btn, s.stored]).toEqual(['en', 'FR', 'en']);
-    expect(s.cv).toEqual(['/quentin-lecler-cv.pdf', '/quentin-lecler-cv.pdf']);
+    expect(s.cv).toEqual(['/resume/quentin-lecler-cv-en.pdf', '/resume/quentin-lecler-cv-en.pdf']);
     expect(await texts(page)).toEqual(original);
     expect(problems).toEqual([]);
   });

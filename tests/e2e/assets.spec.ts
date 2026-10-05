@@ -1,7 +1,7 @@
 import { test, expect } from './fixtures';
 
 test.describe('deployed files', () => {
-  for (const file of ['quentin-lecler-cv.pdf', 'quentin-lecler-cv-fr.pdf']) {
+  for (const file of ['resume/quentin-lecler-cv-en.pdf', 'resume/quentin-lecler-cv-fr.pdf']) {
     test(`${file} is served as a real PDF`, async ({ request }) => {
       const res = await request.get(`/${file}`);
       expect(res.status()).toBe(200);

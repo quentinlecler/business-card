@@ -7,8 +7,8 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
 const out = join(root, '_site');
 
-const files = ['index.html', 'CNAME', 'og.jpg', 'quentin-lecler-cv.pdf', 'quentin-lecler-cv-fr.pdf'];
-const dirs = ['i18n', 'vendor', 'fonts', 'icons'];
+const files = ['index.html', 'CNAME', 'og.jpg'];
+const dirs = ['resume', 'i18n', 'vendor', 'fonts', 'icons'];
 
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out);

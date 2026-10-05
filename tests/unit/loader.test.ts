@@ -82,7 +82,7 @@ describe('i18n/loader.js — language resolution', () => {
   it('uses English for an English browser', async () => {
     const page = await boot({ navigatorLanguage: 'en-US' });
     expect(page.lang).toBe('en');
-    expect(page.cv).toBe('/quentin-lecler-cv.pdf');
+    expect(page.cv).toBe('/resume/quentin-lecler-cv-en.pdf');
     expect(page.ogLocale).toBe('en_US');
   });
 
@@ -91,7 +91,7 @@ describe('i18n/loader.js — language resolution', () => {
       const page = await boot({ navigatorLanguage });
       expect(page.lang, navigatorLanguage).toBe('fr');
       expect(page.label).toBe(fr['stats.stat_label.3']);
-      expect(page.cv).toBe('/quentin-lecler-cv-fr.pdf');
+      expect(page.cv).toBe('/resume/quentin-lecler-cv-fr.pdf');
       expect(page.ogLocale).toBe('fr_FR');
     }
   });
