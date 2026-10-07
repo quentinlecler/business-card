@@ -297,7 +297,7 @@ body:not(.light) .icon-github{filter:invert(0.7)}
 .exp-toggle{font-size:18px;color:var(--fg-3);background:none;border:none;cursor:pointer;padding:0;line-height:1;transition:color 0.2s,transform 0.3s var(--ease);margin-top:2px}
 .exp-card.open .exp-toggle{transform:rotate(45deg);color:var(--accent)}
 .exp-body{max-height:0;overflow:hidden;transition:max-height 0.4s var(--ease),padding 0.3s ease;border-top:1px solid transparent}
-.exp-card.open .exp-body{max-height:700px;border-top-color:var(--border);padding:16px 24px 20px}
+.exp-card.open .exp-body{max-height:var(--exp-h,700px);border-top-color:var(--border);padding:16px 24px 20px}
 .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
 .exp-bullets li{font-size:13px;color:var(--fg-2);padding-left:16px;position:relative;line-height:1.5}
 .exp-bullets li::before{content:'–';position:absolute;left:0;color:var(--fg-3);font-family:var(--mono);font-size:11px}
@@ -885,10 +885,24 @@ const scrollTopBtn=document.getElementById('scrollTop');
 window.addEventListener('scroll',()=>{scrollTopBtn.classList.toggle('visible',window.scrollY>400)},{passive:true});
 
 /* Experience accordion */
+function fitExp(){
+  /* content height + the open padding (16+20) and border (1) from CSS; measured on the children, because the padding is still animating when a card has just been opened */
+  document.querySelectorAll('.exp-card.open .exp-body').forEach(b=>{
+    const first=b.firstElementChild,last=b.lastElementChild;
+    if(!first||!last)return;
+    b.style.setProperty('--exp-h',(last.offsetTop+last.offsetHeight-first.offsetTop+37)+'px');
+  });
+}
 function toggleExp(card){
   const isOpen=card.classList.contains('open');
   document.querySelectorAll('.exp-card').forEach(c=>c.classList.remove('open'));
   if(!isOpen)card.classList.add('open');
+  fitExp();
+}
+/* The body height follows its content (bullets / tags), so a longer text or a narrower screen never clips it */
+if('ResizeObserver' in window){
+  const expRO=new ResizeObserver(fitExp);
+  document.querySelectorAll('.exp-bullets,.exp-tags').forEach(el=>expRO.observe(el));
 }
 
 /* Nav scroll-spy */
